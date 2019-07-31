@@ -1,7 +1,7 @@
-const config = require('./config');
+import config from './config';
 
-const express = require('express');
-const next = require('next');
+import * as express from 'express';
+import * as next from 'next';
 
 const dev = config.ENV !== 'production';
 const app = next({ dev });

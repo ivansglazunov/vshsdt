@@ -7,11 +7,11 @@ WORKDIR "/usr/src/app"
 
 RUN set -ex \
   && npm install \
-  && npm run build
+  && npm run docker-build
 
 # Environment Variables
 # ENV PORT="4860" ? Can without it
 
 # Running the application
 # EXPOSE 4860 ? Can without it
-CMD ["npm", "run", "docker"]
+CMD ["npm", "run", "docker-start"]
