@@ -18,7 +18,6 @@ export default class MyDocument extends Document {
         });
 
       const initialProps = await Document.getInitialProps(ctx);
-
       return {
         ...initialProps,
         styles: (
@@ -34,13 +33,16 @@ export default class MyDocument extends Document {
       sheet.seal();
     }
   }
-
   render() {
+    const { head, styles } = this.props;
+
     return (
       <html lang='en'>
+        <head>{head}</head>
         <body>
           <Main />
           <NextScript />
+          {styles}
         </body>
       </html>
     );
