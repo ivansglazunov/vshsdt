@@ -5,7 +5,7 @@ import { ApolloProvider } from 'react-apollo-hooks';
 import { createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import withApollo from '../lib/withApollo';
+import withApollo from '../lib/with-apollo';
 
 const theme = createMuiTheme();
 

@@ -1,7 +1,7 @@
 import * as config from '../config';
 
 import gql from 'graphql-tag';
-import { useGql } from '../lib/useGql';
+import { useGql } from '../lib/use-gql';
 
 const GET_NODES = `
   nodes {

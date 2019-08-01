@@ -1,0 +1,310 @@
+{
+  "functions": [],
+  "remote_schemas": [],
+  "query_collections": [],
+  "allowlist": [],
+  "tables": [
+    {
+      "table": "links_lists",
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "linkId" },
+          "name": "link",
+          "comment": null
+        }
+      ],
+      "array_relationships": [
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "listId",
+              "table": "links_lists_items"
+            }
+          },
+          "name": "items",
+          "comment": null
+        }
+      ],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "nodes_props_passport_password",
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "nodeId" },
+          "name": "node",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "nodes_props_types",
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "nodeId" },
+          "name": "node",
+          "comment": null
+        },
+        {
+          "using": { "foreign_key_constraint_on": "typeId" },
+          "name": "type",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "nodes_props_session",
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "nodeId" },
+          "name": "node",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "knex_migrations_lock",
+      "object_relationships": [],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "links_types",
+      "object_relationships": [],
+      "array_relationships": [
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "typeId",
+              "table": "links"
+            }
+          },
+          "name": "links",
+          "comment": null
+        }
+      ],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "nodes_types",
+      "object_relationships": [],
+      "array_relationships": [
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "typeId",
+              "table": "nodes_props_types"
+            }
+          },
+          "name": "props_types",
+          "comment": null
+        }
+      ],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "nodes",
+      "object_relationships": [],
+      "array_relationships": [
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "nodeId",
+              "table": "nodes_props_passport_password"
+            }
+          },
+          "name": "props_passport_passwords",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "nodeId",
+              "table": "nodes_props_session"
+            }
+          },
+          "name": "props_sessions",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "nodeId",
+              "table": "nodes_props_types"
+            }
+          },
+          "name": "props_types",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "sourceId",
+              "table": "links"
+            }
+          },
+          "name": "links_by_source",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "targetId",
+              "table": "links"
+            }
+          },
+          "name": "links_by_target",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "nodeId",
+              "table": "links"
+            }
+          },
+          "name": "links_by_node",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "nodeId",
+              "table": "links_lists_items"
+            }
+          },
+          "name": "links_lists_items",
+          "comment": null
+        }
+      ],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "links",
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "typeId" },
+          "name": "type",
+          "comment": null
+        },
+        {
+          "using": { "foreign_key_constraint_on": "targetId" },
+          "name": "target",
+          "comment": null
+        },
+        {
+          "using": { "foreign_key_constraint_on": "sourceId" },
+          "name": "source",
+          "comment": null
+        },
+        {
+          "using": { "foreign_key_constraint_on": "nodeId" },
+          "name": "node",
+          "comment": null
+        }
+      ],
+      "array_relationships": [
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "linkId",
+              "table": "links_lists"
+            }
+          },
+          "name": "lists",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "linkId",
+              "table": "links_lists_items"
+            }
+          },
+          "name": "items",
+          "comment": null
+        }
+      ],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "links_lists_items",
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "linkId" },
+          "name": "link",
+          "comment": null
+        },
+        {
+          "using": { "foreign_key_constraint_on": "listId" },
+          "name": "list",
+          "comment": null
+        },
+        {
+          "using": { "foreign_key_constraint_on": "nodeId" },
+          "name": "node",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "knex_migrations",
+      "object_relationships": [],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    }
+  ],
+  "query_templates": []
+}

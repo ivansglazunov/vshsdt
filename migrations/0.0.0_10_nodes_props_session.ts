@@ -1,0 +1,23 @@
+import * as Knex from 'knex';
+
+export function up(knex: Knex) {
+  console.log(__filename);
+  return knex.schema.createTable('nodes_props_session', table => {
+    table.increments('id').primary();
+    table
+      .integer('nodeId')
+      .notNullable()
+      .references('id')
+      .inTable('nodes');
+    table.text('token').notNullable();
+    table
+      .timestamp('inserted', { useTz: true })
+      .notNullable()
+      .defaultTo(knex.fn.now());
+    table.timestamp('deleted', { useTz: true });
+  });
+}
+
+export function down(knex: Knex) {
+  return knex.schema.dropTable('nodes_props_session');
+}
