@@ -1,7 +1,6 @@
 import * as Knex from 'knex';
 
 export function up(knex: Knex) {
-  console.log(__filename);
   return knex.schema.createTable('nodes_props_session', table => {
     table.increments('id').primary();
     table

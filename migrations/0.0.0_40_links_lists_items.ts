@@ -1,7 +1,6 @@
 import * as Knex from 'knex';
 
 export async function up(knex: Knex) {
-  console.log(__filename);
   await knex.schema.createTable('links_lists_items', table => {
     table.increments('id').primary();
     table

@@ -7,4 +7,5 @@ export const connection = `${config.POSTGRES}?ssl=true`;
 
 export const migrations = {
   directory: __dirname + '/migrations',
+  disableTransactions: true,
 };

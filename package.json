@@ -6,7 +6,8 @@
     "next-start": "next start",
     "docker-build": "npm run next-build",
     "docker-start": "cross-env ENV=production ts-node server.ts",
-    "migrate": "knex migrate:latest"
+    "migrate": "knex migrate:latest",
+    "unmigrate": "knex migrate:rollback --all"
   },
   "keywords": [],
   "author": "",

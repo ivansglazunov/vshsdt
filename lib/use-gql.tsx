@@ -7,5 +7,5 @@ export { useQuery, useSubscription };
 export function useGql(query, options?) {
   return process.browser
     ? useSubscription(gql`subscription { ${query} }`, options)
-    : useQuery(gql`{ ${query} }`, options);
+    : useQuery(gql`{ ${query} }`, { ssr: true, suspend: true });
 };
