@@ -4,8 +4,8 @@ import { useQuery, useSubscription, useMutation as _useMutation } from 'react-ap
 
 export { useQuery, useSubscription };
 
-export function useGql(query, options?) {
+export function useGql(query, options = {}) {
   return process.browser
     ? useSubscription(gql`subscription { ${query} }`, options)
-    : useQuery(gql`{ ${query} }`, { ssr: true, suspend: true });
+    : useQuery(gql`{ ${query} }`, { ssr: true, suspend: true, ...options });
 };
