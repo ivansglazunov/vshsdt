@@ -1,6 +1,11 @@
 ### sandbox
 
-#### migrations
+#### dev
+
+- `npm i` install deps
+- `npm run next -- -p 3000` start development
+
+#### hasura migrations
 
 ##### filenames
 
