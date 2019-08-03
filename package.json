@@ -4,8 +4,9 @@
     "next": "next",
     "next-build": "next build",
     "next-start": "next start",
+    "next-server": "ts-node next-server.ts",
     "docker-build": "npm run next-build",
-    "docker-start": "cross-env ENV=production ts-node server.ts",
+    "docker-start": "cross-env ENV=production npm run next-server",
     "migrate": "knex migrate:latest",
     "unmigrate": "knex migrate:rollback --all"
   },
@@ -25,6 +26,7 @@
     "axios": "^0.19.0",
     "cross-env": "^5.2.0",
     "express": "^4.17.1",
+    "express-validator": "^6.1.1",
     "graphql": "^14.4.0",
     "graphql-tag": "^2.10.1",
     "i18next": "^17.0.4",
