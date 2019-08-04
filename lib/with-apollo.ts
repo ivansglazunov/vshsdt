@@ -64,8 +64,13 @@ export function initApollo(initialState = {}) {
 }
 
 export default withApollo(
-  ({ ctx, headers, initialState }) => {
-    return initApollo(initialState);
+  ({ initialState }) => {
+    if (typeof window === 'object') {
+      // @ts-ignore
+      return initApollo(window.__APOLLO_STATE__);
+    } else {
+      return initApollo(initialState);
+    }
   },
   {
     getDataFromTree: 'ssr',

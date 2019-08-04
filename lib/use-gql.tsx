@@ -5,7 +5,14 @@ import { useQuery, useSubscription, useMutation as _useMutation } from 'react-ap
 export { useQuery, useSubscription };
 
 export function useGql(query, options = {}) {
-  return process.browser
-    ? useSubscription(gql`subscription { ${query} }`, options)
-    : useQuery(gql`{ ${query} }`, { ssr: true, suspend: true, ...options });
+  if (!process.browser)
+  {
+    return useQuery(gql`{ ${query} }`, { ssr: true, suspend: true, ...options });
+  } else
+  {
+    const qr = useQuery(gql`{ ${query} }`, { ...options });
+    const sr = useSubscription(gql`subscription { ${query} }`, options);
+    if (sr.loading) return qr;
+    return sr;
+  }
 };

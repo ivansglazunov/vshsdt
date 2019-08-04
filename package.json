@@ -5,6 +5,7 @@
     "next-build": "next build",
     "next-start": "next start",
     "next-server": "ts-node next-server.ts",
+    "auth-server": "ts-node auth-server.ts",
     "docker-build": "npm run next-build",
     "docker-start": "cross-env ENV=production npm run next-server",
     "migrate": "knex migrate:latest",

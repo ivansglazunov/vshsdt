@@ -38,7 +38,17 @@ export default class MyDocument extends Document {
 
     return (
       <html lang='en'>
-        <head>{head}</head>
+        <head>
+          {head}
+          <script
+            id='ssr-apollo-state'
+            dangerouslySetInnerHTML={{
+              __html: `window.__APOLLO_STATE__ = ${JSON.stringify(
+                global.__APOLLO_STATE__,
+              )}`,
+            }}
+          />
+        </head>
         <body>
           <Main />
           <NextScript />
