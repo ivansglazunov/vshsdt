@@ -58,7 +58,6 @@ export default class MyApp extends App {
   constructor(props) {
     super(props);
     if (typeof window === 'object') {
-      console.log('_app', window.__APOLLO_STATE__);
       this.apolloClient = initApollo(window.__APOLLO_STATE__);
     } else {
       global.__APOLLO_STATE__ = props.apolloState;
