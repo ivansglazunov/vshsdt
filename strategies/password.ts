@@ -72,7 +72,7 @@ export const signupMiddleware = (
   apolloClient: ApolloClient<any>,
   _signinMiddleware,
 ) => async (req, res, next) => {
-  const result = await apolloClient.mutate({
+  await apolloClient.mutate({
     mutation: CREATE_NODE_PASSWORD_AND_SESSION,
     variables: {
       username: req.body.username,
@@ -83,18 +83,18 @@ export const signupMiddleware = (
   _signinMiddleware(req, res, next);
 };
 
-export const passportUse = apolloClient => {
+export const passportUse = (apolloClient) => {
   passport.use(
     new LocalStrategy(
       {
         usernameField: 'username',
         passwordField: 'password',
       },
-      async function(username, password, done) {
+      async (username, password, done) => {
         const result = await apolloClient.query({
           query: FIND_USER_PASSWORD,
           variables: {
-            username: username,
+            username,
           },
         });
         // TODO check errors
@@ -106,15 +106,14 @@ export const passportUse = apolloClient => {
         if (_.get(node, 'props.0.passport_passwords.0.password') === password) {
           // TODO hide node password !!!
           return done(null, node);
-        } else {
-          return done('!password');
         }
+        return done('!password');
       },
     ),
   );
 };
 
-export default async app => {
+export default async (app) => {
   const apolloClient = initApollo();
   passportUse(apolloClient);
   const _signinMiddleware = signinMiddleware(apolloClient);

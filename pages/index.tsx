@@ -1,5 +1,3 @@
-import * as config from '../config';
-
 import { useGql, gql } from '../lib/use-gql';
 
 const GET_NODES = gql`
@@ -18,7 +16,7 @@ const GET_NODES = gql`
 
 export const Index = () => {
   const query = useGql(GET_NODES);
-  return <pre>{JSON.stringify(query, null, 2)}</pre>
+  return <pre>{JSON.stringify(query, null, 2)}</pre>;
 };
 
 export default Index;

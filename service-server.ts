@@ -4,7 +4,7 @@ import * as passport from 'passport';
 import strategies from './strategies';
 import webhooks from './webhooks';
 
-if (!process.env.SERVICE_PORT) throw new Error(`!process.env.SERVICE_PORT`);
+if (!process.env.SERVICE_PORT) throw new Error('!process.env.SERVICE_PORT');
 
 const app = express();
 
@@ -31,7 +31,7 @@ if (process.env.MODE) {
   webhooks(app);
 }
 
-app.listen(app.get('port'), error => {
+app.listen(app.get('port'), (error) => {
   if (error) throw error;
   console.log(`> Ready on http://localhost:${process.env.SERVICE_PORT}`);
 });

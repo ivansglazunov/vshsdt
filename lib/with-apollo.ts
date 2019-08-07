@@ -3,8 +3,6 @@ import { InMemoryCache, HttpLink } from 'apollo-boost';
 import ApolloClient from 'apollo-client';
 import { WebSocketLink } from 'apollo-link-ws';
 import { split, ApolloLink, concat } from 'apollo-link';
-import { getMainDefinition } from 'apollo-utilities';
-import { getDataFromTree } from 'react-apollo';
 import config from '../config';
 
 const { GRAPHQL, HASURA_ADMIN_SECRET } = config;
@@ -17,28 +15,28 @@ export function initApollo(initialState = {}) {
   const wsLink = !process.browser
     ? null
     : new WebSocketLink({
-        uri: `ws://${GRAPHQL}`,
-        options: {
-          reconnect: true,
-          ...(HASURA_ADMIN_SECRET
-            ? {
-                connectionParams: () => ({
-                  headers: {
-                    'x-hasura-admin-secret': HASURA_ADMIN_SECRET,
-                  },
-                }),
-              }
-            : {}),
-        },
-      });
+      uri: 'ws://${GRAPHQL}',
+      options: {
+        reconnect: true,
+        ...(HASURA_ADMIN_SECRET
+          ? {
+            connectionParams: () => ({
+              headers: {
+                'x-hasura-admin-secret': HASURA_ADMIN_SECRET,
+              },
+            }),
+          } : {}),
+      },
+    });
 
   const authMiddleware = new ApolloLink((operation, forward) => {
-    if (HASURA_ADMIN_SECRET)
+    if (HASURA_ADMIN_SECRET) {
       operation.setContext({
         headers: {
           'x-hasura-admin-secret': HASURA_ADMIN_SECRET,
         },
       });
+    }
 
     return forward(operation);
   });
@@ -68,9 +66,8 @@ export default withApollo(
     if (typeof window === 'object') {
       // @ts-ignore
       return initApollo(window.__APOLLO_STATE__);
-    } else {
-      return initApollo(initialState);
     }
+    return initApollo(initialState);
   },
   {
     getDataFromTree: 'ssr',

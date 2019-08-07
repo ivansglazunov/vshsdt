@@ -53,3 +53,9 @@
   - NEXT_PORT
 - create docker repository with name CONTAINER_NAME
 - add to https://git.styleschool.ru/admin/runners/3 you repository
+
+#### fork
+
+- create **empty** repo and copy git url
+- git clone https://git.styleschool.ru/lerny/sandbox.git
+- 
