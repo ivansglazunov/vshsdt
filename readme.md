@@ -5,6 +5,17 @@
 - `npm i` install deps
 - `npm run next -- -p 3000` start development
 
+#### services
+
+- `PORT=3000 npm run service-server` all services
+- `MODE=webhooks PORT=3000 npm run service-server` only webhooks
+- `MODE=strategies PORT=3000 npm run service-server` only strategies
+
+#### hasura settings
+
+- `HASURA_GRAPHQL_AUTH_HOOK` `http://<service-server>/webhooks/bearer`
+- `HASURA_GRAPHQL_ADMIN_SECRET` `7777`
+
 #### hasura migrations
 
 ##### filenames

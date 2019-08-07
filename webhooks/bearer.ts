@@ -7,6 +7,7 @@ import * as _ from 'lodash';
 
 export const bearerMiddleware = async (req, res, next) => {
   passport.authenticate('bearer', (error, user, info) => {
+    console.log('bearerMiddleware', user);
     if (error) {
       return res.status(401).json({ error: error.toString() });
     }
@@ -35,12 +36,14 @@ export const FIND_TOKEN = gql`
 export const passportUse = apolloClient => {
   passport.use(
     new BearerStrategy(async function(token, done) {
+      console.log('BearerStrategy token', token);
       const result = await apolloClient.query({
         query: FIND_TOKEN,
         variables: {
           token: token,
         },
       });
+      console.log('BearerStrategy result', result);
       // TODO check errors
       if (result.errors && result.errors.length) {
         return done(result.errors);
