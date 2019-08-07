@@ -1,14 +1,19 @@
 import * as Knex from 'knex';
 
-export function up(knex: Knex) {
-  return knex.schema.createTable('nodes_props_session', table => {
+export async function up(knex: Knex) {
+  await knex.schema.createTable('props', table => {
     table.increments('id').primary();
+
+    table
+      .integer('typeId')
+      .references('id')
+      .inTable('props_types');
     table
       .integer('nodeId')
       .notNullable()
       .references('id')
       .inTable('nodes');
-    table.text('token').notNullable();
+
     table
       .timestamp('inserted', { useTz: true })
       .notNullable()
@@ -17,6 +22,6 @@ export function up(knex: Knex) {
   });
 }
 
-export function down(knex: Knex) {
-  return knex.schema.dropTable('nodes_props_session');
+export async function down(knex: Knex) {
+  await knex.schema.dropTable('props');
 }

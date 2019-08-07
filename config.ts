@@ -4,5 +4,5 @@ export default {
   HASURA_ADMIN_SECRET: '7777',
   HASURA: 'isg-hasura-lerny.herokuapp.com',
   GRAPHQL: 'isg-hasura-lerny.herokuapp.com/v1/graphql',
-  AUTH: 'localhost:3006',
+  STRATEGIES: 'localhost:3006',
 };

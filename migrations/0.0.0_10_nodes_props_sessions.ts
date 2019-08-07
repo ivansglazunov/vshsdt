@@ -1,8 +1,16 @@
 import * as Knex from 'knex';
 
 export function up(knex: Knex) {
-  return knex.schema.createTable('nodes', table => {
+  return knex.schema.createTable('nodes_props_sessions', table => {
     table.increments('id').primary();
+    table
+      .integer('propId')
+      .notNullable()
+      .references('id')
+      .inTable('props');
+
+    table.text('token').notNullable();
+
     table
       .timestamp('inserted', { useTz: true })
       .notNullable()
@@ -12,5 +20,5 @@ export function up(knex: Knex) {
 }
 
 export function down(knex: Knex) {
-  return knex.schema.dropTable('nodes');
+  return knex.schema.dropTable('nodes_props_sessions');
 }

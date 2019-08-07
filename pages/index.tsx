@@ -1,20 +1,24 @@
 import * as config from '../config';
 
-import gql from 'graphql-tag';
-import { useGql } from '../lib/use-gql';
+import { useGql, gql } from '../lib/use-gql';
 
-const GET_NODES = `
+const GET_NODES = gql`
   nodes {
     id
-    props_sessions {
-      token
+    props {
+      passport_passwords {
+        username
+      }
+      sessions {
+        token
+      }
     }
   }
 `;
 
 export const Index = () => {
   const query = useGql(GET_NODES);
-  return <div>{JSON.stringify(query, null, 2)}</div>
+  return <pre>{JSON.stringify(query, null, 2)}</pre>
 };
 
 export default Index;

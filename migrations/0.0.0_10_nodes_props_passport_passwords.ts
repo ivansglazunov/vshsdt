@@ -1,15 +1,17 @@
 import * as Knex from 'knex';
 
 export async function up(knex: Knex) {
-  await knex.schema.createTable('nodes_props_passport_password', table => {
+  await knex.schema.createTable('nodes_props_passport_passwords', table => {
     table.increments('id').primary();
     table
-      .integer('nodeId')
+      .integer('propId')
       .notNullable()
       .references('id')
-      .inTable('nodes');
+      .inTable('props');
+
     table.text('username').notNullable();
     table.text('password').notNullable();
+
     table
       .timestamp('inserted', { useTz: true })
       .notNullable()
@@ -19,5 +21,5 @@ export async function up(knex: Knex) {
 }
 
 export async function down(knex: Knex) {
-  await knex.schema.dropTable('nodes_props_passport_password');
+  await knex.schema.dropTable('nodes_props_passport_passwords');
 }

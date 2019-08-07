@@ -32,11 +32,11 @@
       "event_triggers": []
     },
     {
-      "table": "nodes_props_passport_password",
+      "table": "nodes_props_passport_passwords",
       "object_relationships": [
         {
-          "using": { "foreign_key_constraint_on": "nodeId" },
-          "name": "node",
+          "using": { "foreign_key_constraint_on": "propId" },
+          "name": "prop",
           "comment": null
         }
       ],
@@ -51,8 +51,8 @@
       "table": "nodes_props_types",
       "object_relationships": [
         {
-          "using": { "foreign_key_constraint_on": "nodeId" },
-          "name": "node",
+          "using": { "foreign_key_constraint_on": "propId" },
+          "name": "prop",
           "comment": null
         },
         {
@@ -69,15 +69,20 @@
       "event_triggers": []
     },
     {
-      "table": "nodes_props_session",
-      "object_relationships": [
+      "table": "props_types",
+      "object_relationships": [],
+      "array_relationships": [
         {
-          "using": { "foreign_key_constraint_on": "nodeId" },
-          "name": "node",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "typeId",
+              "table": "props"
+            }
+          },
+          "name": "links",
           "comment": null
         }
       ],
-      "array_relationships": [],
       "insert_permissions": [],
       "select_permissions": [],
       "update_permissions": [],
@@ -85,8 +90,14 @@
       "event_triggers": []
     },
     {
-      "table": "knex_migrations_lock",
-      "object_relationships": [],
+      "table": "nodes_props_sessions",
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "propId" },
+          "name": "prop",
+          "comment": null
+        }
+      ],
       "array_relationships": [],
       "insert_permissions": [],
       "select_permissions": [],
@@ -144,30 +155,10 @@
           "using": {
             "foreign_key_constraint_on": {
               "column": "nodeId",
-              "table": "nodes_props_passport_password"
+              "table": "props"
             }
           },
-          "name": "props_passport_passwords",
-          "comment": null
-        },
-        {
-          "using": {
-            "foreign_key_constraint_on": {
-              "column": "nodeId",
-              "table": "nodes_props_session"
-            }
-          },
-          "name": "props_sessions",
-          "comment": null
-        },
-        {
-          "using": {
-            "foreign_key_constraint_on": {
-              "column": "nodeId",
-              "table": "nodes_props_types"
-            }
-          },
-          "name": "props_types",
+          "name": "props",
           "comment": null
         },
         {
@@ -208,6 +199,58 @@
             }
           },
           "name": "links_lists_items",
+          "comment": null
+        }
+      ],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "props",
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "nodeId" },
+          "name": "node",
+          "comment": null
+        },
+        {
+          "using": { "foreign_key_constraint_on": "typeId" },
+          "name": "type",
+          "comment": null
+        }
+      ],
+      "array_relationships": [
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "propId",
+              "table": "nodes_props_passport_passwords"
+            }
+          },
+          "name": "passport_passwords",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "propId",
+              "table": "nodes_props_sessions"
+            }
+          },
+          "name": "sessions",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "propId",
+              "table": "nodes_props_types"
+            }
+          },
+          "name": "types",
           "comment": null
         }
       ],
@@ -288,16 +331,6 @@
           "comment": null
         }
       ],
-      "array_relationships": [],
-      "insert_permissions": [],
-      "select_permissions": [],
-      "update_permissions": [],
-      "delete_permissions": [],
-      "event_triggers": []
-    },
-    {
-      "table": "knex_migrations",
-      "object_relationships": [],
       "array_relationships": [],
       "insert_permissions": [],
       "select_permissions": [],

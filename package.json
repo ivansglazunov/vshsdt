@@ -5,7 +5,7 @@
     "next-build": "next build",
     "next-start": "next start",
     "next-server": "ts-node next-server.ts",
-    "auth-server": "ts-node auth-server.ts",
+    "service-server": "ts-node service-server.ts",
     "docker-build": "npm run next-build",
     "docker-start": "cross-env ENV=production npm run next-server",
     "migrate": "knex migrate:latest",
@@ -42,6 +42,7 @@
     "normalize.css": "^8.0.1",
     "passport": "^0.4.0",
     "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0",
     "pg": "^7.12.0",
     "react": "^16.8.6",
     "react-apollo": "^2.5.8",
@@ -57,7 +58,8 @@
     "styled-components": "^4.3.2",
     "subscriptions-transport-ws": "^0.9.16",
     "ts-node": "^8.3.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.5.3",
+    "uniqid": "^5.0.3"
   },
   "devDependencies": {
     "@types/node": "^12.0.10"
