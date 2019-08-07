@@ -54,5 +54,7 @@ export const passportUse = (apolloClient) => {
 export default (app) => {
   const apolloClient = initApollo();
   passportUse(apolloClient);
-  app.get('/webhooks/hasura-bearer', bearerMiddleware);
+  app.get('/webhooks/hasura-bearer', bearerMiddleware, (req, res) => {
+    res.json({ abc: 123 });
+  });
 };
