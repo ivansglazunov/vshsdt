@@ -56,6 +56,12 @@
 
 #### fork
 
-- create **empty** repo and copy git url
-- git clone https://git.styleschool.ru/lerny/sandbox.git
-- 
+- create fork
+  - create **empty** repo and copy git url
+  - git clone https://git.styleschool.ru/lerny/sandbox.git
+  - git remote set-url origin <my-repo>
+- merge from sandbox master
+  - commit all changes
+  - git remote set-url sandbox https://git.styleschool.ru/lerny/sandbox.git
+  - git pull
+  - git merge sandbox/master
