@@ -7,9 +7,9 @@
 
 #### services
 
-- `PORT=3000 npm run service-server` all services
-- `MODE=webhooks PORT=3000 npm run service-server` only webhooks
-- `MODE=strategies PORT=3000 npm run service-server` only strategies
+- `SERVICE_PORT=3000 npm run service-server` all services
+- `MODE=webhooks SERVICE_PORT=3000 npm run service-server` only webhooks
+- `MODE=strategies SERVICE_PORT=3000 npm run service-server` only strategies
 
 #### hasura settings
 
@@ -36,6 +36,7 @@
   - GITLAB_PASSWORD
   - GITLAB_REPOSITORY
   - GITLAB_USERNAME
-  - PORT
+  - SERVICE_PORT
+  - NEXT_PORT
 - create docker repository with name CONTAINER_NAME
 - add to https://git.styleschool.ru/admin/runners/3 you repository

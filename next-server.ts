@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as next from 'next';
 
-if (!process.env.PORT) throw new Error(`!process.env.PORT`);
+if (!process.env.NEXT_PORT) throw new Error(`!process.env.NEXT_PORT`);
 
 const dev = process.env.ENV !== 'production';
 const app = next({ dev });
@@ -14,9 +14,9 @@ app
 
     server.get('*', (req, res) => handle(req, res));
 
-    server.listen(process.env.PORT, error => {
+    server.listen(process.env.NEXT_PORT, error => {
       if (error) throw error;
-      console.log(`> Ready on http://localhost:${process.env.PORT}`);
+      console.log(`> Ready on http://localhost:${process.env.NEXT_PORT}`);
     });
   })
   .catch(ex => {

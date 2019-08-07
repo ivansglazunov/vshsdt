@@ -4,12 +4,12 @@ import * as passport from 'passport';
 import strategies from './strategies';
 import webhooks from './webhooks';
 
-if (!process.env.PORT) throw new Error(`!process.env.PORT`);
+if (!process.env.SERVICE_PORT) throw new Error(`!process.env.SERVICE_PORT`);
 
 const app = express();
 
 app.set('host', '0.0.0.0');
-app.set('port', process.env.PORT);
+app.set('port', process.env.SERVICE_PORT);
 app.set('json spaces', 2); // number of spaces for indentation
 app.use(express.json());
 app.use(passport.initialize());
@@ -33,5 +33,5 @@ if (process.env.MODE) {
 
 app.listen(app.get('port'), error => {
   if (error) throw error;
-  console.log(`> Ready on http://localhost:${process.env.PORT}`);
+  console.log(`> Ready on http://localhost:${process.env.SERVICE_PORT}`);
 });

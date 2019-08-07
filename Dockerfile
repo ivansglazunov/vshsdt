@@ -9,9 +9,4 @@ RUN set -ex \
   && npm install \
   && npm run docker-build
 
-# Environment Variables
-# ENV PORT="4860" ? Can without it
-
-# Running the application
-# EXPOSE 4860 ? Can without it
 CMD ["npm", "run", "docker-start"]
