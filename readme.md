@@ -1,4 +1,17 @@
-### sandbox
+# sandbox
+
+### about
+
+- no server side logic, only reach+gql rendering
+- all server logic in hasura remote schemas
+
+- server gql render
+- server-client gql cache
+- client use server query results
+- client override queries as subscriptions
+- no data client refetching, only subscribing
+
+### how to
 
 #### dev
 
