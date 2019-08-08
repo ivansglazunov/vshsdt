@@ -1,24 +1,12 @@
-import * as config from '../config';
-
-import { useGql, gql } from '../lib/use-gql';
-
-const GET_NODES = gql`
-  nodes {
-    id
-    props {
-      passport_passwords {
-        username
-      }
-      sessions {
-        token
-      }
-    }
-  }
-`;
+import { Canvas } from 'react-three-fiber';
+import Sandbox from '../components/Sandbox';
 
 export const Index = () => {
-  const query = useGql(GET_NODES);
-  return <pre>{JSON.stringify(query, null, 2)}</pre>
+  return (
+    <Canvas camera={{ position: [0, 0, 15] }} >
+      <Sandbox />
+    </Canvas>
+  );
 };
 
 export default Index;
