@@ -62,6 +62,6 @@
   - git remote set-url origin <my-repo>
 - merge from sandbox master
   - commit all changes
-  - git remote set-url sandbox https://git.styleschool.ru/lerny/sandbox.git
+  - git remote set-url sandbox https://git.styleschool.ru/ivansglazunov/sandbox.git
   - git pull
   - git merge sandbox/master
