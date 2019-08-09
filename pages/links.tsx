@@ -32,8 +32,6 @@ export default () => {
   const nodes = _.map(_.get(nodesQ, 'data.nodes', []), node => ({ node, id: node.id, group: node.__typename }));
   const links = _.map(_.get(linksQ, 'data.links', []), link => ({ link, id: link.id, source: link.sourceId, target: link.targetId }));
 
-  console.log({ nodes, links });
-
   return <div style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '100%' }}>
     <ReactResizeDetector handleWidth handleHeight onResize={(width, height) => {
       setSize({ width, height });
@@ -50,7 +48,7 @@ export default () => {
       linkDirectionalArrowRelPos={1}
       linkCurvature={0.25}
       nodeCanvasObject={(node, ctx, globalScale) => {
-        const label = node.id;
+        const label = `n${node.id}`;
         const fontSize = 12/globalScale;
         ctx.font = `${fontSize}px Sans-Serif`;
         const textWidth = ctx.measureText(label).width;
