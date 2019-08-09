@@ -7,7 +7,7 @@
     "next-server": "ts-node next-server.ts",
     "service-server": "ts-node service-server.ts",
     "docker-build": "npm run next-build",
-    "docker-start": "cross-env ENV=production concurrently \"npm run next-server\" \"npm run service-server\"",
+    "docker-start": "cross-env ENV=production concurrently \"npm run next-server\"",
     "tslint": "tslint --project tsconfig.json -c ./tslint.json",
     "migrate": "knex migrate:latest",
     "unmigrate": "knex migrate:rollback --all",

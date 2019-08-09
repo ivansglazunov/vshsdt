@@ -1,5 +1,7 @@
 import * as express from 'express';
+import * as passport from 'passport';
 import * as next from 'next';
+import serviceApp from './service-app';
 
 if (!process.env.NEXT_PORT) throw new Error('!process.env.NEXT_PORT');
 
@@ -10,11 +12,18 @@ const handle = app.getRequestHandler();
 app
   .prepare()
   .then(() => {
-    const server = express();
+    const app = express();
 
-    server.get('*', (req, res) => handle(req, res));
+    app.set('json spaces', 2);
+    app.use(express.json());
+    app.use(passport.initialize());
+    app.use(passport.session());
 
-    server.listen(process.env.NEXT_PORT, (error) => {
+    serviceApp(app);
+
+    app.get('*', (req, res) => handle(req, res));
+
+    app.listen(process.env.NEXT_PORT, (error) => {
       if (error) throw error;
       console.log(`> Ready on http://localhost:${process.env.NEXT_PORT}`);
     });
