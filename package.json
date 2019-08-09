@@ -77,8 +77,6 @@
     "uniqid": "^5.0.3"
   },
   "devDependencies": {
-    "@types/node": "^12.0.10",
-    "@wildpeaks/three-webpack-plugin": "^2.0.0",
-    "three": "^0.107.0"
+    "@types/node": "^12.0.10"
   }
 }
