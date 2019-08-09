@@ -14,9 +14,7 @@ const GET_NODES = gql`
   }
 `;
 
-export const Index = () => {
+export default () => {
   const query = useGql(GET_NODES);
   return <pre>{JSON.stringify(query, null, 2)}</pre>;
 };
-
-export default Index;

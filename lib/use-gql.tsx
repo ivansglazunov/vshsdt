@@ -1,14 +1,10 @@
 import Gql from 'graphql-tag';
-import { useQuery, useSubscription, useMutation as _useMutation } from 'react-apollo-hooks';
+import { useQuery, useSubscription, useMutation as _useMutation } from '@apollo/react-hooks';
 
 export { useQuery, useSubscription };
 
 export function useGql(query, options = {}): { error: any; data: any; loading: boolean; } {
-  if (!process.browser) {
-    const qr = useQuery(Gql`{ ${query} }`, { ssr: true, suspend: true, ...options });
-    return { data: qr.data, loading: qr.loading, error: qr.error };
-  }
-  const qr = useQuery(Gql`{ ${query} }`, { ...options });
+  const qr = useQuery(Gql`{ ${query} }`, { ssr: true, ...options });
   const sr = useSubscription(Gql`subscription { ${query} }`, options);
   if (sr.loading) return { data: qr.data, loading: qr.loading, error: qr.error };
   return { data: sr.data, loading: sr.loading, error: sr.error };
