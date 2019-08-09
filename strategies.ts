@@ -1,6 +1,6 @@
 import password from './strategies/password';
 
-export default app => {
+export default (app) => {
   password(app);
-  console.log(`strategies`);
+  console.log('strategies');
 };

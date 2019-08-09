@@ -1,6 +1,6 @@
 import bearer from './webhooks/bearer';
 
-export default app => {
+export default (app) => {
   bearer(app);
-  console.log(`webhooks`);
+  console.log('webhooks');
 };

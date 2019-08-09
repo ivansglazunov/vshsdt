@@ -12,5 +12,6 @@
     "target": "es2015",
     "lib": ["dom", "es6", "es7"],
     "resolveJsonModule": true
-  }
+  },
+  "exclude": ["node_modules", ".next"]
 }

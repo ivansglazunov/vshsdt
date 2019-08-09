@@ -1,7 +1,7 @@
 import * as Knex from 'knex';
 
 export async function up(knex: Knex) {
-  await knex.schema.createTable('props', table => {
+  await knex.schema.createTable('props', (table) => {
     table.increments('id').primary();
 
     table
