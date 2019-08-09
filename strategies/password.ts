@@ -119,4 +119,5 @@ export default async (app) => {
   const _signinMiddleware = signinMiddleware(apolloClient);
   app.post('/strategies/signin',_signinMiddleware);
   app.post('/strategies/signup', signupMiddleware(apolloClient, _signinMiddleware));
+  console.log('strategy password');
 };

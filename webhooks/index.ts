@@ -1,4 +1,4 @@
-import bearer from './webhooks/bearer';
+import bearer from './bearer';
 
 export default (app) => {
   bearer(app);

@@ -1,4 +1,4 @@
-import password from './strategies/password';
+import password from './password';
 
 export default (app) => {
   password(app);
