@@ -15,7 +15,7 @@ export function initApollo(initialState = {}) {
   const wsLink = !process.browser
     ? null
     : new WebSocketLink({
-      uri: 'ws://${GRAPHQL}',
+      uri: `ws://${GRAPHQL}`,
       options: {
         reconnect: true,
         ...(HASURA_ADMIN_SECRET

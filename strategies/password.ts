@@ -117,9 +117,6 @@ export default async (app) => {
   const apolloClient = initApollo();
   passportUse(apolloClient);
   const _signinMiddleware = signinMiddleware(apolloClient);
-  app.post('/strategies/signin', _signinMiddleware);
-  app.post(
-    '/strategies/signup',
-    signupMiddleware(apolloClient, _signinMiddleware),
-  );
+  app.post('/strategies/signin',_signinMiddleware);
+  app.post('/strategies/signup', signupMiddleware(apolloClient, _signinMiddleware));
 };

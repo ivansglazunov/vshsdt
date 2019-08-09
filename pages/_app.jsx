@@ -1,6 +1,6 @@
 import App, { Container } from 'next/app';
 import Head from 'next/head';
-import { ApolloProvider } from 'react-apollo-hooks';
+import { ApolloProvider } from '@apollo/react-hooks';
 
 import React from 'react';
 import { ThemeProvider } from '@material-ui/styles';
@@ -8,7 +8,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import withApollo, { initApollo } from '../lib/with-apollo';
-import { getDataFromTree } from 'react-apollo';
+import { getDataFromTree } from '@apollo/react-ssr';
 
 const theme = createMuiTheme();
 
