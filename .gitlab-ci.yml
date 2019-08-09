@@ -43,10 +43,8 @@ deploy_job:
     - docker pull "$(printenv GITLAB_REPOSITORY):latest"
     - docker run --detach
       --env "HOST=$(printenv ROOT_URL)"
-      --env "NEXT_PORT=$(printenv NEXT_PORT)"
-      --env "SERVICE_PORT=$(printenv SERVICE_PORT)"
+      --env "PORT=$(printenv PORT)"
       --name "$(printenv CONTAINER_NAME)"
-      --publish $(printenv NEXT_PORT):$(printenv NEXT_PORT)
-      --publish $(printenv SERVICE_PORT):$(printenv SERVICE_PORT)
+      --publish $(printenv PORT):$(printenv PORT)
       --restart=always
       "$(printenv GITLAB_REPOSITORY):latest"

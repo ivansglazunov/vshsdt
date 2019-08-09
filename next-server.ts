@@ -3,7 +3,7 @@ import * as passport from 'passport';
 import * as next from 'next';
 import serviceApp from './service-app';
 
-if (!process.env.NEXT_PORT) throw new Error('!process.env.NEXT_PORT');
+if (!process.env.PORT) throw new Error('!process.env.PORT');
 
 const dev = process.env.ENV !== 'production';
 const app = next({ dev });
@@ -23,9 +23,9 @@ app
 
     app.get('*', (req, res) => handle(req, res));
 
-    app.listen(process.env.NEXT_PORT, (error) => {
+    app.listen(process.env.PORT, (error) => {
       if (error) throw error;
-      console.log(`> Ready on http://localhost:${process.env.NEXT_PORT}`);
+      console.log(`> Ready on http://localhost:${process.env.PORT}`);
     });
   })
   .catch((ex) => {

@@ -16,13 +16,23 @@
 #### dev
 
 - `npm i` install deps
-- `npm run next -- -p 3000` start development
+- `npm start -- -p 3000` start development
+
+#### docker
+
+By default docker run next server with all services inside. For more detailed logic need to build separated dockers.
 
 #### services
 
-- `SERVICE_PORT=3000 npm run service-server` all services
-- `MODE=webhooks SERVICE_PORT=3000 npm run service-server` only webhooks
-- `MODE=strategies SERVICE_PORT=3000 npm run service-server` only strategies
+Manual can be runned:
+
+- `npm run next-build` and then
+  - `PORT=3000 npm run next-server` with server render and all services
+- `PORT=3000 npm run service-server` all services
+
+> Can add vars `MODE=webhooks` or `MODE=strategies` for run only one service.
+
+> Yes, need best api.
 
 #### hasura settings
 
@@ -49,8 +59,7 @@
   - GITLAB_PASSWORD
   - GITLAB_REPOSITORY
   - GITLAB_USERNAME
-  - SERVICE_PORT
-  - NEXT_PORT
+  - PORT
 - create docker repository with name CONTAINER_NAME
 - add to https://git.styleschool.ru/admin/runners/3 you repository
 

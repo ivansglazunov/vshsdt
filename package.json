@@ -1,6 +1,7 @@
 {
   "version": "0.0.0",
   "scripts": {
+    "start": "next",
     "next": "next",
     "next-build": "next build",
     "next-start": "next start",
@@ -10,8 +11,7 @@
     "docker-start": "cross-env ENV=production concurrently \"npm run next-server\"",
     "tslint": "tslint --project tsconfig.json -c ./tslint.json",
     "migrate": "knex migrate:latest",
-    "unmigrate": "knex migrate:rollback --all",
-    "start": "npm run next"
+    "unmigrate": "knex migrate:rollback --all"
   },
   "keywords": [],
   "author": "",
