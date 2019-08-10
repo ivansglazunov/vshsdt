@@ -4,10 +4,14 @@ export function up(knex: Knex) {
   return knex.schema.createTable('nodes_props_sessions', (table) => {
     table.increments('id').primary();
     table
-      .integer('propId')
+      .integer('typeId')
+      .references('id')
+      .inTable('props_types');
+    table
+      .integer('ofId')
       .notNullable()
       .references('id')
-      .inTable('props');
+      .inTable('nodes');
 
     table.text('token').notNullable();
 

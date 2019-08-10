@@ -1,72 +1,75 @@
+import { useState } from 'react';
 import * as _ from 'lodash';
 import ReactResizeDetector from 'react-resize-detector';
 
-import { useGql, gql } from '../lib/use-gql';
-import { useState } from 'react';
+import { useGql } from '../lib/use-gql';
+import { GET_NODES } from '../lib/sandbox';
+
 
 let ForceGraph2D;
 if (process.browser) {
   ForceGraph2D = require('react-force-graph-2d').default;
 }
 
-const GET_NODES = gql`
-  nodes {
-    id
-    props {
-      nodeId
-      id
-      passport_passwords {
-        id
-        propId
-      }
-      sessions {
-        id
-        propId
-      }
-      types {
-        id
-        propId
-      }
-    }
-    links_by_source {
-      id
-      sourceId
-      targetId
-    }
-    links_by_target {
-      id
-      sourceId
-      targetId
-    }
-  }
-`;
-
-const parseLink = (input, links, _links, nodes) => {
-  for (let l = 0; l < input.length; l++) {
-    const link = input[l];
-    if (!_links[link.id]) {
-      _links[link.id] = true;
+const parseLink = (input, links, _road, nodes) => {
+  for (let i = 0; i < input.length; i++) {
+    const link = input[i];
+    if (!_road[`l${link.id}`]) {
+      _road[`l${link.id}`] = true;
       nodes.push({
         id: `l${link.id}`,
         group: link.__typename,
       });
       links.push({
-        id: `l${link.id}`,
+        id: `l${link.id}-source`,
         source: `n${link.sourceId}`,
         target: `l${link.id}`,
         group: `${link.__typename}-source`,
       });
       links.push({
-        id: `l${link.id}`,
+        id: `l${link.id}-target`,
         source: `l${link.id}`,
         target: `n${link.targetId}`,
         group: `${link.__typename}-target`,
       });
+      for (let l = 0; l < link.lists.length; l++) {
+        const list = link.lists[l];
+        console.log(list);
+        if (!_road[`li${list.id}`]) {
+          _road[`li${list.id}`] = true;
+          nodes.push({
+            id: `li${list.id}`,
+            group: list.__typename,
+          });
+          links.push({
+            id: `li${list.id}`,
+            source: `li${list.id}`,
+            target: `l${list.linkId}`,
+            group: `${list.__typename}`,
+          });
+          for (let it = 0; it < link.lists.length; it++) {
+            const item = list.items[it];
+            if (!_road[`i${item.id}`]) {
+              _road[`i${item.id}`] = true;
+              nodes.push({
+                id: `i${item.id}`,
+                group: item.__typename,
+              });
+              links.push({
+                id: `i${item.id}`,
+                source: `i${item.id}`,
+                target: `li${list.id}`,
+                group: `${item.__typename}`,
+              });
+            }
+          }
+        }
+      }
     }
   }
 };
 
-const parseProp = (prop, rel, links, _links, nodes) => {
+const parseProp = (prop, rel, links, _road, nodes) => {
   for (let p = 0; p < prop[rel].length; p++) {
     const pr = prop[rel][p];
     nodes.push({
@@ -86,7 +89,7 @@ export default () => {
   const query = useGql(GET_NODES);
 
   const nodes: { id: string, group: string }[] = [];
-  const _links: { [id: string]: boolean } = {};
+  const _road: { [id: string]: boolean } = {};
   const links: { id: string, group: string, source: string, target: string }[] = [];
   
   const ns = _.get(query, 'data.nodes');
@@ -97,8 +100,8 @@ export default () => {
         id: `n${node.id}`,
         group: node.__typename,
       });
-      parseLink(node.links_by_source, links, _links, nodes);
-      parseLink(node.links_by_target, links, _links, nodes);
+      parseLink(node.links_by_source, links, _road, nodes);
+      parseLink(node.links_by_target, links, _road, nodes);
       for (let p = 0; p < node.props.length; p++) {
         const prop = node.props[p];
         nodes.push({
@@ -111,9 +114,9 @@ export default () => {
           target: `n${prop.nodeId}`,
           group: prop.__typename,
         });
-        parseProp(prop, 'passport_passwords', links, _links, nodes);
-        parseProp(prop, 'sessions', links, _links, nodes);
-        parseProp(prop, 'types', links, _links, nodes);
+        parseProp(prop, 'passport_passwords', links, _road, nodes);
+        parseProp(prop, 'sessions', links, _road, nodes);
+        parseProp(prop, 'types', links, _road, nodes);
       }
     }
   }

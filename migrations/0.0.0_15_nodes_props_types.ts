@@ -4,13 +4,17 @@ export async function up(knex: Knex) {
   await knex.schema.createTable('nodes_props_types', (table) => {
     table.increments('id').primary();
     table
-      .integer('propId')
+      .integer('typeId')
+      .references('id')
+      .inTable('props_types');
+    table
+      .integer('ofId')
       .notNullable()
       .references('id')
-      .inTable('props');
+      .inTable('nodes');
 
     table
-      .integer('typeId')
+      .integer('nodeTypeId')
       .notNullable()
       .references('id')
       .inTable('nodes_types');
