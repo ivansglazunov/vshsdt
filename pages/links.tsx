@@ -69,9 +69,9 @@ const parseLink = (input, links, _road, nodes) => {
   }
 };
 
-const parseProp = (prop, rel, links, _road, nodes) => {
-  for (let p = 0; p < prop[rel].length; p++) {
-    const pr = prop[rel][p];
+const parseProp = (node, rel, links, _road, nodes) => {
+  for (let p = 0; p < node[rel].length; p++) {
+    const pr = node[rel][p];
     nodes.push({
       id: `${rel}${pr.id}`,
       group: pr.__typename,
@@ -79,7 +79,7 @@ const parseProp = (prop, rel, links, _road, nodes) => {
     links.push({
       id: `pr${pr.id}`,
       source: `${rel}${pr.id}`,
-      target: `p${prop.id}`,
+      target: `n${node.id}`,
       group: pr.__typename,
     });
   }
@@ -102,22 +102,9 @@ export default () => {
       });
       parseLink(node.links_by_source, links, _road, nodes);
       parseLink(node.links_by_target, links, _road, nodes);
-      for (let p = 0; p < node.props.length; p++) {
-        const prop = node.props[p];
-        nodes.push({
-          id: `p${prop.id}`,
-          group: prop.__typename,
-        });
-        links.push({
-          id: `p${prop.id}`,
-          source: `p${prop.id}`,
-          target: `n${prop.nodeId}`,
-          group: prop.__typename,
-        });
-        parseProp(prop, 'passport_passwords', links, _road, nodes);
-        parseProp(prop, 'sessions', links, _road, nodes);
-        parseProp(prop, 'types', links, _road, nodes);
-      }
+      parseProp(node, 'passport_passwords', links, _road, nodes);
+      parseProp(node, 'sessions', links, _road, nodes);
+      parseProp(node, 'types', links, _road, nodes);
     }
   }
 
