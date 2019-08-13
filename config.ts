@@ -1,8 +1,8 @@
 export default {
   POSTGRES:
-    'postgres://vguxyqbknrwqmy:c4993ed4d0cd4bf08a5c29d9591cfdbfd8de10d51d665e58d1d2780e114a5665@ec2-107-21-102-221.compute-1.amazonaws.com:5432/ddt9oc6kbkpkjn',
+    'postgres://aiprrfrejfrwou:1873e10b255b94658871395e945d3d694dca092b7b67add86c2d5aa6011cc2c1@ec2-46-137-91-216.eu-west-1.compute.amazonaws.com:5432/d9c1ose6lpnud1',
   HASURA_ADMIN_SECRET: '7777',
-  HASURA: 'isg-hasura-lerny.herokuapp.com',
-  GRAPHQL: 'isg-hasura-lerny.herokuapp.com/v1/graphql',
+  HASURA: 'learny-hasura-sandbox.herokuapp.com',
+  GRAPHQL: 'learny-hasura-sandbox.herokuapp.com/v1/graphql',
   STRATEGIES: '88.99.24.138:4900',
 };
