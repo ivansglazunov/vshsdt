@@ -49,7 +49,7 @@ export default class MyApp extends App {
     try {
       await getDataFromTree(CreateComponent(Component, {}, apolloClient));
     } catch (error) {
-      await error;
+      console.log({ error: await error });
     }
     Head.rewind();
     const apolloState = apolloClient.extract();

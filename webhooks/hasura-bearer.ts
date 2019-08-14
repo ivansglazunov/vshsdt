@@ -65,5 +65,4 @@ export default (app) => {
   app.get('/webhooks/hasura-bearer', bearerMiddleware, (req, res) => {
     res.json({ abc: 123 });
   });
-  console.log('webhook bearer');
 };

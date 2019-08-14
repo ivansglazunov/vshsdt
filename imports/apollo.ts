@@ -30,18 +30,14 @@ export function initApollo(initialState = {}, token) {
       options: {
         reconnect: true,
         connectionParams: () => ({
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
+          headers,
         }),
       },
     });
 
   const authMiddleware = new ApolloLink((operation, forward) => {
     operation.setContext({
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
+      headers,
     });
 
     return forward(operation);
