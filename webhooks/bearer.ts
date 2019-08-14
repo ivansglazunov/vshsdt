@@ -25,7 +25,7 @@ export const bearerMiddleware = async (req, res, next) => {
 
 export const FIND_TOKEN = gql`
   query($token: String) {
-    nodes(where: { sessions: { token: { _eq: $token } } }) {
+    nodes(where: { props: { sessions: { token: { _eq: $token } } } }) {
       id
     }
   }
