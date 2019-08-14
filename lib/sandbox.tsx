@@ -6,10 +6,13 @@ export const GET_NODES = gql`
     passport_passwords {
       id
       ofId
+      username
+      password
     }
     sessions {
       id
       ofId
+      token
     }
     types {
       id

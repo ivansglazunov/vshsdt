@@ -12,38 +12,19 @@ export const signinMiddleware = apolloClient => (req, res, next) => {
       return res.status(400).json({ error: error.toString() });
     }
     if (user) {
-      for (let p = 0; p < user.props.length; p++) {
-        delete user.props[p].passport_passwords;
-      }
+      delete user.passport_passwords;
       return res.status(200).json(user);
     }
   })(req, res, next);
 };
 
 export const CREATE_NODE_PASSWORD_AND_SESSION = gql`
-  mutation CreateNodeWithPasswordAndSession(
-    $username: String
-    $password: String
-    $token: String
-  ) {
-    insert_nodes(
-      objects: {
-        props: {
-          data: {
-            passport_passwords: {
-              data: { password: $password, username: $username }
-            }
-            sessions: { data: { token: $token } }
-          }
-        }
-      }
-    ) {
+  mutation CreateNodeWithPasswordAndSession($username: String, $password: String, $token: String) {
+    insert_nodes(objects: {passport_passwords: {data: {password: $password, username: $username}}, sessions: {data: {token: $token}}}) {
       returning {
         id
-        props {
-          sessions {
-            token
-          }
+        sessions(where: {token: {_eq: $token}}) {
+          token
         }
       }
     }
@@ -53,16 +34,14 @@ export const CREATE_NODE_PASSWORD_AND_SESSION = gql`
 export const FIND_USER_PASSWORD = gql`
   query($username: String) {
     nodes(
-      where: { props: { passport_passwords: { username: { _eq: $username } } } }
+      where: { passport_passwords: { username: { _eq: $username } } }
     ) {
       id
-      props {
-        passport_passwords(where: { username: { _eq: $username } }) {
-          password
-        }
-        sessions {
-          token
-        }
+      passport_passwords(where: { username: { _eq: $username } }) {
+        password
+      }
+      sessions {
+        token
       }
     }
   }
@@ -103,7 +82,7 @@ export const passportUse = (apolloClient) => {
         }
         const node = _.get(result, 'data.nodes.0');
         if (!node) return done('!node');
-        if (_.get(node, 'props.0.passport_passwords.0.password') === password) {
+        if (_.get(node, 'passport_passwords.0.password') === password) {
           // TODO hide node password !!!
           return done(null, node);
         }

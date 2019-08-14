@@ -3,9 +3,9 @@ import { InMemoryCache, HttpLink } from 'apollo-boost';
 import ApolloClient from 'apollo-client';
 import { WebSocketLink } from 'apollo-link-ws';
 import { split, ApolloLink, concat } from 'apollo-link';
-import config from '../config';
 
-const { GRAPHQL, HASURA_ADMIN_SECRET } = config;
+const HASURA_ADMIN_SECRET = '7777';
+const GRAPHQL = 'isg-hasura-lerny.herokuapp.com/v1/graphql';
 
 export function initApollo(initialState = {}) {
   const httpLink = new HttpLink({

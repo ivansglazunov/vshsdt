@@ -60,6 +60,9 @@ Manual can be runned:
   - GITLAB_REPOSITORY
   - GITLAB_USERNAME
   - PORT
+  - POSTGRES
+  - HASURA_ADMIN_SECRET
+  - HASURA_URL
 - create docker repository with name CONTAINER_NAME
 - add to https://git.styleschool.ru/admin/runners/3 you repository
 
@@ -67,10 +70,12 @@ Manual can be runned:
 
 - create fork
   - create **empty** repo and copy git url
-  - git clone https://git.styleschool.ru/lerny/sandbox.git
+  - git clone https://git.styleschool.ru/ivansglazunov/sandbox.git
   - git remote set-url origin <my-repo>
 - merge from sandbox master
   - commit all changes
   - git remote set-url sandbox https://git.styleschool.ru/ivansglazunov/sandbox.git
   - git pull
   - git merge sandbox/master
+
+> push always `git push origin`, with selected remote!

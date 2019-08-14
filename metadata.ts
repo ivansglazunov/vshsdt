@@ -1,12 +1,11 @@
 import * as rp from 'request-promise';
-import config from './config';
 
 export async function replace(metadata) {
   await rp({
     method: 'POST',
-    uri: `https://${config.HASURA}/v1/query`,
+    uri: `https://${process.env.HASURA_URL}/v1/query`,
     headers: {
-      'X-Hasura-Admin-Secret': config.HASURA_ADMIN_SECRET,
+      'X-Hasura-Admin-Secret': process.env.HASURA_ADMIN_SECRET,
     },
     body: {
       type: 'replace_metadata',
