@@ -16,7 +16,7 @@
 #### dev
 
 - `npm i` install deps
-- `npm start -- -p 3000` start development
+- `PORT=3000 npm start` start development
 
 #### docker
 
@@ -26,11 +26,10 @@ By default docker run next server with all services inside. For more detailed lo
 
 Manual can be runned:
 
-- `npm run next-build` and then
-  - `PORT=3000 npm run next-server` with server render and all services
-- `PORT=3000 npm run service-server` all services
+- `PORT=3000 npm start` with next app
+- `PORT=3000 npm run service-server` only services
 
-> Can add vars `MODE=webhooks` or `MODE=passport` for run only one service.
+> Can add vars `MODE=webhooks` or `MODE="webhooks,passport"` for run only selected services.
 
 > Yes, need best api.
 

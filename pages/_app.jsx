@@ -44,7 +44,7 @@ export default class MyApp extends App {
     }
   }
   static async getInitialProps({ Component, ctx: { req: { cookies } } }) {
-    const token = process.browser ? Cookie.get('token') : cookies.token;
+    const token = process.browser ? Cookie.get('token') : cookies ? cookies.token : undefined;
     const apolloClient = initApollo({}, token);
     try {
       await getDataFromTree(CreateComponent(Component, {}, apolloClient));

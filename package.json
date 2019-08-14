@@ -1,15 +1,9 @@
 {
   "version": "0.0.0",
   "scripts": {
-    "start": "next",
-    "docker": "npm run next-build",
-    "next": "next",
-    "next-build": "next build",
-    "next-start": "next start",
-    "next-server": "ts-node next-server.ts",
-    "service-server": "ts-node service-server.ts",
-    "docker-build": "next build",
-    "docker-start": "cross-env ENV=production ts-node next-server.ts",
+    "start": "cross-env ENV=development ts-node next-server.ts",
+    "build": "next build",
+    "serve": "cross-env ENV=production ts-node next-server.ts",
     "tslint": "tslint --project tsconfig.json -c ./tslint.json",
     "migrate": "knex migrate:latest",
     "unmigrate": "knex migrate:rollback --all"
@@ -26,6 +20,7 @@
     "@material-ui/system": "^4.3.0",
     "@material-ui/types": "^4.1.1",
     "@material-ui/utils": "^4.1.0",
+    "@types/lodash": "^4.14.136",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-typescript": "^1.1.1",
     "apollo-boost": "^0.4.3",

@@ -7,6 +7,6 @@ WORKDIR "/usr/src/app"
 
 RUN set -ex \
   && npm install \
-  && npm run docker-build
+  && npm run build
 
-CMD ["npm", "run", "docker-start"]
+CMD ["npm", "run", "serve"]
