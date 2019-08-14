@@ -19,14 +19,14 @@ export function initApollo(initialState = {}, token) {
     'X-Hasura-Admin-Secret': 7777,
   };
   const httpLink = new HttpLink({
-    uri: `http://${GRAPHQL}`,
+    uri: `https://${GRAPHQL}`,
     fetch
   });
 
   const wsLink = !process.browser
     ? null
     : new WebSocketLink({
-      uri: `ws://${GRAPHQL}`,
+      uri: `wss://${GRAPHQL}`,
       options: {
         reconnect: true,
         connectionParams: () => ({
