@@ -40,7 +40,7 @@ if (process.browser) {
 export const login = async (username, password) => {
   const q = {
     method: 'post',
-    url:`/_passport/signin`,
+    url:`/_passports/signin`,
     data: {
       username,
       password,
