@@ -29,7 +29,7 @@ Manual can be runned:
 - `PORT=3000 npm start` with next app
 - `PORT=3000 npm run service-server` only services
 
-> Can add vars `MODE=webhooks` or `MODE="webhooks,passport"` for run only selected services.
+> Can add vars `MODE=webhooks` or `MODE="webhooks,passports"` for run only selected services.
 
 > Yes, need best api.
 
