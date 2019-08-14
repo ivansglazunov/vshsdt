@@ -73,7 +73,7 @@ Manual can be runned:
   - git remote set-url origin <my-repo>
 - merge from sandbox master
   - commit all changes
-  - git remote set-url sandbox https://git.styleschool.ru/ivansglazunov/sandbox.git
+  - git remote add sandbox https://git.styleschool.ru/ivansglazunov/sandbox.git
   - git pull
   - git merge sandbox/master
 

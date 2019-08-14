@@ -28,6 +28,7 @@ export function initApollo(initialState = {}, token) {
     : new WebSocketLink({
       uri: `wss://${GRAPHQL}`,
       options: {
+        lazy: true,
         reconnect: true,
         connectionParams: () => ({
           headers,
