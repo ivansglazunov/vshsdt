@@ -1,5 +1,5 @@
-import { useGql } from '../imports/use-gql';
-import { GET_NODES } from '../imports/sandbox';
+import { useGql } from '../lib/use-gql';
+import { GET_NODES } from '../lib/sandbox';
 
 export default () => {
   const query = useGql(GET_NODES);
