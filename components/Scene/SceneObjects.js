@@ -1,15 +1,16 @@
 import React from 'react';
 import Box from '../geometry/Box';
 import Plane from '../geometry/Plane';
-import TransformControls from '../TransformControls';
+import Draggable from '../geometry/Draggable';
 
 export default function SceneObjects() {
+
     return (
         <>
             <Plane position={[0, 0, 0]} />
-            <TransformControls>
+            <Draggable>
                 <Box position={[1, 0, 1]} />
-            </TransformControls>
+            </Draggable>
             <Box position={[1, 0, 1]} />
             {/*
             <Box position={[2, 1, 5]} />

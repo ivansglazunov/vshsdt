@@ -6,8 +6,8 @@ import { context } from '../lib/helpers/context';
 extend({ OrbitControls: THREEOrbitControls });
 
 export function useOrbit() {
-    const { orbitControlRef } = useContext(context);
-    return orbitControlRef;
+    const { orbitControlRef: { current } } = useContext(context);
+    return current;
 }
 
 export default function OrbitControls(props) {

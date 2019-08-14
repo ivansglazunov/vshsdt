@@ -14,7 +14,7 @@ export default function TransformControls(props) {
   scene.add(control);
 
   control.addEventListener( 'dragging-changed', function ( event ) {
-    orbitRef.current.enabled = !event.value;
+    orbitRef.enabled = !event.value;
   });
 
   return (
