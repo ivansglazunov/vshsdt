@@ -1,4 +1,4 @@
-import { gql } from '../lib/use-gql';
+import { gql } from './use-gql';
 
 export const GET_NODES = gql`
   nodes {

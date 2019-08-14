@@ -1,7 +1,7 @@
-import { useGql } from '../lib/use-gql';
+import { useGql } from '../imports/use-gql';
 
 import Cookie from 'js-cookie';
-import { login } from '../lib/passport';
+import { login } from '../imports/passport';
 
 export default () => {
   return <div>

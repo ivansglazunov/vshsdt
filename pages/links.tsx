@@ -2,8 +2,8 @@ import { useState } from 'react';
 import * as _ from 'lodash';
 import ReactResizeDetector from 'react-resize-detector';
 
-import { useGql } from '../lib/use-gql';
-import { GET_NODES } from '../lib/sandbox';
+import { useGql } from '../imports/use-gql';
+import { GET_NODES } from '../imports/sandbox';
 
 
 let ForceGraph2D;

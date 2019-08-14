@@ -1,11 +1,11 @@
-import strategies from './strategies';
+import passport from './passports';
 import webhooks from './webhooks';
 
 export default (app) => {
   if (process.env.MODE) {
     switch (process.env.MODE) {
-      case 'strategies':
-        strategies(app);
+      case 'passport':
+        passport(app);
         break;
       case 'webhooks':
         webhooks(app);
@@ -14,7 +14,7 @@ export default (app) => {
         break;
     }
   } else {
-    strategies(app);
+    passport(app);
     webhooks(app);
   }
 };

@@ -30,7 +30,7 @@ Manual can be runned:
   - `PORT=3000 npm run next-server` with server render and all services
 - `PORT=3000 npm run service-server` all services
 
-> Can add vars `MODE=webhooks` or `MODE=strategies` for run only one service.
+> Can add vars `MODE=webhooks` or `MODE=passport` for run only one service.
 
 > Yes, need best api.
 

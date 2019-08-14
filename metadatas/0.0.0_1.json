@@ -26,28 +26,27 @@
         }
       ],
       "insert_permissions": [],
-      "select_permissions": [],
-      "update_permissions": [],
-      "delete_permissions": [],
-      "event_triggers": []
-    },
-    {
-      "table": "nodes_props_passport_passwords",
-      "object_relationships": [
+      "select_permissions": [
         {
-          "using": { "foreign_key_constraint_on": "typeId" },
-          "name": "type",
-          "comment": null
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": ["id", "linkId", "inserted", "deleted"],
+            "limit": 0,
+            "filter": {}
+          }
         },
         {
-          "using": { "foreign_key_constraint_on": "ofId" },
-          "name": "of",
-          "comment": null
+          "role": "user",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": ["id", "linkId", "deleted", "inserted"],
+            "filter": {}
+          }
         }
       ],
-      "array_relationships": [],
-      "insert_permissions": [],
-      "select_permissions": [],
       "update_permissions": [],
       "delete_permissions": [],
       "event_triggers": []
@@ -73,39 +72,41 @@
       ],
       "array_relationships": [],
       "insert_permissions": [],
-      "select_permissions": [],
-      "update_permissions": [],
-      "delete_permissions": [],
-      "event_triggers": []
-    },
-    {
-      "table": "props_types",
-      "object_relationships": [],
-      "array_relationships": [
-      ],
-      "insert_permissions": [],
-      "select_permissions": [],
-      "update_permissions": [],
-      "delete_permissions": [],
-      "event_triggers": []
-    },
-    {
-      "table": "nodes_props_sessions",
-      "object_relationships": [
+      "select_permissions": [
         {
-          "using": { "foreign_key_constraint_on": "typeId" },
-          "name": "type",
-          "comment": null
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": [
+              "id",
+              "typeId",
+              "ofId",
+              "nodeTypeId",
+              "inserted",
+              "deleted"
+            ],
+            "limit": 0,
+            "filter": {}
+          }
         },
         {
-          "using": { "foreign_key_constraint_on": "ofId" },
-          "name": "of",
-          "comment": null
+          "role": "user",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": [
+              "id",
+              "nodeTypeId",
+              "ofId",
+              "typeId",
+              "deleted",
+              "inserted"
+            ],
+            "filter": {}
+          }
         }
       ],
-      "array_relationships": [],
-      "insert_permissions": [],
-      "select_permissions": [],
       "update_permissions": [],
       "delete_permissions": [],
       "event_triggers": []
@@ -126,7 +127,27 @@
         }
       ],
       "insert_permissions": [],
-      "select_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": ["id", "name", "inserted", "deleted"],
+            "limit": 0,
+            "filter": {}
+          }
+        },
+        {
+          "role": "user",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": ["id", "name", "deleted", "inserted"],
+            "filter": {}
+          }
+        }
+      ],
       "update_permissions": [],
       "delete_permissions": [],
       "event_triggers": []
@@ -135,9 +156,96 @@
       "table": "nodes_types",
       "object_relationships": [],
       "array_relationships": [
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "nodeTypeId",
+              "table": "nodes_props_types"
+            }
+          },
+          "name": "nodes_props_types",
+          "comment": null
+        }
       ],
       "insert_permissions": [],
-      "select_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": ["id", "name", "inserted", "deleted"],
+            "limit": 0,
+            "filter": {}
+          }
+        },
+        {
+          "role": "user",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": ["id", "name", "deleted", "inserted"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "nodes_props_passport_passwords",
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "typeId" },
+          "name": "type",
+          "comment": null
+        },
+        {
+          "using": { "foreign_key_constraint_on": "ofId" },
+          "name": "of",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": [
+              "id",
+              "typeId",
+              "ofId",
+              "username",
+              "password",
+              "inserted",
+              "deleted"
+            ],
+            "limit": 0,
+            "filter": {}
+          }
+        },
+        {
+          "role": "user",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": [
+              "id",
+              "ofId",
+              "typeId",
+              "password",
+              "username",
+              "deleted",
+              "inserted"
+            ],
+            "filter": {}
+          }
+        }
+      ],
       "update_permissions": [],
       "delete_permissions": [],
       "event_triggers": []
@@ -218,7 +326,27 @@
         }
       ],
       "insert_permissions": [],
-      "select_permissions": [],
+      "select_permissions": [
+        {
+          "role": "user",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": ["id", "deleted", "inserted"],
+            "filter": {}
+          }
+        },
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": ["id", "inserted", "deleted"],
+            "limit": 0,
+            "filter": {}
+          }
+        }
+      ],
       "update_permissions": [],
       "delete_permissions": [],
       "event_triggers": []
@@ -270,7 +398,43 @@
         }
       ],
       "insert_permissions": [],
-      "select_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": [
+              "id",
+              "sourceId",
+              "targetId",
+              "nodeId",
+              "typeId",
+              "inserted",
+              "deleted"
+            ],
+            "limit": 0,
+            "filter": {}
+          }
+        },
+        {
+          "role": "user",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": [
+              "id",
+              "nodeId",
+              "sourceId",
+              "targetId",
+              "typeId",
+              "deleted",
+              "inserted"
+            ],
+            "filter": {}
+          }
+        }
+      ],
       "update_permissions": [],
       "delete_permissions": [],
       "event_triggers": []
@@ -296,7 +460,145 @@
       ],
       "array_relationships": [],
       "insert_permissions": [],
-      "select_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": [
+              "id",
+              "listId",
+              "nodeId",
+              "linkId",
+              "depth",
+              "inserted",
+              "deleted"
+            ],
+            "limit": 0,
+            "filter": {}
+          }
+        },
+        {
+          "role": "user",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": [
+              "depth",
+              "id",
+              "linkId",
+              "listId",
+              "nodeId",
+              "deleted",
+              "inserted"
+            ],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "props_types",
+      "object_relationships": [],
+      "array_relationships": [
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "typeId",
+              "table": "nodes_props_passport_passwords"
+            }
+          },
+          "name": "passport_passwords",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "typeId",
+              "table": "nodes_props_sessions"
+            }
+          },
+          "name": "sessions",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "typeId",
+              "table": "nodes_props_types"
+            }
+          },
+          "name": "types",
+          "comment": null
+        }
+      ],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": ["id", "name", "inserted", "deleted"],
+            "limit": 0,
+            "filter": {}
+          }
+        },
+        {
+          "role": "user",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": ["id", "name", "deleted", "inserted"],
+            "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "nodes_props_sessions",
+      "object_relationships": [
+        {
+          "using": { "foreign_key_constraint_on": "typeId" },
+          "name": "type",
+          "comment": null
+        },
+        {
+          "using": { "foreign_key_constraint_on": "ofId" },
+          "name": "of",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": ["id", "typeId", "ofId", "token", "inserted", "deleted"],
+            "limit": 0,
+            "filter": {}
+          }
+        },
+        {
+          "role": "user",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": ["id", "ofId", "typeId", "token", "deleted", "inserted"],
+            "filter": {}
+          }
+        }
+      ],
       "update_permissions": [],
       "delete_permissions": [],
       "event_triggers": []

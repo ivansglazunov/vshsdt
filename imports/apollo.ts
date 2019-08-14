@@ -1,15 +1,26 @@
 import withApollo from 'next-with-apollo';
+import fetch from 'node-fetch';
 import { InMemoryCache, HttpLink } from 'apollo-boost';
 import ApolloClient from 'apollo-client';
 import { WebSocketLink } from 'apollo-link-ws';
 import { split, ApolloLink, concat } from 'apollo-link';
+import * as Debug from 'debug';
 
-const HASURA_ADMIN_SECRET = '7777';
+const debug = Debug('apollo');
+
 const GRAPHQL = 'isg-hasura-lerny.herokuapp.com/v1/graphql';
 
-export function initApollo(initialState = {}) {
+export function initApollo(initialState = {}, token) {
+  debug('initApollo', token);
+
+  const headers = token ? {
+    'Authorization': `Bearer ${token}`,
+  } : {
+    'X-Hasura-Admin-Secret': 7777,
+  };
   const httpLink = new HttpLink({
     uri: `http://${GRAPHQL}`,
+    fetch
   });
 
   const wsLink = !process.browser
@@ -18,25 +29,20 @@ export function initApollo(initialState = {}) {
       uri: `ws://${GRAPHQL}`,
       options: {
         reconnect: true,
-        ...(HASURA_ADMIN_SECRET
-          ? {
-            connectionParams: () => ({
-              headers: {
-                'x-hasura-admin-secret': HASURA_ADMIN_SECRET,
-              },
-            }),
-          } : {}),
+        connectionParams: () => ({
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }),
       },
     });
 
   const authMiddleware = new ApolloLink((operation, forward) => {
-    if (HASURA_ADMIN_SECRET) {
-      operation.setContext({
-        headers: {
-          'x-hasura-admin-secret': HASURA_ADMIN_SECRET,
-        },
-      });
-    }
+    operation.setContext({
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
 
     return forward(operation);
   });
@@ -60,16 +66,3 @@ export function initApollo(initialState = {}) {
     cache: new InMemoryCache().restore(initialState),
   });
 }
-
-export default withApollo(
-  ({ initialState }) => {
-    if (typeof window === 'object') {
-      // @ts-ignore
-      return initApollo(window.__APOLLO_STATE__);
-    }
-    return initApollo(initialState);
-  },
-  {
-    getDataFromTree: 'ssr',
-  },
-);

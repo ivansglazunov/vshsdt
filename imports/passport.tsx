@@ -1,5 +1,8 @@
 import Cookie from 'js-cookie';
 import * as _ from 'lodash';
+import * as Debug from 'debug';
+
+const debug = Debug('passport');
 
 let rp, axios, request;
 if (process.browser) {
@@ -37,16 +40,17 @@ if (process.browser) {
 export const login = async (username, password) => {
   const q = {
     method: 'post',
-    url:`/strategies/signin`,
+    url:`/_passport/signin`,
     data: {
       username,
       password,
     },
   };
-  const user = await request(q);
+  const { data: user } = await request(q);
+  debug('login', { user });
   const token = _.get(user, 'sessions.0.token');
   if (token) {
-    Cookie.set('token', token);
+    return Cookie.set('token', token);
   }
   throw new Error('!user.sessions.0.token');
 };

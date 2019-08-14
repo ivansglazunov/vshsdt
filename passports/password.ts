@@ -1,22 +1,13 @@
 import * as passport from 'passport';
-import { initApollo } from '../lib/with-apollo';
+import { initApollo } from '../imports/apollo';
 import ApolloClient from 'apollo-client';
 import { Strategy as LocalStrategy } from 'passport-local';
 import gql from 'graphql-tag';
 import * as _ from 'lodash';
 import * as uniqid from 'uniqid';
+import * as Debug from 'debug';
 
-export const signinMiddleware = apolloClient => (req, res, next) => {
-  passport.authenticate('local', async (error, user, info) => {
-    if (error) {
-      return res.status(400).json({ error: error.toString() });
-    }
-    if (user) {
-      delete user.passport_passwords;
-      return res.status(200).json(user);
-    }
-  })(req, res, next);
-};
+const debug = Debug('passports:password');
 
 export const CREATE_NODE_PASSWORD_AND_SESSION = gql`
   mutation CreateNodeWithPasswordAndSession($username: String, $password: String, $token: String) {
@@ -47,10 +38,24 @@ export const FIND_USER_PASSWORD = gql`
   }
 `;
 
+export const signinMiddleware = apolloClient => (req, res, next) => {
+  passport.authenticate('local', async (error, user, info) => {
+    debug('signinMiddleware', { user });
+    if (error) {
+      return res.status(400).json({ error: error.toString() });
+    }
+    if (user) {
+      delete user.passport_passwords;
+      return res.status(200).json(user);
+    }
+  })(req, res, next);
+};
+
 export const signupMiddleware = (
   apolloClient: ApolloClient<any>,
   _signinMiddleware,
 ) => async (req, res, next) => {
+  debug('signupMiddleware', { body: req.body });
   await apolloClient.mutate({
     mutation: CREATE_NODE_PASSWORD_AND_SESSION,
     variables: {
@@ -70,6 +75,7 @@ export const passportUse = (apolloClient) => {
         passwordField: 'password',
       },
       async (username, password, done) => {
+        debug('passport', { username, password });
         const result = await apolloClient.query({
           query: FIND_USER_PASSWORD,
           variables: {
@@ -93,10 +99,10 @@ export const passportUse = (apolloClient) => {
 };
 
 export default async (app) => {
-  const apolloClient = initApollo();
+  const apolloClient = initApollo({}, '_passport');
+  debug('init');
   passportUse(apolloClient);
   const _signinMiddleware = signinMiddleware(apolloClient);
-  app.post('/strategies/signin',_signinMiddleware);
-  app.post('/strategies/signup', signupMiddleware(apolloClient, _signinMiddleware));
-  console.log('strategy password');
+  app.post('/_passport/signin',_signinMiddleware);
+  app.post('/_passport/signup', signupMiddleware(apolloClient, _signinMiddleware));
 };

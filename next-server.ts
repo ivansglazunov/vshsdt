@@ -1,6 +1,8 @@
 import * as express from 'express';
 import * as passport from 'passport';
 import * as next from 'next';
+import * as cookieParser from 'cookie-parser';
+
 import serviceApp from './service-app';
 
 if (!process.env.PORT) throw new Error('!process.env.PORT');
@@ -16,12 +18,15 @@ app
 
     app.set('json spaces', 2);
     app.use(express.json());
+    app.use(cookieParser())
     app.use(passport.initialize());
     app.use(passport.session());
 
     serviceApp(app);
 
-    app.get('*', (req, res) => handle(req, res));
+    app.get('*', (req, res) => {
+      return handle(req, res);
+    });
 
     app.listen(process.env.PORT, (error) => {
       if (error) throw error;

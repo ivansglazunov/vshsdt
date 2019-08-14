@@ -3,11 +3,12 @@ import Head from 'next/head';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 import React from 'react';
+import Cookie from 'js-cookie';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import withApollo, { initApollo } from '../lib/with-apollo';
+import { initApollo } from '../imports/apollo';
 import { getDataFromTree } from '@apollo/react-ssr';
 
 const theme = createMuiTheme();
@@ -42,8 +43,9 @@ export default class MyApp extends App {
       jssStyles.parentNode.removeChild(jssStyles);
     }
   }
-  static async getInitialProps({ Component }) {
-    const apolloClient = initApollo();
+  static async getInitialProps({ Component, ctx: { req: { cookies } } }) {
+    const token = process.browser ? Cookie.get('token') : cookies.token;
+    const apolloClient = initApollo({}, token);
     try {
       await getDataFromTree(CreateComponent(Component, {}, apolloClient));
     } catch (error) {
@@ -52,17 +54,18 @@ export default class MyApp extends App {
     Head.rewind();
     const apolloState = apolloClient.extract();
     return {
+      token,
       apolloState,
     };
   }
   constructor(props) {
     super(props);
     if (typeof window === 'object') {
-      this.apolloClient = initApollo(window.__APOLLO_STATE__);
+      this.apolloClient = initApollo(window.__APOLLO_STATE__, props.token);
     } else {
       global.__APOLLO_STATE__ = props.apolloState;
       props.apolloState;
-      this.apolloClient = initApollo(props.apolloState);
+      this.apolloClient = initApollo(props.apolloState, props.token);
     }
   }
   render() {
