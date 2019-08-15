@@ -89,7 +89,6 @@ export const passportUse = (apolloClient) => {
         const node = _.get(result, 'data.nodes.0');
         if (!node) return done('!node');
         if (_.get(node, 'passport_passwords.0.password') === password) {
-          // TODO hide node password !!!
           return done(null, node);
         }
         return done('!password');
