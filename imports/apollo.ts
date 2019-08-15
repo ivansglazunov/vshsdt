@@ -13,11 +13,12 @@ const GRAPHQL = 'isg-hasura-lerny.herokuapp.com/v1/graphql';
 export function initApollo(initialState = {}, token) {
   debug('initApollo', token);
 
-  const headers = token ? {
+  const headers = token && false ? {
     'Authorization': `Bearer ${token}`,
   } : {
-    'X-Hasura-Admin-Secret': 7777,
+    'x-hasura-admin-secret': '7777',
   };
+
   const httpLink = new HttpLink({
     uri: `https://${GRAPHQL}`,
     fetch
