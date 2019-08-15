@@ -35,7 +35,7 @@ Manual can be runned:
 
 #### hasura settings
 
-- `HASURA_GRAPHQL_AUTH_HOOK` `http://<service-server>/webhooks/hasura-bearer`
+- `HASURA_GRAPHQL_AUTH_HOOK` `http://<service-server>/_webhooks/hasura-bearer`
 - `HASURA_GRAPHQL_ADMIN_SECRET` `7777`
 
 #### hasura migrations
