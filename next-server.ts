@@ -1,9 +1,12 @@
 import * as express from 'express';
 import * as passport from 'passport';
 import * as next from 'next';
+import * as dotenv from 'dotenv';
 import * as cookieParser from 'cookie-parser';
 
 import serviceApp from './service-app';
+
+dotenv.config();
 
 if (!process.env.PORT) throw new Error('!process.env.PORT');
 

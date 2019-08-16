@@ -1,4 +1,5 @@
 require('ts-node/register');
+require('dotenv').config();
 
 export const client = 'pg';
 

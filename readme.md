@@ -23,20 +23,24 @@
 
 #### dev
 
-- `npm i` install deps
-- `PORT=3000 npm start` start development
+- install
+  - `npm i`
+- set env
+  - in .env
+    ```
+    PORT=3000
+    POSTGRES=<POSTGRES>
+    HASURA_ADMIN_SECRET=<HASURA_ADMIN_SECRET>
+    HASURA_URL=<HASURA_URL>
+    ```
+  - in terminal `export PORT=3000 && export POSTGRES=<POSTGRES> && export HASURA_ADMIN_SECRET=<HASURA_ADMIN_SECRET> && export HASURA_URL=<HASURA_URL>`
+- start
+  - `npm start` with next app
+  - `npm run service-server` only services
 
 #### docker
 
 By default docker run next server with all services inside. For more detailed logic need to build separated dockers.
-
-#### services
-
-Manual can be runned:
-
-- `export POSTGRES=<POSTGRES> && export HASURA_ADMIN_SECRET=<HASURA_ADMIN_SECRET> && export HASURA_URL=<HASURA_URL>` define global vars
-- `PORT=3000 npm start` with next app
-- `PORT=3000 npm run service-server` only services
 
 > Can add vars `MODE=webhooks` or `MODE="webhooks,passports"` for run only selected services.
 
@@ -83,7 +87,7 @@ Manual can be runned:
 - merge from sandbox master
   - commit all changes
   - git remote add sandbox https://git.styleschool.ru/ivansglazunov/sandbox.git
-  - git pull
+  - git pull sandbox master
   - git merge sandbox/master
 
 > push always `git push origin`, with selected remote!

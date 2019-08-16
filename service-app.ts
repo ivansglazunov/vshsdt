@@ -1,8 +1,10 @@
 import passports from './passports';
 import webhooks from './webhooks';
 import * as _ from 'lodash';
+import * as dotenv from 'dotenv';
 import * as Debug from 'debug';
 
+dotenv.config();
 const debug = Debug('services');
 
 export default (app) => {
