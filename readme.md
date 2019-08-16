@@ -1,15 +1,23 @@
 # sandbox
 
+> sandbox code is universal
+
+> current readme of deploying writed for styleschool infrastructure
+
 ### about
 
 - no server side logic, only reach+gql rendering
 - all server logic in hasura remote schemas
 
-- server gql render
-- server-client gql cache
-- client use server query results
-- client override queries as subscriptions
-- no data client refetching, only subscribing
+- [x] server gql render
+- [x] server-client gql cache
+- [x] client use server query results
+- [x] client override queries as subscriptions
+- [x] no data client refetching, only subscribing for changes
+- [ ] passport + hasura tokens auth [@ivansglazunov]
+- [ ] links + links_lists + triggers
+- [ ] props based on links_lists
+- [ ] access props based on links_lists
 
 ### how to
 
@@ -26,6 +34,7 @@ By default docker run next server with all services inside. For more detailed lo
 
 Manual can be runned:
 
+- `export POSTGRES=<POSTGRES> && export HASURA_ADMIN_SECRET=<HASURA_ADMIN_SECRET> && export HASURA_URL=<HASURA_URL>` define global vars
 - `PORT=3000 npm start` with next app
 - `PORT=3000 npm run service-server` only services
 
@@ -50,7 +59,7 @@ Manual can be runned:
 - <order> - order for appying migrations, just a number 0-1000
 - <name> - any a-z_- names, likely equal with table names
 
-#### create new styleschool docker
+#### create new sandbox docker
 
 - fork
 - set variables
