@@ -15,7 +15,6 @@ export async function up(knex: Knex) {
       .inTable('nodes');
     table
       .integer('linkId')
-      .notNullable()
       .references('id')
       .inTable('links');
     table.integer('depth').notNullable();
