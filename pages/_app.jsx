@@ -10,27 +10,30 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { initApollo } from '../imports/apollo';
 import { getDataFromTree } from '@apollo/react-ssr';
+import { PassportProvider } from '../imports/passport';
 
 const theme = createMuiTheme();
 
-function CreateComponent(Component, pageProps, apolloClient) {
+function CreateComponent(Component, pageProps, apolloClient, token) {
   return (
     <Container>
-      <ThemeProvider theme={theme}>
-        <div
-          style={{
-            position: 'absolute',
-            left: 0,
-            top: 0,
-            width: '100%',
-            height: '100%',
-          }}>
-          <ApolloProvider client={apolloClient}>
-            <CssBaseline />
-            <Component {...pageProps} />
-          </ApolloProvider>
-        </div>
-      </ThemeProvider>
+      <PassportProvider defaultToken={token}>
+        <ThemeProvider theme={theme}>
+          <div
+            style={{
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              width: '100%',
+              height: '100%',
+            }}>
+            <ApolloProvider client={apolloClient}>
+              <CssBaseline />
+              <Component {...pageProps} />
+            </ApolloProvider>
+          </div>
+        </ThemeProvider>
+      </PassportProvider>
     </Container>
   );
 }
@@ -69,8 +72,8 @@ export default class MyApp extends App {
     }
   }
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, token } = this.props;
 
-    return CreateComponent(Component, pageProps, this.apolloClient);
+    return CreateComponent(Component, pageProps, this.apolloClient, token);
   }
 }

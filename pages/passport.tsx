@@ -1,15 +1,24 @@
+import * as React from 'react';
 import { useGql } from '../imports/use-gql';
 
-import Cookie from 'js-cookie';
-import { login } from '../imports/passport';
+import { usePassport } from '../imports/passport';
+
+const Content = () => {
+  const { token, login, logout } = usePassport();
+
+  return <>
+    <div>{token || '-'}</div>
+    <div>
+      <button onClick={async () => {
+        await login('abc', 'abce');
+      }}>login</button>
+      <button onClick={async () => {
+        await logout();
+      }}>logout</button>
+    </div>
+  </>;
+};
 
 export default () => {
-  return <div>
-    <div>{Cookie.get('hasura_token') || 'no token'}</div>
-    <div>
-      <button onClick={() => {
-        login('abc', 'abc');
-      }}>login</button>
-    </div>
-  </div>;
+  return <Content/>;
 };

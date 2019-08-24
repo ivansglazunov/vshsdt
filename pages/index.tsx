@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useGql } from '../imports/use-gql';
 import { GET_NODES } from '../imports/sandbox';
 

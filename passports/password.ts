@@ -9,6 +9,12 @@ import * as Debug from 'debug';
 
 const debug = Debug('passports:password');
 
+export const errors = [
+  '!gql',
+  '!node',
+  '!password',
+];
+
 export const CREATE_NODE_PASSWORD_AND_SESSION = gql`
   mutation CreateNodeWithPasswordAndSession($username: String, $password: String, $token: String) {
     insert_nodes(objects: {passport_passwords: {data: {password: $password, username: $username}}, sessions: {data: {token: $token}}}) {
@@ -38,22 +44,27 @@ export const FIND_USER_PASSWORD = gql`
   }
 `;
 
-export const signinMiddleware = apolloClient => (req, res, next) => {
+export const loginMiddleware = apolloClient => (req, res, next) => {
   passport.authenticate('local', async (error, user, info) => {
-    debug('signinMiddleware', { user });
+    debug('loginMiddleware', { error, user });
     if (error) {
-      return res.status(400).json({ error: error.toString() });
+      const code = _.includes(errors, error) ? 200 : 400;
+      return res.status(code).json({ error });
     }
     if (user) {
-      delete user.passport_passwords;
-      return res.status(200).json(user);
+      return res.status(200).json({
+        node: {
+          ...user,
+          password_password: undefined,
+        }
+      });
     }
   })(req, res, next);
 };
 
 export const signupMiddleware = (
   apolloClient: ApolloClient<any>,
-  _signinMiddleware,
+  _loginMiddleware,
 ) => async (req, res, next) => {
   debug('signupMiddleware', { body: req.body });
   await apolloClient.mutate({
@@ -64,7 +75,7 @@ export const signupMiddleware = (
       token: uniqid(),
     },
   });
-  _signinMiddleware(req, res, next);
+  _loginMiddleware(req, res, next);
 };
 
 export const passportUse = (apolloClient) => {
@@ -75,7 +86,7 @@ export const passportUse = (apolloClient) => {
         passwordField: 'password',
       },
       async (username, password, done) => {
-        debug('passport', { username, password });
+        debug('strategy start', { username, password });
         const result = await apolloClient.query({
           query: FIND_USER_PASSWORD,
           variables: {
@@ -84,13 +95,17 @@ export const passportUse = (apolloClient) => {
         });
         // TODO check errors
         if (result.errors && result.errors.length) {
-          return done(result.errors);
+          debug('strategy errors', { errors: result.errors });
+          return done('!gql');
         }
         const node = _.get(result, 'data.nodes.0');
         if (!node) return done('!node');
+        // TODO crypt passwords
         if (_.get(node, 'passport_passwords.0.password') === password) {
+          debug('strategy done', { node });
           return done(null, node);
         }
+        debug('strategy !password', { node });
         return done('!password');
       },
     ),
@@ -101,7 +116,7 @@ export default async (app) => {
   const apolloClient = initApollo({}, '_passport');
   debug('init');
   passportUse(apolloClient);
-  const _signinMiddleware = signinMiddleware(apolloClient);
-  app.post('/_passports/signin',_signinMiddleware);
-  app.post('/_passports/signup', signupMiddleware(apolloClient, _signinMiddleware));
+  const _loginMiddleware = loginMiddleware(apolloClient);
+  app.post('/_passports/login',_loginMiddleware);
+  app.post('/_passports/signup', signupMiddleware(apolloClient, _loginMiddleware));
 };

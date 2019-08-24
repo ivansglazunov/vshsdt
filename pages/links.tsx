@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useState } from 'react';
 import * as _ from 'lodash';
 import ReactResizeDetector from 'react-resize-detector';
@@ -5,7 +6,7 @@ import ReactResizeDetector from 'react-resize-detector';
 import { useGql } from '../imports/use-gql';
 import { GET_NODES } from '../imports/sandbox';
 import { Paper } from '@material-ui/core';
-import Links from '../components/links';
+import Links from '../imports/components/links';
 
 export default () => {
   const query = useGql(GET_NODES);

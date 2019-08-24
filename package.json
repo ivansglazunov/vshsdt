@@ -6,7 +6,8 @@
     "serve": "cross-env ENV=production ts-node next-server.ts",
     "tslint": "tslint --project tsconfig.json -c ./tslint.json",
     "migrate": "knex migrate:latest",
-    "unmigrate": "knex migrate:rollback --all"
+    "unmigrate": "knex migrate:rollback --all",
+    "doc": "typedoc --out ./docs \"./imports\" \"./pages\" \"./passports\" \"./webhooks\""
   },
   "keywords": [],
   "author": "",
@@ -85,8 +86,10 @@
     "tslint": "^5.18.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-eslint-rules": "^5.4.0",
+    "typedoc": "^0.15.0",
     "typescript": "^3.5.3",
     "uniqid": "^5.0.3",
+    "use-interval": "^1.1.0",
     "webp-loader": "^0.5.0"
   },
   "devDependencies": {

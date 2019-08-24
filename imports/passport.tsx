@@ -1,8 +1,12 @@
 import Cookie from 'js-cookie';
 import * as _ from 'lodash';
 import * as Debug from 'debug';
+import useInterval from 'use-interval';
+import React, { useState, useEffect, useContext } from 'react';
 
 const debug = Debug('passport');
+
+// TODO url support for microservices (now only current app)
 
 let rp, axios, request;
 if (process.browser) {
@@ -37,20 +41,70 @@ if (process.browser) {
   });
 }
 
-export const login = async (username, password) => {
+export const login = async (
+  username: string,
+  password: string,
+): Promise<{ token?: string, error?: string }> => {
   const q = {
     method: 'post',
-    url:`/_passports/signin`,
+    url:`/_passports/login`,
     data: {
       username,
       password,
     },
   };
-  const { data: user } = await request(q);
-  debug('login', { user });
-  const token = _.get(user, 'sessions.0.token');
-  if (token) {
-    return Cookie.set('token', token);
-  }
-  throw new Error('!user.sessions.0.token');
+  const { data: { node, error } } = await request(q);
+  debug('login', { node });
+  const token = _.get(node, 'sessions.0.token');
+  if (token) Cookie.set('token', token);
+  return { token, error };
+};
+
+export const logout = async (): Promise<void> => {
+  const q = {
+    method: 'get',
+    url:`/_passports/logout`,
+  };
+  await request(q);
+  Cookie.remove('token');
+};
+
+export interface IContext {
+  token?: string;
+  login: (username: string, password: string) => Promise<{ token?: string, error?: string }>;
+  logout: () => Promise<void>;
+}
+
+export const Context = React.createContext<IContext | undefined>(undefined);
+
+export function usePassport() {
+  const context = useContext(Context);
+  return context;
+};
+
+export const PassportProvider = ({
+  context = Context,
+  children = null,
+  defaultToken,
+}: {
+  context?: React.Context<IContext>;
+  children?: any;
+  defaultToken: string;
+}) => {
+  const [token, setToken] = useState<string | undefined>(defaultToken);
+
+  return <context.Provider value={{
+    token,
+    login: async (username, password) => {
+      const result = await login(username, password);
+      setToken(result.token);
+      return result;
+    },
+    logout: async () => {
+      await logout();
+      setToken(undefined);
+    },
+  }}>
+    {children}
+  </context.Provider>;
 };

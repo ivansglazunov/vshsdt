@@ -6,7 +6,7 @@
     "sourceMap": true,
     "noImplicitAny": false,
     "removeComments": true,
-    "jsx": "preserve",
+    "jsx": "react",
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es2015",
