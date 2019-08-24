@@ -1,5 +1,4 @@
 import * as passport from 'passport';
-import { initApollo } from '../imports/apollo';
 import ApolloClient from 'apollo-client';
 import { Strategy as LocalStrategy } from 'passport-local';
 import gql from 'graphql-tag';
@@ -7,7 +6,7 @@ import * as _ from 'lodash';
 import * as uniqid from 'uniqid';
 import * as Debug from 'debug';
 
-const debug = Debug('passports:password');
+const debug = Debug('passports');
 
 export const errors = [
   '!gql',
@@ -44,9 +43,9 @@ export const FIND_USER_PASSWORD = gql`
   }
 `;
 
-export const loginMiddleware = apolloClient => (req, res, next) => {
+export const signinMiddleware = apolloClient => (req, res, next) => {
   passport.authenticate('local', async (error, user, info) => {
-    debug('loginMiddleware', { error, user });
+    debug('signinMiddleware', { error, user });
     if (error) {
       const code = _.includes(errors, error) ? 200 : 400;
       return res.status(code).json({ error });
@@ -64,7 +63,7 @@ export const loginMiddleware = apolloClient => (req, res, next) => {
 
 export const signupMiddleware = (
   apolloClient: ApolloClient<any>,
-  _loginMiddleware,
+  _signinMiddleware,
 ) => async (req, res, next) => {
   debug('signupMiddleware', { body: req.body });
   await apolloClient.mutate({
@@ -75,7 +74,7 @@ export const signupMiddleware = (
       token: uniqid(),
     },
   });
-  _loginMiddleware(req, res, next);
+  _signinMiddleware(req, res, next);
 };
 
 export const passportUse = (apolloClient) => {
@@ -112,11 +111,18 @@ export const passportUse = (apolloClient) => {
   );
 };
 
-export default async (app) => {
+export const signoutMiddleware = async (req, res, next) => {
+  debug('signoutMiddleware', {});
+  req.logout();
+  return res.status(200).json({});
+};
+
+export default async (app, initApollo) => {
   const apolloClient = initApollo({}, '_passport');
   debug('init');
   passportUse(apolloClient);
-  const _loginMiddleware = loginMiddleware(apolloClient);
-  app.post('/_passports/login',_loginMiddleware);
-  app.post('/_passports/signup', signupMiddleware(apolloClient, _loginMiddleware));
+  const _signinMiddleware = signinMiddleware(apolloClient);
+  app.post('/_passports/signin',_signinMiddleware);
+  app.post('/_passports/signup', signupMiddleware(apolloClient, _signinMiddleware));
+  app.get('/_passports/signout', signoutMiddleware);
 };

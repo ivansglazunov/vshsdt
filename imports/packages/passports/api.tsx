@@ -41,70 +41,32 @@ if (process.browser) {
   });
 }
 
-export const login = async (
+export const signin = async (
   username: string,
   password: string,
 ): Promise<{ token?: string, error?: string }> => {
+  if (!username) return { error: '!node' };
+  if (!password) return { error: '!password' };
   const q = {
     method: 'post',
-    url:`/_passports/login`,
+    url:`/_passports/signin`,
     data: {
       username,
       password,
     },
   };
   const { data: { node, error } } = await request(q);
-  debug('login', { node });
+  debug('signin', { node });
   const token = _.get(node, 'sessions.0.token');
   if (token) Cookie.set('token', token);
   return { token, error };
 };
 
-export const logout = async (): Promise<void> => {
+export const signout = async (): Promise<void> => {
   const q = {
     method: 'get',
-    url:`/_passports/logout`,
+    url:`/_passports/signout`,
   };
   await request(q);
   Cookie.remove('token');
-};
-
-export interface IContext {
-  token?: string;
-  login: (username: string, password: string) => Promise<{ token?: string, error?: string }>;
-  logout: () => Promise<void>;
-}
-
-export const Context = React.createContext<IContext | undefined>(undefined);
-
-export function usePassport() {
-  const context = useContext(Context);
-  return context;
-};
-
-export const PassportProvider = ({
-  context = Context,
-  children = null,
-  defaultToken,
-}: {
-  context?: React.Context<IContext>;
-  children?: any;
-  defaultToken: string;
-}) => {
-  const [token, setToken] = useState<string | undefined>(defaultToken);
-
-  return <context.Provider value={{
-    token,
-    login: async (username, password) => {
-      const result = await login(username, password);
-      setToken(result.token);
-      return result;
-    },
-    logout: async () => {
-      await logout();
-      setToken(undefined);
-    },
-  }}>
-    {children}
-  </context.Provider>;
 };

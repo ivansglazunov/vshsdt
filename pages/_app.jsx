@@ -8,9 +8,11 @@ import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
+import '../imports/i18n';
+
 import { initApollo } from '../imports/apollo';
 import { getDataFromTree } from '@apollo/react-ssr';
-import { PassportProvider } from '../imports/passport';
+import { PassportProvider } from '../imports/packages/passports/react';
 
 const theme = createMuiTheme();
 
