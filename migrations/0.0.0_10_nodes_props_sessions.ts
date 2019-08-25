@@ -1,4 +1,4 @@
-import * as Knex from 'knex';
+import Knex from 'knex';
 
 export function up(knex: Knex) {
   return knex.schema.createTable('nodes_props_sessions', (table) => {

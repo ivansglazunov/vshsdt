@@ -1,13 +1,15 @@
-import * as React from 'react';
+import React from 'react';
 
 import { TextField, Grid, Button } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
+
+import { useTranslation } from '../imports/i18n';
 
 import { useGql } from '../imports/use-gql';
 import { usePassport } from '../imports/packages/passports/react';
+import { wrapPage } from '../imports/wrap-page';
 
 const Form = () => {
-  const { token, signin, signout } = usePassport();
+  const { token, signin, signup, signout } = usePassport();
   const { t, i18n } = useTranslation();
 
   const [username, setUsername] = React.useState('');
@@ -63,6 +65,14 @@ const Form = () => {
       <Button
         variant="outlined"
         fullWidth
+        disabled={error !== '!node' || loading}
+        onClick={() => signup(username, password)}
+      >{t('signup')}</Button>
+    </Grid>
+    <Grid item xs={12}>
+      <Button
+        variant="outlined"
+        fullWidth
         disabled={!token}
         onClick={() => signout()}
       >{t('signout')}</Button>
@@ -70,18 +80,14 @@ const Form = () => {
   </Grid>;
 };
 
-const Content = () => {
+export default wrapPage(() => {
   return <>
     <div style={{ padding: 16 }}>
       <Grid container justify="center" alignItems="center">
         <Grid item xs={12} sm={8} md={6} lg={4}>
-          <Form/>
+          <Form />
         </Grid>
       </Grid>
     </div>
   </>;
-};
-
-export default () => {
-  return <Content/>;
-};
+});

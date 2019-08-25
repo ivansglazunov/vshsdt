@@ -1,19 +1,25 @@
 import Cookie from 'js-cookie';
-import * as _ from 'lodash';
-import * as Debug from 'debug';
+import _ from 'lodash';
+import Debug from 'debug';
 import useInterval from 'use-interval';
 import React, { useState, useEffect, useContext } from 'react';
-import { signin, signout } from './api';
+import { signin, signup, signout } from './api';
 
 const debug = Debug('passport');
 
 export interface IContext {
   token?: string;
   signin: (username: string, password: string) => Promise<{ token?: string, error?: string }>;
+  signup: (username: string, password: string) => Promise<{ token?: string, error?: string }>;
   signout: () => Promise<void>;
 }
 
-export const Context = React.createContext<IContext | undefined>(undefined);
+export const Context = React.createContext<IContext | undefined>({
+  token: undefined,
+  signin: async (username, password) => ({}),
+  signup: async (username, password) => ({}),
+  signout: async () => {},
+});
 
 export function usePassport() {
   const context = useContext(Context);
@@ -35,6 +41,11 @@ export const PassportProvider = ({
     token,
     signin: async (username, password) => {
       const result = await signin(username, password);
+      setToken(result.token);
+      return result;
+    },
+    signup: async (username, password) => {
+      const result = await signup(username, password);
       setToken(result.token);
       return result;
     },

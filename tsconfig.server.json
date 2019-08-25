@@ -7,7 +7,7 @@
     "noImplicitAny": false,
     "removeComments": true,
     "jsx": "preserve",
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "target": "es2015",
     "lib": [

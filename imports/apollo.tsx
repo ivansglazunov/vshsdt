@@ -4,13 +4,15 @@ import { InMemoryCache, HttpLink } from 'apollo-boost';
 import ApolloClient from 'apollo-client';
 import { WebSocketLink } from 'apollo-link-ws';
 import { split, ApolloLink, concat } from 'apollo-link';
-import * as Debug from 'debug';
+import Debug from 'debug';
+import { getDataFromTree } from '@apollo/react-ssr';
+import { ApolloProvider } from '@apollo/react-hooks';
 
 const debug = Debug('apollo');
 
 const GRAPHQL = 'isg-hasura-lerny.herokuapp.com/v1/graphql';
 
-export function initApollo(initialState = {}, token) {
+export function initApollo(initialState = {}, token?) {
   debug('initApollo', token);
 
   const headers = token && false ? {
@@ -24,6 +26,7 @@ export function initApollo(initialState = {}, token) {
     fetch
   });
 
+  // @ts-ignore
   const wsLink = !process.browser
     ? null
     : new WebSocketLink({
@@ -45,6 +48,7 @@ export function initApollo(initialState = {}, token) {
     return forward(operation);
   });
 
+  // @ts-ignore
   const link = !process.browser
     ? httpLink
     : split(
@@ -61,6 +65,9 @@ export function initApollo(initialState = {}, token) {
   return new ApolloClient({
     ssrMode: true,
     link: concat(authMiddleware, link),
-    cache: new InMemoryCache().restore(initialState),
+    cache: new InMemoryCache({
+      freezeResults: false,
+      resultCaching: false,
+    }).restore(initialState),
   });
 }

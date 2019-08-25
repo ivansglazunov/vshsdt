@@ -1,9 +1,9 @@
-import * as passport from 'passport';
+import passport from 'passport';
 import { initApollo } from '../imports/apollo';
 import gql from 'graphql-tag';
 import { Strategy as BearerStrategy } from 'passport-http-bearer';
-import * as _ from 'lodash';
-import * as Debug from 'debug';
+import _ from 'lodash';
+import Debug from 'debug';
 
 export const ANONYMOUS_USER_ID = 1;
 

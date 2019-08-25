@@ -1,6 +1,6 @@
-import * as express from 'express';
-// import * as chalk from 'chalk';
-import * as passport from 'passport';
+import express from 'express';
+// import chalk from 'chalk';
+import passport from 'passport';
 
 import serviceApp from './service-app';
 

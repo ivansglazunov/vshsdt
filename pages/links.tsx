@@ -1,21 +1,21 @@
-import * as React from 'react';
+import React from 'react';
 import { useState } from 'react';
-import * as _ from 'lodash';
+import _ from 'lodash';
 import ReactResizeDetector from 'react-resize-detector';
 
 import { useGql } from '../imports/use-gql';
 import { GET_NODES } from '../imports/sandbox';
 import { Paper } from '@material-ui/core';
 import Links from '../imports/components/links';
+import { wrapPage } from '../imports/wrap-page';
 
-export default () => {
+export default wrapPage(() => {
   const query = useGql(GET_NODES);
 
   const [selected, setSelected] = useState<any>([]);
 
   return <div style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '100%' }}>
     <div style={{ position: 'absolute', left: 0, top: 0, width: 'calc(100% - 300px)', height: '100%' }}>
-    >
       <Links
         data={query.data}
         onNodeClick={(node) => {
@@ -32,4 +32,4 @@ export default () => {
       </code></pre>
     </Paper>
   </div>;
-};
+});

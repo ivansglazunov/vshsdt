@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie';
-import * as _ from 'lodash';
-import * as Debug from 'debug';
+import _ from 'lodash';
+import Debug from 'debug';
 import useInterval from 'use-interval';
 import React, { useState, useEffect, useContext } from 'react';
 
@@ -57,6 +57,27 @@ export const signin = async (
   };
   const { data: { node, error } } = await request(q);
   debug('signin', { node });
+  const token = _.get(node, 'sessions.0.token');
+  if (token) Cookie.set('token', token);
+  return { token, error };
+};
+
+export const signup = async (
+  username: string,
+  password: string,
+): Promise<{ token?: string, error?: string }> => {
+  if (!username) return { error: '!node' };
+  if (!password) return { error: '!password' };
+  const q = {
+    method: 'post',
+    url:`/_passports/signup`,
+    data: {
+      username,
+      password,
+    },
+  };
+  const { data: { node, error } } = await request(q);
+  debug('signup', { node });
   const token = _.get(node, 'sessions.0.token');
   if (token) Cookie.set('token', token);
   return { token, error };

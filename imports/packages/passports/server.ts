@@ -1,10 +1,10 @@
-import * as passport from 'passport';
+import passport from 'passport';
 import ApolloClient from 'apollo-client';
 import { Strategy as LocalStrategy } from 'passport-local';
 import gql from 'graphql-tag';
-import * as _ from 'lodash';
-import * as uniqid from 'uniqid';
-import * as Debug from 'debug';
+import _ from 'lodash';
+import uniqid from 'uniqid';
+import Debug from 'debug';
 
 const debug = Debug('passports');
 

@@ -1,8 +1,8 @@
-import * as express from 'express';
-import * as passport from 'passport';
-import * as next from 'next';
-import * as dotenv from 'dotenv';
-import * as cookieParser from 'cookie-parser';
+import express from 'express';
+import passport from 'passport';
+import next from 'next';
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 
 import serviceApp from './service-app';
 
@@ -11,6 +11,8 @@ dotenv.config();
 if (!process.env.PORT) throw new Error('!process.env.PORT');
 
 const dev = process.env.ENV !== 'production';
+// TODO wtf with next typing?
+// @ts-ignore
 const app = next({ dev });
 const handle = app.getRequestHandler();
 

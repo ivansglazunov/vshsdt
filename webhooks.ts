@@ -1,5 +1,5 @@
-import * as fs from 'fs';
-import * as Debug from 'debug';
+import fs from 'fs';
+import Debug from 'debug';
 
 import { initApollo } from './imports/apollo';
 

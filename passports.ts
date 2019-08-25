@@ -1,6 +1,6 @@
-import * as fs from 'fs';
-import * as passport from 'passport';
-import * as Debug from 'debug';
+import fs from 'fs';
+import passport from 'passport';
+import Debug from 'debug';
 
 import { initApollo } from './imports/apollo';
 
