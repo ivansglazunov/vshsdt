@@ -7,4 +7,6 @@ module.exports = withPlugins([
     cssModules: true,
   }],
   [optimizedImages],
-]);
+], {
+  hmr: true,
+});
