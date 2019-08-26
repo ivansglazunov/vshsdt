@@ -38,7 +38,12 @@ export const Header = ({}) => {
   </ThemeProvider>;
 
   const content = <>
-    <Typography variant="h2">День<br/>открытых<br/>дверей</Typography>
+    <Hidden smDown>
+      <Typography variant="h2">День<br/>открытых<br/>дверей</Typography>
+    </Hidden>
+    <Hidden mdUp>
+      <Typography variant="h3">День<br/>открытых<br/>дверей</Typography>
+    </Hidden>
     <Spacing size={7}/>
     <Typography variant="body1">
       Мы приглашаем всех желающих,<br/>погрузится в индустрию моды,<br/>стилистики и имиджмейкинга,<br/>узнать о старте новых уникальных программ.
