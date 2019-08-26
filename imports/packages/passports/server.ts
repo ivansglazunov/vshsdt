@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import _ from 'lodash';
 import uniqid from 'uniqid';
 import Debug from 'debug';
+import { isEqualHashAndPassword, createHashFromPassword } from './api.server';
 
 const debug = Debug('passports');
 
@@ -66,11 +67,12 @@ export const signupMiddleware = (
   _signinMiddleware,
 ) => async (req, res, next) => {
   debug('signupMiddleware', { body: req.body });
+  const password = createHashFromPassword({ password: req.body.password });
   await apolloClient.mutate({
     mutation: CREATE_NODE_PASSWORD_AND_SESSION,
     variables: {
+      password,
       username: req.body.username,
-      password: req.body.password,
       token: uniqid(),
     },
   });
@@ -100,7 +102,11 @@ export const passportUse = (apolloClient) => {
         const node = _.get(result, 'data.nodes.0');
         if (!node) return done('!node');
         // TODO crypt passwords
-        if (_.get(node, 'passport_passwords.0.password') === password) {
+        const isEqualPasswords = await isEqualHashAndPassword({
+          hash: _.get(node, 'passport_passwords.0.password'),
+          password,
+        });
+        if (isEqualPasswords) {
           debug('strategy done', { node });
           return done(null, node);
         }
