@@ -20,22 +20,22 @@ export const Partners = ({ className = [], ...props }) => {
   return <Grid container justify="space-around" alignItems="center">
     <Grid item xs={6} sm={3} style={{ padding: '2%' }}>
       <Flip top delay={100}>
-        <img src={require('../../images/logo-mhpi.png')} className={classes.image}/>
+        <img src={require('../../images/logo-mhpi.png?resize&size=200')} className={classes.image}/>
       </Flip>
     </Grid>
     <Grid item xs={6} sm={3} style={{ padding: '2%' }}>
       <Flip top delay={100}>
-        <img src={require('../../images/logo-moscow.png')} className={classes.image}/>
+        <img src={require('../../images/logo-moscow.png?resize&size=200')} className={classes.image}/>
       </Flip>
     </Grid>
     <Grid item xs={6} sm={3} style={{ padding: '2%' }}>
       <Flip top delay={100}>
-        <img src={require('../../images/logo-white.png')} className={classes.image}/>
+        <img src={require('../../images/logo-white.png?resize&size=200')} className={classes.image}/>
       </Flip>
     </Grid>
     <Grid item xs={6} sm={3} style={{ padding: '2%' }}>
       <Flip top delay={100}>
-        <img src={require('../../images/logo-garderob.png')} className={classes.image}/>
+        <img src={require('../../images/logo-garderob.png?resize&size=200')} className={classes.image}/>
       </Flip>
     </Grid>
   </Grid>;

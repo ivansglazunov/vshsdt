@@ -99,7 +99,7 @@ export default () => {
                   <Typography variant="h5">метро Алексеевская</Typography>
                     <Typography variant="body1">
                       <OuterLink href="https://yandex.ru/maps/-/CGCDQ2yL">Проспект Мира 101, 6 этаж, кабинет 600</OuterLink>
-                      <img src={require('../images/logo-yandex-maps.png')} style={{ height: '1.1em', position: 'relative', left: 10, top: '0.2em' }}/>
+                      <img src={require('../images/logo-yandex-maps.png?resize&size=50')} style={{ height: '1.1em', position: 'relative', left: 10, top: '0.2em' }}/>
                     </Typography>
                   <Spacing size={2}/>
                   <Typography variant="h6">На входе действует пропускная система</Typography>
@@ -113,7 +113,7 @@ export default () => {
                   <Spacing size={2}/>
                 </Grid>
                 <Grid item xs={6}>
-                  <img src={require('../images/map.jpg')} style={{ width: '100%' }}/>
+                  <img src={require('../images/map.jpg?resize&size=500')} style={{ width: '100%' }}/>
                 </Grid>
               </Grid>
             </Container>

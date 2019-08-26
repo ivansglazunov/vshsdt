@@ -31,7 +31,7 @@ export const Header = ({}) => {
 
   const school = <ThemeProvider theme={goldTheme}>
     <div className={classes.school}>
-      <img className={classes.logo} src={require('../../images/logo.png')}/>
+      <img className={classes.logo} src={require('../../images/logo.png?resize&size=300')}/>
       <Typography variant="h5">Высшая Школа Стилистики<br/>Дизайна и Технологий</Typography>
       <Typography variant="body2">Российское академическое онлайн образование</Typography>
     </div>
