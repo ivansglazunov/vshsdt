@@ -83,7 +83,9 @@ export default () => {
           <Title>Партнеры</Title>
         </Line>
         <Spacing size={10}/>
-        <Partners/>
+        <Container>
+          <Partners/>
+        </Container>
         <Spacing size={4}/>
         <ThemeProvider theme={darkTheme}>
           <Paper square>
