@@ -50,7 +50,10 @@ export const Header = ({}) => {
       <Hidden implementation="css" mdUp>
         <Grid container alignItems="center" justify="center">
           <Grid item xs={12}>{school}</Grid>
-          <Grid item xs={12}>{content}</Grid>
+          <Grid item xs={12}>
+            <Spacing size={5}/>
+            {content}
+          </Grid>
         </Grid>
       </Hidden>
       <Hidden implementation="css" smDown>

@@ -89,7 +89,7 @@ export default () => {
           <Paper square>
             <Container>
               <Grid container alignItems="center" justify="center">
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <Spacing size={2}/>
                   <ThemeProvider theme={goldTheme}>
                     <Typography variant="h5">{moment(start).format('Do MMMM HH:mm')}</Typography>
@@ -112,7 +112,7 @@ export default () => {
                   <Typography variant="body1">Парковка: только вокруг здания. </Typography>
                   <Spacing size={2}/>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <img src={require('../images/map.jpg?resize&size=500')} style={{ width: '100%' }}/>
                 </Grid>
               </Grid>
