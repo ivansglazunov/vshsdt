@@ -57,7 +57,7 @@ export default () => {
           <Typography variant="body1">- Предприниматели</Typography>
           <Typography variant="body1">- Старт карьеры </Typography>
         </Container>
-        <Spacing size={2}/>
+        <Spacing size={10}/>
         <Line>
           <Title>Ждем вас!</Title>
         </Line>
