@@ -4,7 +4,7 @@
     "next": "next dev",
     "start": "cross-env ENV=development ts-node --project tsconfig.server.json next-server.ts",
     "build": "next build",
-    "serve": "cross-env ENV=production ts-node next-server.ts",
+    "serve": "cross-env ENV=production ts-node --project tsconfig.server.json next-server.ts",
     "tslint": "tslint --project tsconfig.json -c ./tslint.json",
     "migrate": "knex migrate:latest",
     "unmigrate": "knex migrate:rollback --all",
