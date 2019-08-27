@@ -4,8 +4,12 @@ export async function up(knex: Knex) {
   await knex.schema.createTable('links_lists', (table) => {
     table.increments('id').primary();
     table
-      .integer('linkId')
+      .integer('nodeId')
       .notNullable()
+      .references('id')
+      .inTable('nodes');
+    table
+      .integer('linkId')
       .references('id')
       .inTable('links');
     table

@@ -37,54 +37,6 @@ const parseLink = (input, links, _road, nodes) => {
         color: '#3f51b5',
         __data: link,
       });
-      for (let l = 0; l < link.lists.length; l++) {
-        const list = link.lists[l];
-        if (!_road[`li${list.id}`]) {
-          _road[`li${list.id}`] = true;
-          nodes.push({
-            id: `li${list.id}`,
-            group: list.__typename,
-            color: '#2196f3',
-            __data: list,
-          });
-          links.push({
-            id: `li${list.id}`,
-            source: `li${list.id}`,
-            target: `l${list.linkId}`,
-            group: `${list.__typename}`,
-            color: '#2196f3',
-            __data: list,
-          });
-          for (let it = 0; it < list.items.length; it++) {
-            const item = list.items[it];
-            if (!_road[`i${item.id}`]) {
-              _road[`i${item.id}`] = true;
-              nodes.push({
-                id: `i${item.id}`,
-                group: item.__typename,
-                color: '#a1a1a1',
-                __data: item,
-              });
-              links.push({
-                id: `ili${item.id}`,
-                source: `i${item.id}`,
-                target: `li${list.id}`,
-                group: `${item.__typename}`,
-                color: '#a1a1a1',
-                __data: item,
-              });
-              links.push({
-                id: `in${item.id}`,
-                source: `i${item.id}`,
-                target: `n${item.nodeId}`,
-                group: `${item.__typename}`,
-                color: '#a1a1a1',
-                __data: item,
-              });
-            }
-          }
-        }
-      }
     }
   }
 };
@@ -129,6 +81,56 @@ export default ({ data, onNodeClick }) => {
       parseProp(node, 'passport_passwords', links, _road, nodes);
       parseProp(node, 'sessions', links, _road, nodes);
       parseProp(node, 'types', links, _road, nodes);
+      for (let l = 0; l < node.links_lists.length; l++) {
+        const list = node.links_lists[l];
+        if (!_road[`li${list.id}`]) {
+          _road[`li${list.id}`] = true;
+          nodes.push({
+            id: `li${list.id}`,
+            group: list.__typename,
+            color: '#2196f3',
+            __data: list,
+          });
+          links.push({
+            id: `li${list.id}-l`,
+            source: `li${list.id}`,
+            target: `n${list.nodeId}`,
+            group: `${list.__typename}`,
+            color: '#2196f3',
+            __data: list,
+          });
+          if (list.linkId) {
+            links.push({
+              id: `li${list.id}-l`,
+              source: `li${list.id}`,
+              target: `l${list.linkId}`,
+              group: `${list.__typename}`,
+              color: '#2196f3',
+              __data: list,
+            });
+          }
+        }
+      }
+      for (let it = 0; it < node.links_lists_items.length; it++) {
+        const item = node.links_lists_items[it];
+        if (!_road[`i${item.id}`]) {
+          _road[`i${item.id}`] = true;
+          nodes.push({
+            id: `i${item.id}`,
+            group: item.__typename,
+            color: '#a1a1a1',
+            __data: item,
+          });
+          links.push({
+            id: `in${item.id}`,
+            source: `i${item.id}`,
+            target: `li${item.listId}`,
+            group: `${item.__typename}`,
+            color: '#a1a1a1',
+            __data: item,
+          });
+        }
+      }
     }
   }
 

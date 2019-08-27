@@ -11,6 +11,11 @@
           "using": { "foreign_key_constraint_on": "linkId" },
           "name": "link",
           "comment": null
+        },
+        {
+          "using": { "foreign_key_constraint_on": "nodeId" },
+          "name": "node",
+          "comment": null
         }
       ],
       "array_relationships": [
@@ -312,6 +317,16 @@
             }
           },
           "name": "links_by_node",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "nodeId",
+              "table": "links_lists"
+            }
+          },
+          "name": "links_lists",
           "comment": null
         },
         {
