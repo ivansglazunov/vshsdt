@@ -15,6 +15,7 @@ import { Line, Title } from '../imports/components/heading';
 import { Partners } from '../imports/components/partners';
 import { Container } from '../imports/components/container';
 import { OuterLink } from '../imports/components/links';
+import { MyMap } from '../imports/components/map';
 
 const start = new Date(2019, 8, 11, 18, 30);
 const end = new Date(2019, 8, 11, 19);
@@ -89,9 +90,9 @@ export default () => {
         <Spacing size={4}/>
         <ThemeProvider theme={darkTheme}>
           <Paper square>
-            <Container>
-              <Grid container alignItems="center" justify="center">
-                <Grid item xs={12} md={6}>
+            <Grid container alignItems="stretch" justify="center">
+              <Grid item xs={12} md={6}>
+                <Container>
                   <Spacing size={2}/>
                   <ThemeProvider theme={goldTheme}>
                     <Typography variant="h5">{moment(start).format('Do MMMM HH:mm')}</Typography>
@@ -113,12 +114,12 @@ export default () => {
                   <Spacing size={2}/>
                   <Typography variant="body1">Парковка: только вокруг здания. </Typography>
                   <Spacing size={2}/>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <img src={require('../images/map.jpg?resize&size=500')} style={{ width: '100%' }}/>
-                </Grid>
+                </Container>
               </Grid>
-            </Container>
+              <Grid item xs={12} md={6} style={{ filter: 'sepia(25%) invert(100%) grayscale(100%) contrast(90%)' }}>
+                <MyMap/>
+              </Grid>
+            </Grid>
           </Paper>
         </ThemeProvider>
       </Body>

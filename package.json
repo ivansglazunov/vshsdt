@@ -75,6 +75,7 @@
     "react-router-dom": "^5.0.1",
     "react-sticky": "^6.0.3",
     "react-three-fiber": "^2.3.6",
+    "react-yandex-maps": "^4.0.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "responsive-loader": "^1.2.0",
