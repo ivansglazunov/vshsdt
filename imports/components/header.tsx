@@ -52,8 +52,12 @@ export const Header = ({}) => {
     </Typography>
     <Spacing size={7}/>
     <Typography variant="h6">
-      {moment(start).format('Do MMMM HH:mm')}
+      {moment(start).format('Do MMMM')}
     </Typography>
+    <Typography variant="body1">
+      Сбор гостей 18:30-19:00
+    </Typography>
+    <Spacing size={4}/>
     <Typography variant="h6">
       <b>Метро</b> Алексеевская
     </Typography>

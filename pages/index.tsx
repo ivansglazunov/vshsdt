@@ -95,9 +95,11 @@ export default () => {
                 <Container>
                   <Spacing size={2}/>
                   <ThemeProvider theme={goldTheme}>
-                    <Typography variant="h5">{moment(start).format('Do MMMM HH:mm')}</Typography>
+                    <Typography variant="h5">{moment(start).format('Do MMMM')}</Typography>
+                    <Typography variant="h6">
+                      Сбор гостей 18:30-19:00
+                    </Typography>
                   </ThemeProvider>
-                  <Typography variant="body2">Сбор гостей 30 минут</Typography>
                   <Spacing size={2}/>
                   <Typography variant="h5">метро Алексеевская</Typography>
                     <Typography variant="body1">
