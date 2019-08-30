@@ -17,8 +17,8 @@ import { Container } from '../imports/components/container';
 import { OuterLink } from '../imports/components/links';
 import { MyMap } from '../imports/components/map';
 
-const start = new Date(2019, 8, 11, 18, 30);
-const end = new Date(2019, 8, 11, 19);
+export const start = new Date(2019, 8, 11, 18, 30);
+export const end = new Date(2019, 8, 11, 19);
 
 export default () => {
   const theme = useTheme();

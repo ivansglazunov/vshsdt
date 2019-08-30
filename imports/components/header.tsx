@@ -5,6 +5,8 @@ import React from 'react';
 import { goldTheme, theme } from '../theme';
 import { Container } from './container';
 import { Spacing } from './spacing';
+import { start } from '../../pages/index';
+import moment from 'moment';
 
 const useStyle = makeStyles((theme: Theme) => ({
   root: {
@@ -47,6 +49,13 @@ export const Header = ({}) => {
     <Spacing size={7}/>
     <Typography variant="body1">
       Мы приглашаем всех желающих,<br/>погрузится в индустрию моды,<br/>стилистики и имиджмейкинга,<br/>узнать о старте новых уникальных программ.
+    </Typography>
+    <Spacing size={7}/>
+    <Typography variant="h6">
+      {moment(start).format('Do MMMM HH:mm')}
+    </Typography>
+    <Typography variant="h6">
+      <b>Метро</b> Алексеевская
     </Typography>
   </>;
 
