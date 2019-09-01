@@ -15,9 +15,12 @@
 - [x] client override queries as subscriptions
 - [x] no data client refetching, only subscribing for changes
 - [ ] passport + hasura tokens auth [@ivansglazunov]
-- [ ] links + links_lists + triggers
-- [ ] props based on links_lists
-- [ ] access props based on links_lists
+- [x] links + links_index + triggers
+  - [x] insert/delete links triggers works with links_index
+  - [x] multiparent trees
+  - [ ] recursive trees (need to control duplcates in index)
+- [ ] props based on links_index
+- [ ] access props based on links_index
 
 ### how to
 

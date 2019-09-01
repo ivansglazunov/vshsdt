@@ -228,6 +228,7 @@ export const F_LINK_DELETE_UP = `
   RETURNS TRIGGER AS $trigger$
   DECLARE
   sourceListId RECORD;
+  sourceIgnoreListId RECORD;
   targetListId RECORD;
   nextListId TEXT;
   BEGIN
@@ -299,6 +300,151 @@ export const F_LINK_DELETE_UP = `
         WHERE
         r."targetCount" = r."count"
       );
+    END LOOP;
+  ELSE
+    SELECT *
+    INTO sourceIgnoreListId
+    FROM
+    "links_index" as sili0
+    WHERE
+    sili0."ofNodeId" = OLD."sourceId" AND
+    sili0."nodeId" = OLD."sourceId"
+    LIMIT 1;
+
+    FOR sourceListId
+    IN (
+      SELECT
+      DISTINCT sl0."listId",
+      sl0."depth"
+      FROM
+      "links_index" as sl0
+      WHERE
+      sl0."ofNodeId" = OLD."sourceId" AND
+      sl0."nodeId" = OLD."sourceId" AND
+      sl0."id" != sourceIgnoreListId."id"
+    )
+    LOOP
+      DELETE FROM "links_index"
+      WHERE "listId" IN (
+        SELECT r."listId" FROM
+        (
+            SELECT
+            tsli0."listId",
+            tsli0."ofNodeId",
+            (
+                SELECT COUNT(tli1."id")
+                FROM "links_index" as tli1
+                WHERE tli1."listId" = tl1."listId"
+            ) as "targetCount",
+            COUNT(tsli0."id") as "count"
+            FROM
+            (
+                SELECT *
+                FROM
+                (
+                    SELECT
+                    tl0."listId",
+                    tl0."ofNodeId",
+                    COUNT(tl0."id") as "tl0"
+                    FROM
+                    "links_index" as sli0,
+                    "links_index" as tl0
+                    WHERE
+                    sli0."listId" = sourceListId."listId" AND
+                    tl0."ofNodeId" = OLD."targetId" AND
+                    tl0."nodeId" = sli0."nodeId" AND
+                    tl0."depth" = sli0."depth"
+                    GROUP BY tl0."listId", tl0."ofNodeId"
+                ) as tl0,
+                (
+                    SELECT
+                    COUNT(sli0."id")
+                    FROM
+                    "links_index" as sli0
+                    WHERE
+                    sli0."listId" = sourceListId."listId"
+                ) as sli0
+                WHERE
+                tl0."tl0" = sli0."count"
+            ) as tl1,
+            "links_index" as tli0,
+            "links_index" as tsli0
+            WHERE
+            tli0."listId" = tl1."listId" AND
+            tsli0."nodeId" = tli0."nodeId" AND
+            tsli0."depth" = tli0."depth"
+            GROUP BY tsli0."listId", tsli0."ofNodeId", tl1."listId"
+        ) as r
+        WHERE
+        r."targetCount" = r."count"
+      );
+    END LOOP;
+
+    FOR targetListId
+    IN (
+      SELECT r."listId" FROM
+      (
+        SELECT
+        tsli0."listId",
+        tsli0."ofNodeId",
+        (
+            SELECT COUNT(tli1."id")
+            FROM "links_index" as tli1
+            WHERE tli1."listId" = tl1."listId"
+        ) as "targetCount",
+        COUNT(tsli0."id") as "count"
+        FROM
+        (
+            SELECT *
+            FROM
+            (
+                SELECT
+                tl0."listId",
+                tl0."ofNodeId",
+                COUNT(tl0."id") as "tl0"
+                FROM
+                "links_index" as sli0,
+                "links_index" as tl0
+                WHERE
+                sli0."listId" = sourceIgnoreListId."listId" AND
+                tl0."ofNodeId" = OLD."targetId" AND
+                tl0."nodeId" = sli0."nodeId" AND
+                tl0."depth" = sli0."depth"
+                GROUP BY tl0."listId", tl0."ofNodeId"
+            ) as tl0,
+            (
+                SELECT
+                COUNT(sli0."id")
+                FROM
+                "links_index" as sli0
+                WHERE
+                sli0."listId" = sourceIgnoreListId."listId"
+            ) as sli0
+            WHERE
+            tl0."tl0" = sli0."count"
+        ) as tl1,
+        "links_index" as tli0,
+        "links_index" as tsli0
+        WHERE
+        tli0."listId" = tl1."listId" AND
+        tsli0."nodeId" = tli0."nodeId" AND
+        tsli0."depth" = tli0."depth"
+        GROUP BY tsli0."listId", tsli0."ofNodeId", tl1."listId"
+      ) as r
+      WHERE
+      r."targetCount" = r."count"
+    )
+    LOOP
+      DELETE FROM "links_index"
+      WHERE
+      "listId" = targetListId."listId" AND
+      "depth" <= sourceIgnoreListId."depth";
+      
+      UPDATE "links_index"
+      SET
+      "depth" = "depth" - sourceIgnoreListId."depth" - 1
+      WHERE
+      "listId" = targetListId."listId";
     END LOOP;
   END IF;
   RETURN OLD;
