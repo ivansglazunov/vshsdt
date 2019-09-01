@@ -67,7 +67,7 @@ describe('links_insert', function() {
 
       await api.insertLinks(6, 7, typeId);
 
-      // await api.insertLinks(7, 3, typeId);
+      await api.insertLinks(7, 3, typeId);
 
       const all = await api.getAll();
       console.log(all);
