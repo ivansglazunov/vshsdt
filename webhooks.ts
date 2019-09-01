@@ -3,14 +3,11 @@ import Debug from 'debug';
 
 import { initApollo } from './imports/apollo';
 
-const debug = Debug('webhooks');
+import hasuraBearer from './webhooks/hasura-bearer';
 
-const dir = fs.readdirSync(`${__dirname}/webhooks`);
+const debug = Debug('webhooks');
 
 export default (app) => {
   debug('init');
-  for (let i = 0; i < dir.length; i++){
-    debug(`init webhooks/${dir[i]}`);
-    require(`./webhooks/${dir[i]}`).default(app, initApollo);
-  }
+  hasuraBearer(app, initApollo);
 };

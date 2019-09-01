@@ -18,22 +18,12 @@ export const GET_NODES = gql`
       id
       ofId
     }
-    links_lists {
-      id
-      linkId
-      nodeId
-      items {
-        id
-        linkId
-        nodeId
-        listId
-      }
-    }
-    links_lists_items {
+    links_index {
       id
       linkId
       nodeId
       listId
+      ofNodeId
     }
     links_by_source {
       id

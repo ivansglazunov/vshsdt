@@ -3,6 +3,7 @@ import Knex from 'knex';
 export async function up(knex: Knex) {
   await knex.schema.createTable('nodes_props_passport_passwords', (table) => {
     table.increments('id').primary();
+
     table
       .integer('typeId')
       .references('id')

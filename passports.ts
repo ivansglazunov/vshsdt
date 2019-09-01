@@ -4,15 +4,11 @@ import Debug from 'debug';
 
 import { initApollo } from './imports/apollo';
 
-const debug = Debug('passports');
+import local from './passports/local';
 
-const dir = fs.readdirSync(`${__dirname}/passports`);
+const debug = Debug('passports');
 
 export default (app) => {
   debug('init');
-
-  for (let i = 0; i < dir.length; i++){
-    debug(`init passports/${dir[i]}`);
-    require(`./passports/${dir[i]}`).default(app, initApollo);
-  }
+  local(app, initApollo);
 };
