@@ -60,7 +60,14 @@ describe('links_insert', function() {
     it('A-B-C-D-E fake', async () => {
       await api.insertNodes(10);
 
-      // await api.insertLinks(1, 2, typeId);
+      await api.insertLinks(1, 2, typeId);
+      await api.insertLinks(2, 3, typeId);
+      await api.insertLinks(3, 4, typeId);
+      await api.insertLinks(4, 5, typeId);
+
+      await api.insertLinks(6, 7, typeId);
+
+      // await api.insertLinks(7, 3, typeId);
 
       const all = await api.getAll();
       console.log(all);

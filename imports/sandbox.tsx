@@ -18,6 +18,13 @@ export const GET_NODES = gql`
       id
       ofId
     }
+    links_index_of {
+      id
+      linkId
+      nodeId
+      listId
+      ofNodeId
+    }
     links_index {
       id
       linkId

@@ -46,6 +46,7 @@ export const F_LINK_INSERT_UP = `
   RETURNS TRIGGER AS $trigger$
   DECLARE
   sourceListId RECORD;
+  targetOneListId RECORD;
   targetListId RECORD;
   nextListId TEXT;
   BEGIN
@@ -112,15 +113,88 @@ export const F_LINK_INSERT_UP = `
         WHERE "listId" = targetListId."listId";
       END LOOP;
     END LOOP;
+  ELSE
+    FOR sourceListId
+    IN (
+      SELECT
+      DISTINCT sli0."listId",
+      sli0."depth"
+      FROM
+      "links_index" as sli0
+      WHERE
+      sli0."ofNodeId" = NEW."sourceId" AND
+      sli0."nodeId" = NEW."sourceId"
+    )
+    LOOP
+      SELECT *
+      INTO targetOneListId
+      FROM
+      "links_index" as toli0
+      WHERE
+      toli0."ofNodeId" = NEW."targetId" AND
+      toli0."nodeId" = NEW."targetId"
+      LIMIT 1;
 
-    /* удалить в конце
-    SELECT
-    DISTINCT tli0."listId"
-    FROM
-    "links_index" as tli0
-    WHERE
-    tli0."nodeId" = NEW."targetId" AND
-    tli0."depth" = 0 */
+      FOR targetListId
+      IN (
+        SELECT
+        tli2."listId",
+        tli2."ofNodeId"
+        FROM (
+          SELECT
+          tli1."listId",
+          tli1."ofNodeId",
+          COUNT(tli1."id") as "tli1"
+          FROM
+          "links_index" as tli0,
+          "links_index" as tli1
+          WHERE
+          tli0."listId" = targetOneListId."listId" AND
+          tli1."nodeId" = tli0."nodeId" AND
+          tli1."depth" = tli0."depth"
+          GROUP BY tli1."listId", tli1."ofNodeId"
+        ) as tli2,
+        (
+          SELECT
+          COUNT(tli3."id")
+          FROM
+          "links_index" as tli3
+          WHERE
+          tli3."listId" = targetOneListId."listId"
+        ) as tli3
+        WHERE
+        tli2."tli1" = tli3."count"
+      )
+      LOOP
+        ${RANDOM}
+        INTO nextListId;
+
+        INSERT INTO "links_index" ("nodeId", "linkId", "ofNodeId", "listId", "depth")
+        SELECT
+        tli1."nodeId",
+        tli1."linkId",
+        tli1."ofNodeId",
+        nextListId,
+        ((tli1."depth" - targetOneListId."depth") + sourceListId."depth" + 1)
+        FROM
+        "links_index" as tli1
+        WHERE
+        tli1."listId" = targetListId."listId" AND
+        tli1."depth" >= targetOneListId."depth";
+
+        INSERT INTO "links_index" ("nodeId", "linkId", "ofNodeId", "listId", "depth")
+        SELECT
+        sli1."nodeId",
+        sli1."linkId",
+        targetListId."ofNodeId",
+        nextListId,
+        sli1."depth"
+        FROM
+        "links_index" as sli1
+        WHERE
+        sli1."listId" = sourceListId."listId";
+      END LOOP;
+    END LOOP;
   END IF;
   RETURN NEW;
   END;
