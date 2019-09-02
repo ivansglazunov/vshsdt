@@ -3,6 +3,7 @@ import Knex from 'knex';
 export async function up(knex: Knex) {
   await knex.schema.createTable('nodes_props_types', (table) => {
     table.increments('id').primary();
+
     table
       .integer('typeId')
       .references('id')

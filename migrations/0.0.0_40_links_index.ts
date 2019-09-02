@@ -1,13 +1,9 @@
 import Knex from 'knex';
 
 export async function up(knex: Knex) {
-  await knex.schema.createTable('links_lists_items', (table) => {
+  await knex.schema.createTable('links_index', (table) => {
     table.increments('id').primary();
-    table
-      .integer('listId')
-      .notNullable()
-      .references('id')
-      .inTable('links_lists');
+
     table
       .integer('nodeId')
       .notNullable()
@@ -17,7 +13,16 @@ export async function up(knex: Knex) {
       .integer('linkId')
       .references('id')
       .inTable('links');
+    table
+      .integer('ofNodeId')
+      .notNullable()
+      .references('id')
+      .inTable('nodes');
+    table
+      .text('listId')
+      .notNullable();
     table.integer('depth').notNullable();
+
     table
       .timestamp('inserted', { useTz: true })
       .notNullable()
@@ -27,5 +32,5 @@ export async function up(knex: Knex) {
 }
 
 export async function down(knex: Knex) {
-  await knex.schema.dropTable('links_lists_items');
+  await knex.schema.dropTable('links_index');
 }

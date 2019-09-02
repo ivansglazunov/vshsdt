@@ -3,7 +3,7 @@ import _ from 'lodash';
 import Debug from 'debug';
 import useInterval from 'use-interval';
 import React, { useState, useEffect, useContext } from 'react';
-import { signin, signup, signout } from './api';
+import { signin, signup, signout } from './api.client';
 
 const debug = Debug('passport');
 

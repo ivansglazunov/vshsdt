@@ -3,6 +3,7 @@ import Knex from 'knex';
 export async function up(knex: Knex) {
   await knex.schema.createTable('links', (table) => {
     table.increments('id').primary();
+
     table
       .integer('sourceId')
       .notNullable()
@@ -22,6 +23,7 @@ export async function up(knex: Knex) {
       .notNullable()
       .references('id')
       .inTable('links_types');
+
     table
       .timestamp('inserted', { useTz: true })
       .notNullable()

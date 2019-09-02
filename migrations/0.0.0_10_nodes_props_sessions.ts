@@ -3,6 +3,7 @@ import Knex from 'knex';
 export function up(knex: Knex) {
   return knex.schema.createTable('nodes_props_sessions', (table) => {
     table.increments('id').primary();
+
     table
       .integer('typeId')
       .references('id')

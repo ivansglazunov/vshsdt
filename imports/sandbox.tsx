@@ -18,43 +18,29 @@ export const GET_NODES = gql`
       id
       ofId
     }
+    links_index_of {
+      id
+      linkId
+      nodeId
+      listId
+      ofNodeId
+    }
+    links_index {
+      id
+      linkId
+      nodeId
+      listId
+      ofNodeId
+    }
     links_by_source {
       id
       sourceId
       targetId
-      lists {
-        id
-        linkId
-        items {
-          id
-          linkId
-          nodeId
-        }
-      }
-      items {
-        id
-        linkId
-        nodeId
-      }
     }
     links_by_target {
       id
       sourceId
       targetId
-      lists {
-        id
-        linkId
-        items {
-          id
-          linkId
-          nodeId
-        }
-      }
-      items {
-        id
-        linkId
-        nodeId
-      }
     }
   }
 `;

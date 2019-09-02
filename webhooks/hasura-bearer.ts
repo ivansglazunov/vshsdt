@@ -1,5 +1,4 @@
 import passport from 'passport';
-import { initApollo } from '../imports/apollo';
 import gql from 'graphql-tag';
 import { Strategy as BearerStrategy } from 'passport-http-bearer';
 import _ from 'lodash';
@@ -58,7 +57,7 @@ export const passportUse = (apolloClient) => {
   );
 };
 
-export default (app) => {
+export default (app, initApollo) => {
   const apolloClient = initApollo({}, '_bearer');
   debug('init');
   passportUse(apolloClient);

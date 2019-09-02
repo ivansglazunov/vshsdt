@@ -5,53 +5,6 @@
   "allowlist": [],
   "tables": [
     {
-      "table": "links_lists",
-      "object_relationships": [
-        {
-          "using": { "foreign_key_constraint_on": "linkId" },
-          "name": "link",
-          "comment": null
-        }
-      ],
-      "array_relationships": [
-        {
-          "using": {
-            "foreign_key_constraint_on": {
-              "column": "listId",
-              "table": "links_lists_items"
-            }
-          },
-          "name": "items",
-          "comment": null
-        }
-      ],
-      "insert_permissions": [],
-      "select_permissions": [
-        {
-          "role": "anonymous",
-          "comment": null,
-          "permission": {
-            "allow_aggregations": false,
-            "columns": ["id", "linkId", "inserted", "deleted"],
-            "limit": 0,
-            "filter": {}
-          }
-        },
-        {
-          "role": "user",
-          "comment": null,
-          "permission": {
-            "allow_aggregations": false,
-            "columns": ["id", "linkId", "deleted", "inserted"],
-            "filter": {}
-          }
-        }
-      ],
-      "update_permissions": [],
-      "delete_permissions": [],
-      "event_triggers": []
-    },
-    {
       "table": "nodes_props_types",
       "object_relationships": [
         {
@@ -318,10 +271,20 @@
           "using": {
             "foreign_key_constraint_on": {
               "column": "nodeId",
-              "table": "links_lists_items"
+              "table": "links_index"
             }
           },
-          "name": "links_lists_items",
+          "name": "links_index",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "ofNodeId",
+              "table": "links_index"
+            }
+          },
+          "name": "links_index_of",
           "comment": null
         }
       ],
@@ -380,20 +343,10 @@
           "using": {
             "foreign_key_constraint_on": {
               "column": "linkId",
-              "table": "links_lists"
+              "table": "links_index"
             }
           },
-          "name": "lists",
-          "comment": null
-        },
-        {
-          "using": {
-            "foreign_key_constraint_on": {
-              "column": "linkId",
-              "table": "links_lists_items"
-            }
-          },
-          "name": "items",
+          "name": "links_index",
           "comment": null
         }
       ],
@@ -440,7 +393,7 @@
       "event_triggers": []
     },
     {
-      "table": "links_lists_items",
+      "table": "links_index",
       "object_relationships": [
         {
           "using": { "foreign_key_constraint_on": "linkId" },
@@ -448,13 +401,13 @@
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "listId" },
-          "name": "list",
+          "using": { "foreign_key_constraint_on": "nodeId" },
+          "name": "node",
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "nodeId" },
-          "name": "node",
+          "using": { "foreign_key_constraint_on": "ofNodeId" },
+          "name": "ofNode",
           "comment": null
         }
       ],
@@ -468,7 +421,6 @@
             "allow_aggregations": false,
             "columns": [
               "id",
-              "listId",
               "nodeId",
               "linkId",
               "depth",
@@ -488,7 +440,6 @@
               "depth",
               "id",
               "linkId",
-              "listId",
               "nodeId",
               "deleted",
               "inserted"
