@@ -3,6 +3,8 @@ import { initApollo } from "./apollo";
 import { getDataFromTree } from "@apollo/react-ssr";
 import { PassportProvider } from './packages/passports/react';
 import Cookie from 'js-cookie';
+import { Provider } from "./packages/analitics";
+import analiticsConfig from './analitics.config';
 
 export const wrapPage = (
   Component: () => any,
@@ -10,7 +12,11 @@ export const wrapPage = (
   const Container = ({ apolloClient, token }) => {
     return <ApolloProvider client={apolloClient}>
       <PassportProvider defaultToken={token}>
-        <Component/>
+        <Provider
+          {...analiticsConfig}
+        >
+          <Component/>
+        </Provider>
       </PassportProvider>
     </ApolloProvider>;
   };

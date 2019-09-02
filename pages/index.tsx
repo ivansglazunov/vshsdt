@@ -10,20 +10,11 @@ import { client } from '../knexfile';
 import { wrapPage } from '../imports/wrap-page';
 import { Provider, Context } from '../imports/packages/analitics/index';
 
-export const Body = () => {
+export const Content = () => {
   const query = useGql(GET_NODES);
   const { trigger } = useContext(Context);
   console.log(trigger);
   return <pre>{JSON.stringify(query, null, 2)}</pre>;
-};
-
-const Content = () => {
-  return <Provider
-    googleAnalitics={'UA-64254068-3'}
-    yandexMetrika={53888251}
-  >
-    <Body/>
-  </Provider>;
 };
 
 export default wrapPage(Content);
