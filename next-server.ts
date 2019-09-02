@@ -4,9 +4,9 @@ import next from 'next';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 
-import serviceApp from './service-app';
-
 dotenv.config();
+
+const serviceApp = require('./service-app').default;
 
 if (!process.env.PORT) throw new Error('!process.env.PORT');
 

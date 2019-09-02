@@ -11,11 +11,20 @@ import { wrapPage } from '../imports/wrap-page';
 
 import { TextBackComponent } from '../imports/packages/leads/textback.client';
 import textbackConfig from '../imports/textback.config';
+import { Form } from '../imports/packages/leads/forms.client';
+import { Context } from '../imports/packages/analitics/index';
 
 export const Content = () => {
+  const { trigger } = useContext(Context);
+
   return <div>
     <div style={{ width: 150 }}>
       <TextBackComponent {...textbackConfig}/>
+    </div>
+    <div>
+      <Form onDone={() => {
+        trigger('thankyou');
+      }}/>
     </div>
   </div>;
 };

@@ -91,6 +91,7 @@
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "responsive-loader": "^1.2.0",
+    "simpl-schema": "^1.5.5",
     "styled-components": "^4.3.2",
     "subscriptions-transport-ws": "^0.9.16",
     "svg-sprite-loader": "^4.1.6",
@@ -102,7 +103,10 @@
     "tslint-eslint-rules": "^5.4.0",
     "typedoc": "^0.15.0",
     "typescript": "^3.5.3",
+    "uniforms-bridge-simple-schema-2": "^2.4.0",
+    "uniforms-material": "^2.4.0",
     "uniqid": "^5.0.3",
+    "url-utm-params": "^0.1.0",
     "use-interval": "^1.1.0",
     "webp-loader": "^0.5.0"
   },

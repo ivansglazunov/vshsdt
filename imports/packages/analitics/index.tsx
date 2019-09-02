@@ -16,7 +16,7 @@ export interface IContext {
   facebookPixel?: number;
   googleAnalitics?: string;
   yandexMetrika?: number;
-  trigger?: (action: string, data: any) => void;
+  trigger?: (action: string, data?: any) => void;
 }
 
 export const Context = React.createContext<IContext>({});
