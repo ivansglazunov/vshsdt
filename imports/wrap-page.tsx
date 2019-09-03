@@ -28,8 +28,8 @@ export const wrapPage = (
     return container;
   };
   
-  Page.getInitialProps = async ({ req: { cookies } }) => {
-    const token = cookies ? cookies.token : undefined;
+  Page.getInitialProps = async ({ req }) => {
+    const token = req && req.cookies ? req.cookies.token : undefined;
     const apolloClient = initApollo({}, token);
     await getDataFromTree(<Container apolloClient={apolloClient} token={token}/>);
     const apolloState = apolloClient.extract();
