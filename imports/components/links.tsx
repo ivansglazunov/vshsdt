@@ -62,7 +62,7 @@ const parseProp = (node, rel, links, _road, nodes) => {
 };
 
 export default ({ data, onNodeClick }) => {
-  const nodes: { id: string, group: string, color: string, __data: any }[] = [];
+  const nodes: { id: string, label?: string; group: string, color: string, __data: any }[] = [];
   const _road: { [id: string]: boolean } = {};
   const links: { id: string, group: string, source: string, target: string, color: string, __data: any }[] = [];
 
@@ -87,6 +87,7 @@ export default ({ data, onNodeClick }) => {
           _road[`i${index.id}`] = true;
           nodes.push({
             id: `i${index.id}`,
+            label: `i${index.id} n${index.nodeId}(${index.depth})`,
             group: index.__typename,
             color: '#a1a1a1',
             __data: index,
@@ -123,7 +124,7 @@ export default ({ data, onNodeClick }) => {
       linkColor={d => d.color}
       onNodeClick={onNodeClick}
       nodeCanvasObject={(node, ctx, globalScale) => {
-        const label = node.id;
+        const label = node.label || node.id;
         const fontSize = 12/globalScale;
         ctx.font = `${fontSize}px Sans-Serif`;
         const textWidth = ctx.measureText(label).width;

@@ -24,6 +24,7 @@ export const GET_NODES = gql`
       nodeId
       listId
       ofNodeId
+      depth
     }
     links_index {
       id
@@ -31,6 +32,7 @@ export const GET_NODES = gql`
       nodeId
       listId
       ofNodeId
+      depth
     }
     links_by_source {
       id
