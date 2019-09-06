@@ -13,7 +13,6 @@ import { Provider, Context } from '../imports/packages/analitics/index';
 export const Content = () => {
   const query = useGql(GET_NODES);
   const { trigger } = useContext(Context);
-  console.log(trigger);
   return <pre>{JSON.stringify(query, null, 2)}</pre>;
 };
 

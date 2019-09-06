@@ -6,13 +6,16 @@ import ReactResizeDetector from 'react-resize-detector';
 import { useGql } from '../imports/use-gql';
 import { GET_NODES } from '../imports/sandbox';
 import { Paper } from '@material-ui/core';
-import Links from '../imports/components/links';
+import Links from '../imports/components/links/index';
 import { wrapPage } from '../imports/wrap-page';
+import { useParsed } from '../imports/components/links/parse';
 
 export default wrapPage(() => {
   const query = useGql(GET_NODES);
   const [history, setHistory] = useState([]);
   const [selectedHistory, setSelectedHistory] = useState(0);
+  const [main, setMain] = useState({});
+  const { nodes, links } = useParsed(history[selectedHistory], main);
 
   useEffect(() => {
     if (selectedHistory === history.length - 1) {
@@ -30,7 +33,8 @@ export default wrapPage(() => {
       height: '100%',
     }}>
       <Links
-        data={history[selectedHistory]}
+        nodes={nodes}
+        links={links}
         onNodeClick={(node) => {
           setSelected([node]);
         }}
