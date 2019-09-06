@@ -12,14 +12,14 @@ if (process.browser) {
   ForceGraph3D = require('react-force-graph-3d').default;
 }
 
-export default ({ nodes, links, onNodeClick }) => {
+export default ({ nodes, links, type = '2d', onNodeClick }) => {
   const [{ width, height }, setSize] = useState({ width: 100, height: 100 });
 
   return <div style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '100%' }}>
     <ReactResizeDetector handleWidth handleHeight onResize={(width, height) => {
       setSize({ width, height });
     }}/>
-    {process.browser && <ForceGraph3D
+    {type === '3d' && process.browser && <ForceGraph3D
       width={width}
       height={height}
       graphData={{
@@ -38,7 +38,7 @@ export default ({ nodes, links, onNodeClick }) => {
       linkOpacity={1}
       backgroundColor={'#ffffff'}
     />}
-    {false && process.browser && <ForceGraph2D
+    {type === '2d' && process.browser && <ForceGraph2D
       width={width}
       height={height}
       graphData={{

@@ -9,9 +9,11 @@ import { Paper } from '@material-ui/core';
 import Links from '../imports/components/links/index';
 import { wrapPage } from '../imports/wrap-page';
 import { useParsed } from '../imports/components/links/parse';
+import useQuery from '../imports/packages/use-query/index';
 
 export default wrapPage(() => {
   const query = useGql(GET_NODES);
+  const [viewType, setVieType] = useQuery('view-type', { type: '3d' });
   const [history, setHistory] = useState([]);
   const [selectedHistory, setSelectedHistory] = useState(0);
   const [main, setMain] = useState({});
@@ -33,6 +35,7 @@ export default wrapPage(() => {
       height: '100%',
     }}>
       <Links
+        type={viewType.type}
         nodes={nodes}
         links={links}
         onNodeClick={(node) => {
@@ -43,8 +46,30 @@ export default wrapPage(() => {
     <div style={{
       position: 'absolute',
       top: 0,
+      right: 0,
+    }}>
+      <div style={{
+        padding: 2,
+        border: '1px solid black',
+        float: 'right',
+        backgroundColor: viewType.type === '2d' ? 'gray' : 'transparent',
+      }} onClick={() => {
+        setVieType({ type: '2d' });
+      }}>2d</div>
+      <div style={{
+        padding: 2,
+        border: '1px solid black',
+        float: 'right',
+        backgroundColor: viewType.type === '3d' ? 'gray' : 'transparent',
+      }} onClick={() => {
+        setVieType({ type: '3d' });
+      }}>3d</div>
+    </div>
+    <div style={{
+      position: 'absolute',
+      top: 0,
       left: 0,
-      width: '100%',
+      width: 'calc(100% - 50px)',
     }}>
       {history.map((hi,i) => {
         return <div key={i} style={{
