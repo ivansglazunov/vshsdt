@@ -87,8 +87,8 @@ const parseProp = (node, rel, links: ILinks, _road: IRoad, nodes: INodes) => {
       color: '#20ec3d',
       __data: pr,
     };
-    links[`${rel}${pr.id}`] = {
-      id: `${rel}${pr.id}`,
+    links[`pr-${rel}-${pr.id}`] = {
+      id: `pr-${rel}-${pr.id}`,
       source: `${rel}${pr.id}`,
       target: `n${pr.ofId}`,
       group: pr.__typename,
