@@ -15,7 +15,7 @@ import useQuery from '../imports/packages/use-query/index';
 
 let GraphiQL;
 if (process.browser) {
-  GraphiQL = require('graphiql').default;
+  GraphiQL = require('graphiql');
 }
 
 const gqlWrap = (gql: string) => `query ${gql}`;
@@ -144,7 +144,7 @@ export default wrapPage(() => {
       width: '100%',
       height: 300,
     }}>
-      {process.browser && <GraphiQL
+      {GraphiQL && process.browser && <GraphiQL
         fetcher={graphQLFetcher}
         defaultQuery={`query ${GET_NODES}`}
       />}
