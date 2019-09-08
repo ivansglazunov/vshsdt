@@ -5,6 +5,8 @@ import { PassportProvider } from './packages/passports/react';
 import { Provider } from "./packages/analitics";
 import analiticsConfig from './analitics.config';
 
+import 'normalize.css';
+
 export const wrapPage = (
   Component: () => any,
 ) => {

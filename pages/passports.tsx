@@ -81,13 +81,16 @@ const Form = () => {
 };
 
 export default wrapPage(() => {
+  const { token } = usePassport();
+
   return <>
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Toolbar>
-        <Button color="inherit">Login</Button>
+        <span>{token || '-'}</span>
       </Toolbar>
     </AppBar>
-    <div style={{ padding: 16 }}>
+    <div>
+      <div style={{ height: 16 }}/>
       <Grid container justify="center" alignItems="center">
         <Grid item xs={12} sm={8} md={6} lg={4}>
           <Form />
