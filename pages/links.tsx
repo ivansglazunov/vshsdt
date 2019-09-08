@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useState } from 'react';
 import _ from 'lodash';
 import ReactResizeDetector from 'react-resize-detector';
-import GraphiQL from 'graphiql';
 import fetch from 'isomorphic-fetch';
 
 import { useGql } from '../imports/use-gql';
@@ -13,6 +12,11 @@ import Links from '../imports/components/links/index';
 import { wrapPage } from '../imports/wrap-page';
 import { useParsed } from '../imports/components/links/parse';
 import useQuery from '../imports/packages/use-query/index';
+
+let GraphiQL;
+if (process.browser) {
+  GraphiQL = require('graphiql').default;
+}
 
 const gqlWrap = (gql: string) => `query ${gql}`;
 const gqlUnwrap = (gql: string) => {
