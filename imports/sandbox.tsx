@@ -1,6 +1,6 @@
 import { gql } from './use-gql';
 
-export const GET_NODES = gql`
+export const GET_NODES = gql`{
   nodes {
     id
     passport_passwords {
@@ -45,4 +45,4 @@ export const GET_NODES = gql`
       targetId
     }
   }
-`;
+}`;

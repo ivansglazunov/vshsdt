@@ -42,6 +42,7 @@ export interface IResults {
 };
 
 const parseLink = (input, links: ILinks, _road: IRoad, nodes: INodes) => {
+  if (!_.size(input)) return;
   for (let i = 0; i < input.length; i++) {
     const link = input[i];
     if (!_road[`l${link.id}`]) {
@@ -52,27 +53,32 @@ const parseLink = (input, links: ILinks, _road: IRoad, nodes: INodes) => {
         color: '#3f51b5',
         __data: link,
       };
-      links[`l${link.id}-source`] = {
-        id: `l${link.id}-source`,
-        source: `n${link.sourceId}`,
-        target: `l${link.id}`,
-        group: `${link.__typename}-source`,
-        color: '#3f51b5',
-        __data: link,
-      };
-      links[`l${link.id}-target`] = {
-        id: `l${link.id}-target`,
-        source: `l${link.id}`,
-        target: `n${link.targetId}`,
-        group: `${link.__typename}-target`,
-        color: '#3f51b5',
-        __data: link,
-      };
+      if (link.sourceId) {
+        links[`l${link.id}-source`] = {
+          id: `l${link.id}-source`,
+          source: `n${link.sourceId}`,
+          target: `l${link.id}`,
+          group: `${link.__typename}-source`,
+          color: '#3f51b5',
+          __data: link,
+        };
+      }
+      if (link.targetId) {
+        links[`l${link.id}-target`] = {
+          id: `l${link.id}-target`,
+          source: `l${link.id}`,
+          target: `n${link.targetId}`,
+          group: `${link.__typename}-target`,
+          color: '#3f51b5',
+          __data: link,
+        };
+      }
     }
   }
 };
 
 const parseProp = (node, rel, links: ILinks, _road: IRoad, nodes: INodes) => {
+  if (!_.size(node[rel])) return;
   for (let p = 0; p < node[rel].length; p++) {
     const pr = node[rel][p];
     nodes[`${rel}${pr.id}`] = {
@@ -92,6 +98,31 @@ const parseProp = (node, rel, links: ILinks, _road: IRoad, nodes: INodes) => {
   }
 };
 
+const parseIndex = (node, links: ILinks, _road: IRoad, nodes: INodes) => {
+  if (!_.size(node.links_index)) return;
+  for (let it = 0; it < node.links_index.length; it++) {
+    const index = node.links_index[it];
+    if (!_road[`i${index.id}`]) {
+      _road[`i${index.id}`] = true;
+      nodes[`i${index.id}`] = {
+        id: `i${index.id}`,
+        label: `i${index.id} n${index.nodeId}(${index.depth})`,
+        group: index.__typename,
+        color: '#a1a1a1',
+        __data: index,
+      };
+      links[`in${index.id}`] = {
+        id: `in${index.id}`,
+        source: `i${index.id}`,
+        target: `n${index.ofNodeId}`,
+        group: `${index.__typename}`,
+        color: '#a1a1a1',
+        __data: index,
+      };
+    }
+  }
+};
+
 export const hashIntoResult = (
   hash: IHash = {},
   result: IObject[] = [],
@@ -101,11 +132,12 @@ export const hashIntoResult = (
       if (!_.isEqual(result[k], hash[result[k].id])) {
         _.merge(result[k], hash[result[k].id]);
       }
+      delete hash[result[k].id];
     } else {
+      delete hash[result[k].id];
       result.splice(k, 1);
       k--;
     }
-    delete hash[result[k].id];
   }
   const nk = Object.keys(hash);
   for (let k = 0; k < nk.length; k++) {
@@ -137,7 +169,7 @@ export function useParsed(
   const links: ILinks = {};
 
   const ns = _.get(data, 'nodes');
-  if (ns) {
+  if (_.size(ns)) {
     for (let n = 0; n < ns.length; n++) {
       const node = ns[n];
       nodes[`n${node.id}`] = {
@@ -151,27 +183,7 @@ export function useParsed(
       parseProp(node, 'passport_passwords', links, _road, nodes);
       parseProp(node, 'sessions', links, _road, nodes);
       parseProp(node, 'types', links, _road, nodes);
-      for (let it = 0; it < node.links_index.length; it++) {
-        const index = node.links_index[it];
-        if (!_road[`i${index.id}`]) {
-          _road[`i${index.id}`] = true;
-          nodes[`i${index.id}`] = {
-            id: `i${index.id}`,
-            label: `i${index.id} n${index.nodeId}(${index.depth})`,
-            group: index.__typename,
-            color: '#a1a1a1',
-            __data: index,
-          };
-          links[`in${index.id}`] = {
-            id: `in${index.id}`,
-            source: `i${index.id}`,
-            target: `n${index.ofNodeId}`,
-            group: `${index.__typename}`,
-            color: '#a1a1a1',
-            __data: index,
-          };
-        }
-      }
+      parseIndex(node, links, _road, nodes);
     }
   }
 
