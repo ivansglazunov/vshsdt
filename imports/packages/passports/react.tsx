@@ -1,4 +1,3 @@
-import Cookie from 'js-cookie';
 import _ from 'lodash';
 import Debug from 'debug';
 import useInterval from 'use-interval';

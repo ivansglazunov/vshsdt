@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TextField, Grid, Button } from '@material-ui/core';
+import { TextField, Grid, Button, Paper, AppBar, Toolbar } from '@material-ui/core';
 
 import { useTranslation } from '../imports/i18n';
 
@@ -82,6 +82,11 @@ const Form = () => {
 
 export default wrapPage(() => {
   return <>
+    <AppBar position="static">
+      <Toolbar>
+        <Button color="inherit">Login</Button>
+      </Toolbar>
+    </AppBar>
     <div style={{ padding: 16 }}>
       <Grid container justify="center" alignItems="center">
         <Grid item xs={12} sm={8} md={6} lg={4}>

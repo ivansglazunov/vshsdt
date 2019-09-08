@@ -2,7 +2,6 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import { initApollo } from "./apollo";
 import { getDataFromTree } from "@apollo/react-ssr";
 import { PassportProvider } from './packages/passports/react';
-import Cookie from 'js-cookie';
 import { Provider } from "./packages/analitics";
 import analiticsConfig from './analitics.config';
 

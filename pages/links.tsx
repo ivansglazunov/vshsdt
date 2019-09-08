@@ -13,6 +13,8 @@ import { wrapPage } from '../imports/wrap-page';
 import { useParsed } from '../imports/components/links/parse';
 import useQuery from '../imports/packages/use-query/index';
 
+import 'graphiql/graphiql.css';
+
 let GraphiQL;
 if (process.browser) {
   GraphiQL = require('graphiql');
@@ -71,12 +73,6 @@ export default wrapPage(() => {
   const [selected, setSelected] = useState<any>([]);
 
   return <div style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '100%' }}>
-    <Head>
-      <link
-        rel="stylesheet"
-        href="/static/graphiql.css"
-      />
-    </Head>
     <div style={{
       position: 'absolute', left: 0, top: 0,
       width: selected.length ? 'calc(100% - 300px)' : '100%',

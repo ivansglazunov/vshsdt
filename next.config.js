@@ -7,7 +7,9 @@ const withCSS = require('@zeit/next-css');
 
 module.exports = withPlugins([
   [withCSS, {
-    cssModules: true,
+    cssLoaderOptions: {
+      url: false
+    }
   }],
   [optimizedImages],
 ], {
