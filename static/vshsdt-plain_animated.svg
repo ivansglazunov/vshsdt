@@ -1,0 +1,16 @@
+<!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" id="svg4773" version="1.1" viewBox="0 0 100 100" height="100mm" width="100mm" style="">
+  <defs id="defs4767"></defs>
+  <metadata id="metadata4770">
+    <rdf:rdf>
+      <cc:work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"></dc:type>
+        <dc:title></dc:title>
+      </cc:work>
+    </rdf:rdf>
+  </metadata>
+  <g transform="translate(0,-197)" id="layer1">
+    <path id="path4535-6-7-9" d="m 39.162922,291.59033 c 0,0 4.677746,-2.18169 11.102935,-9.10111 6.425163,-6.91943 18.48631,-33.6556 29.773408,-36.04985 8.155014,-1.72986 16.45233,3.24386 16.776146,11.41728 0.349489,8.8213 -4.249294,14.54296 -4.249294,14.54296 0,0 -2.266492,-6.7786 -9.185912,-7.27283 -6.919412,-0.49425 -10.728598,4.8864 -17.153784,4.39215 -6.425168,-0.49424 -20.712584,-0.59829 -28.810916,-19.79459 -6.50994,-15.43119 1.820768,-25.59046 4.967278,-34.04291 2.53119,-6.79947 3.24044,-14.0187 3.24044,-14.0187 0,0 18.826118,17.62812 17.847409,37.61793 -0.825489,16.86074 -9.695082,23.70469 -20.860595,28.63827 -10.626224,4.69535 -14.500404,-3.68446 -25.705628,-3.71672 -8.6197906,-0.025 -9.5178448,8.1974 -9.5178448,8.1974 0,0 -11.3669884,-19.84296 2.7431808,-25.30881 16.735223,-6.4827 26.297282,17.60562 26.297282,17.60562 0,0 6.425158,11.36764 14.333071,17.29856 7.907911,5.93092 13.224666,8.54689 13.224666,8.54689" style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4.21897; stroke-linecap: square; stroke-linejoin: bevel; stroke-miterlimit: 4; stroke-opacity: 1;" class="ajzPBwxX_0"></path>
+  </g>
+<style data-made-with="vivus-instant">.ajzPBwxX_0{stroke-dasharray:443 445;stroke-dashoffset:444;animation:ajzPBwxX_draw 2000ms linear 0ms forwards;}@keyframes ajzPBwxX_draw{100%{stroke-dashoffset:0;}}@keyframes ajzPBwxX_fade{0%{stroke-opacity:1;}94.44444444444444%{stroke-opacity:1;}100%{stroke-opacity:0;}}</style></svg>
