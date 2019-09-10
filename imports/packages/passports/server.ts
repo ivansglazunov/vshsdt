@@ -125,7 +125,7 @@ export const signoutMiddleware = async (req, res, next) => {
 };
 
 export default async (app, initApollo) => {
-  const apolloClient = initApollo({}, '_passport');
+  const apolloClient = initApollo({}, { secret: process.env.HASURA_ADMIN_SECRET });
   debug('init');
   passportUse(apolloClient);
   const _signinMiddleware = signinMiddleware(apolloClient);

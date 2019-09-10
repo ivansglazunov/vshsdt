@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import color from 'material-color-hash';
 
 import _ from 'lodash';
 
@@ -50,7 +51,7 @@ const parseLink = (input, links: ILinks, _road: IRoad, nodes: INodes) => {
       nodes[`l${link.id}`] = {
         id: `l${link.id}`,
         group: link.__typename,
-        color: '#3f51b5',
+        color: color('links', 500).backgroundColor,
         __data: link,
       };
       if (link.sourceId) {
@@ -59,7 +60,7 @@ const parseLink = (input, links: ILinks, _road: IRoad, nodes: INodes) => {
           source: `n${link.sourceId}`,
           target: `l${link.id}`,
           group: `${link.__typename}-source`,
-          color: '#3f51b5',
+          color: color('links', 500).backgroundColor,
           __data: link,
         };
       }
@@ -69,7 +70,17 @@ const parseLink = (input, links: ILinks, _road: IRoad, nodes: INodes) => {
           source: `l${link.id}`,
           target: `n${link.targetId}`,
           group: `${link.__typename}-target`,
-          color: '#3f51b5',
+          color: color('links', 500).backgroundColor,
+          __data: link,
+        };
+      }
+      if (link.nodeId) {
+        links[`l${link.id}-node`] = {
+          id: `l${link.id}-node`,
+          source: `l${link.id}`,
+          target: `n${link.nodeId}`,
+          group: `${link.__typename}-node`,
+          color: color('links.node', 500).backgroundColor,
           __data: link,
         };
       }
@@ -160,6 +171,26 @@ export const onlyChanged = (
   };
 };
 
+export function parseNode(
+  node: any,
+  nodes, links, _road,
+) {
+  nodes[`n${node.id}`] = {
+    id: `n${node.id}`,
+    group: node.__typename,
+    color: '#000',
+    __data: node,
+  };
+  parseLink(node.links_by_source, links, _road, nodes);
+  parseLink(node.links_by_target, links, _road, nodes);
+  const keys = Object.keys(node);
+  parseProp(node, 'passport_passwords', links, _road, nodes);
+  parseProp(node, 'sessions', links, _road, nodes);
+  parseProp(node, 'types', links, _road, nodes);
+  parseProp(node, 'accesses', links, _road, nodes);
+  parseIndex(node, links, _road, nodes);
+};
+
 export function useParsed(
   data: any,
   results: IResults = { nodes: [], links: [] },
@@ -171,19 +202,7 @@ export function useParsed(
   const ns = _.get(data, 'nodes');
   if (_.size(ns)) {
     for (let n = 0; n < ns.length; n++) {
-      const node = ns[n];
-      nodes[`n${node.id}`] = {
-        id: `n${node.id}`,
-        group: node.__typename,
-        color: '#000',
-        __data: node,
-      };
-      parseLink(node.links_by_source, links, _road, nodes);
-      parseLink(node.links_by_target, links, _road, nodes);
-      parseProp(node, 'passport_passwords', links, _road, nodes);
-      parseProp(node, 'sessions', links, _road, nodes);
-      parseProp(node, 'types', links, _road, nodes);
-      parseIndex(node, links, _road, nodes);
+      parseNode(ns[n], nodes, links, _road);
     }
   }
 

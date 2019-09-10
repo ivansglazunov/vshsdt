@@ -42,10 +42,8 @@ describe('links_insert', function() {
     await api.clearNodes();
   };
 
-  let typeId;
+  let typeId = 1;
   before(async () => {
-    await api.clearLinksTypeId();
-    typeId = await api.prepareLinksTypeId();
     await clear();
   });
   beforeEach(async () => {
@@ -53,7 +51,6 @@ describe('links_insert', function() {
   });
   // after(async () => {
   //   await clear();
-  //   await api.clearLinksTypeId();
   // });
 
   describe('prepare', () => {

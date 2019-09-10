@@ -18,6 +18,8 @@ const Form = () => {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState('');
 
+  const wtfError = error && error !== '!node' && error !== '!password';
+
   const submit = async () => {
     setLoading(true);
     const { error } = await signin(username, password);
@@ -56,6 +58,7 @@ const Form = () => {
     <Grid item xs={12}>
       <Button
         variant="outlined"
+        color={wtfError ? 'secondary' : 'default'}
         fullWidth
         disabled={Boolean(token || loading)}
         onClick={submit}

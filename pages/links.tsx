@@ -14,6 +14,7 @@ import { useParsed } from '../imports/components/links/parse';
 import useQuery from '../imports/packages/use-query/index';
 
 import 'graphiql/graphiql.css';
+import { usePassport } from '../imports/packages/passports/react';
 
 let GraphiQL;
 if (process.browser) {
@@ -43,9 +44,11 @@ export default wrapPage(() => {
   const [selectedHistory, setSelectedHistory] = useState(0);
   const [main, setMain] = useState({});
   const { nodes, links } = useParsed(history[selectedHistory], main);
+
+  console.log({ nodes, links });
   
-  function graphQLFetcher(params) {
-    if (!params.query.includes('__schema')) {
+  const graphQLFetcher = (token) => (params) => {
+    if (!params.query.includes('__schema') && !params.query.includes('mutation')) {
       const gqlp = { query: gqlUnwrap(params.query), variables: params.variables };
       setGqlParams(gqlp);
     }
@@ -53,7 +56,9 @@ export default wrapPage(() => {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
-        'x-hasura-admin-secret': '7777',
+        ...(token ? {
+          'Authorization': `Bearer ${token}`,
+        } : {}),
       },
       body: JSON.stringify(params),
     }).then(response => {
@@ -71,6 +76,7 @@ export default wrapPage(() => {
   }, [query.data]);
 
   const [selected, setSelected] = useState<any>([]);
+  const { token } = usePassport();
 
   return <div style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '100%' }}>
     <div style={{
@@ -141,7 +147,7 @@ export default wrapPage(() => {
       height: 300,
     }}>
       {GraphiQL && process.browser && <GraphiQL
-        fetcher={graphQLFetcher}
+        fetcher={graphQLFetcher(token)}
         defaultQuery={`query ${GET_NODES}`}
       />}
     </Paper>

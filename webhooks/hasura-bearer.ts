@@ -58,7 +58,7 @@ export const passportUse = (apolloClient) => {
 };
 
 export default (app, initApollo) => {
-  const apolloClient = initApollo({}, '_bearer');
+  const apolloClient = initApollo({}, { secret: process.env.HASURA_ADMIN_SECRET });
   debug('init');
   passportUse(apolloClient);
   app.get('/_webhooks/hasura-bearer', bearerMiddleware, (req, res) => {

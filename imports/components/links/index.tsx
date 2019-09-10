@@ -37,6 +37,9 @@ export default ({ nodes, links, type = '2d', onNodeClick }) => {
       linkColor={d => d.color}
       linkOpacity={1}
       backgroundColor={'#ffffff'}
+      linkDirectionalArrowLength={3.5}
+      linkDirectionalArrowRelPos={1}
+      linkCurvature={0.25}
     />}
     {type === '2d' && process.browser && <ForceGraph2D
       width={width}
@@ -48,6 +51,7 @@ export default ({ nodes, links, type = '2d', onNodeClick }) => {
       nodeAutoColorBy="group"
       linkDirectionalArrowLength={3.5}
       linkDirectionalArrowRelPos={1}
+      linkCurvature={0.25}
       linkColor={d => d.color}
       onNodeClick={onNodeClick}
       nodeCanvasObject={(node, ctx, globalScale) => {

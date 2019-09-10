@@ -23,7 +23,7 @@ export const wrapPage = (
   };
   
   const Page = ({ apolloState, token }) => {
-    const apolloClient = initApollo(apolloState, token);
+    const apolloClient = initApollo(apolloState, { token });
     const container = <Container apolloClient={apolloClient} token={token}/>;
     apolloClient.stop();
     return container;
@@ -31,7 +31,7 @@ export const wrapPage = (
   
   Page.getInitialProps = async ({ req }) => {
     const token = req && req.cookies ? req.cookies.token : undefined;
-    const apolloClient = initApollo({}, token);
+    const apolloClient = initApollo({}, { token });
     await getDataFromTree(<Container apolloClient={apolloClient} token={token}/>);
     const apolloState = apolloClient.extract();
     apolloClient.stop();
