@@ -123,7 +123,7 @@
                                     },
                                     {
                                       "tableName": {
-                                        "_eq": "nodes"
+                                        "_eq": "nodes_props_access"
                                       }
                                     }
                                   ]
@@ -290,7 +290,7 @@
                                     },
                                     {
                                       "tableName": {
-                                        "_eq": "nodes"
+                                        "_eq": "nodes_props_passport_passwords"
                                       }
                                     }
                                   ]
@@ -851,7 +851,7 @@
                                       },
                                       {
                                         "tableName": {
-                                          "_eq": "nodes"
+                                          "_eq": "access_types"
                                         }
                                       }
                                     ]
@@ -946,7 +946,7 @@
                                     },
                                     {
                                       "tableName": {
-                                        "_eq": "nodes"
+                                        "_eq": "nodes_props_sessions"
                                       }
                                     }
                                   ]
