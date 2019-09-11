@@ -67,7 +67,7 @@ export const signupMiddleware = (
   _signinMiddleware,
 ) => async (req, res, next) => {
   debug('signupMiddleware', { body: req.body });
-  const password = createHashFromPassword({ password: req.body.password });
+  const password = await createHashFromPassword({ password: req.body.password });
   await apolloClient.mutate({
     mutation: CREATE_NODE_PASSWORD_AND_SESSION,
     variables: {
@@ -79,7 +79,7 @@ export const signupMiddleware = (
   _signinMiddleware(req, res, next);
 };
 
-export const passportUse = (apolloClient) => {
+export const passportUse = (apolloClient: ApolloClient<any>) => {
   passport.use(
     new LocalStrategy(
       {
@@ -93,6 +93,7 @@ export const passportUse = (apolloClient) => {
           variables: {
             username,
           },
+          fetchPolicy: 'no-cache',
         });
         // TODO check errors
         if (result.errors && result.errors.length) {
@@ -124,7 +125,7 @@ export const signoutMiddleware = async (req, res, next) => {
 };
 
 export default async (app, initApollo) => {
-  const apolloClient = initApollo({}, '_passport');
+  const apolloClient = initApollo({}, { secret: process.env.HASURA_ADMIN_SECRET });
   debug('init');
   passportUse(apolloClient);
   const _signinMiddleware = signinMiddleware(apolloClient);

@@ -12,13 +12,23 @@ const debug = Debug('apollo');
 
 const GRAPHQL = 'isg-hasura-lerny.herokuapp.com/v1/graphql';
 
-export function initApollo(initialState = {}, token?) {
-  debug('initApollo', token);
+export interface IOptions {
+  token?: string;
+  secret?: string;
+  headers?: any;
+};
 
-  const headers = token && false ? {
-    'Authorization': `Bearer ${token}`,
-  } : {
-    'x-hasura-admin-secret': '7777',
+export function initApollo(initialState = {}, options: IOptions = {}) {
+  debug('initApollo', options);
+
+  const headers = {
+    ...(options.token ? {
+      'Authorization': `Bearer ${options.token}`,
+    } : {}),
+    ...(options.secret ? {
+      'x-hasura-admin-secret': `${options.secret}`,
+    } : {}),
+    ...options.headers,
   };
 
   const httpLink = new HttpLink({

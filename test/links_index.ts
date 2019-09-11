@@ -42,10 +42,8 @@ describe('links_insert', function() {
     await api.clearNodes();
   };
 
-  let typeId;
+  let typeId = 1;
   before(async () => {
-    await api.clearLinksTypeId();
-    typeId = await api.prepareLinksTypeId();
     await clear();
   });
   beforeEach(async () => {
@@ -53,7 +51,6 @@ describe('links_insert', function() {
   });
   // after(async () => {
   //   await clear();
-  //   await api.clearLinksTypeId();
   // });
 
   describe('prepare', () => {
@@ -61,13 +58,14 @@ describe('links_insert', function() {
       await api.insertNodes(10);
 
       await api.insertLinks(1, 2, typeId);
-      await api.insertLinks(2, 3, typeId);
       await api.insertLinks(3, 4, typeId);
-      await api.insertLinks(4, 5, typeId);
+      await api.insertLinks(4, 1, typeId);
+      // await api.insertLinks(3, 4, typeId);
+      // await api.insertLinks(4, 5, typeId);
 
-      await api.insertLinks(6, 7, typeId);
+      // await api.insertLinks(6, 7, typeId);
 
-      await api.insertLinks(7, 3, typeId);
+      // await api.insertLinks(7, 3, typeId);
 
       const all = await api.getAll();
       console.log(all);

@@ -94,3 +94,8 @@ By default docker run next server with all services inside. For more detailed lo
   - git merge sandbox/master
 
 > push always `git push origin`, with selected remote!
+
+### links
+
+- access spreads from sources to targets by all links
+- indexing supporting all links with type where `indexing` is `true`

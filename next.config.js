@@ -1,12 +1,21 @@
+
+const webpack = require("webpack");
+
 const withPlugins = require('next-compose-plugins');
 const optimizedImages = require('next-optimized-images');
 const withCSS = require('@zeit/next-css');
 
 module.exports = withPlugins([
   [withCSS, {
-    cssModules: true,
+    cssLoaderOptions: {
+      url: false
+    }
   }],
   [optimizedImages],
 ], {
-  hmr: true,
+  webpack: (config) => {
+    config.plugins.push(new webpack.IgnorePlugin(/\.flow$/));
+
+    return config;
+  },
 });

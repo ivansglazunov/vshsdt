@@ -8,17 +8,23 @@
       "table": "nodes_props_types",
       "object_relationships": [
         {
-          "using": { "foreign_key_constraint_on": "typeId" },
+          "using": {
+            "foreign_key_constraint_on": "typeId"
+          },
           "name": "type",
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "ofId" },
+          "using": {
+            "foreign_key_constraint_on": "ofId"
+          },
           "name": "of",
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "nodeTypeId" },
+          "using": {
+            "foreign_key_constraint_on": "nodeTypeId"
+          },
           "name": "nodeType",
           "comment": null
         }
@@ -26,23 +32,6 @@
       "array_relationships": [],
       "insert_permissions": [],
       "select_permissions": [
-        {
-          "role": "anonymous",
-          "comment": null,
-          "permission": {
-            "allow_aggregations": false,
-            "columns": [
-              "id",
-              "typeId",
-              "ofId",
-              "nodeTypeId",
-              "inserted",
-              "deleted"
-            ],
-            "limit": 0,
-            "filter": {}
-          }
-        },
         {
           "role": "user",
           "comment": null,
@@ -57,6 +46,108 @@
               "inserted"
             ],
             "filter": {}
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "nodes_props_access",
+      "object_relationships": [
+        {
+          "using": {
+            "foreign_key_constraint_on": "accessTypeId"
+          },
+          "name": "access_type",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": "typeId"
+          },
+          "name": "type",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": "ofId"
+          },
+          "name": "of",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "user",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": [
+              "id",
+              "typeId",
+              "ofId",
+              "accessTypeId",
+              "tableName",
+              "inserted",
+              "deleted"
+            ],
+            "filter": {
+              "of": {
+                "links_index_of": {
+                  "node": {
+                    "_or": [
+                      {
+                        "links_by_target": {
+                          "_and": [
+                            {
+                              "type": {
+                                "name": {
+                                  "_eq": "access"
+                                }
+                              }
+                            },
+                            {
+                              "node": {
+                                "accesses": {
+                                  "_and": [
+                                    {
+                                      "access_type": {
+                                        "name": {
+                                          "_eq": "select"
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "tableName": {
+                                        "_eq": "nodes_props_access"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            {
+                              "sourceId": {
+                                "_eq": "X-Hasura-User-Id"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "id": {
+                          "_eq": "X-Hasura-User-Id"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
           }
         }
       ],
@@ -82,21 +173,16 @@
       "insert_permissions": [],
       "select_permissions": [
         {
-          "role": "anonymous",
-          "comment": null,
-          "permission": {
-            "allow_aggregations": false,
-            "columns": ["id", "name", "inserted", "deleted"],
-            "limit": 0,
-            "filter": {}
-          }
-        },
-        {
           "role": "user",
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "name", "deleted", "inserted"],
+            "columns": [
+              "id",
+              "name",
+              "deleted",
+              "inserted"
+            ],
             "filter": {}
           }
         }
@@ -123,75 +209,13 @@
       "insert_permissions": [],
       "select_permissions": [
         {
-          "role": "anonymous",
-          "comment": null,
-          "permission": {
-            "allow_aggregations": false,
-            "columns": ["id", "name", "inserted", "deleted"],
-            "limit": 0,
-            "filter": {}
-          }
-        },
-        {
-          "role": "user",
-          "comment": null,
-          "permission": {
-            "allow_aggregations": false,
-            "columns": ["id", "name", "deleted", "inserted"],
-            "filter": {}
-          }
-        }
-      ],
-      "update_permissions": [],
-      "delete_permissions": [],
-      "event_triggers": []
-    },
-    {
-      "table": "nodes_props_passport_passwords",
-      "object_relationships": [
-        {
-          "using": { "foreign_key_constraint_on": "typeId" },
-          "name": "type",
-          "comment": null
-        },
-        {
-          "using": { "foreign_key_constraint_on": "ofId" },
-          "name": "of",
-          "comment": null
-        }
-      ],
-      "array_relationships": [],
-      "insert_permissions": [],
-      "select_permissions": [
-        {
-          "role": "anonymous",
-          "comment": null,
-          "permission": {
-            "allow_aggregations": false,
-            "columns": [
-              "id",
-              "typeId",
-              "ofId",
-              "username",
-              "password",
-              "inserted",
-              "deleted"
-            ],
-            "limit": 0,
-            "filter": {}
-          }
-        },
-        {
           "role": "user",
           "comment": null,
           "permission": {
             "allow_aggregations": false,
             "columns": [
               "id",
-              "ofId",
-              "typeId",
-              "password",
-              "username",
+              "name",
               "deleted",
               "inserted"
             ],
@@ -204,9 +228,144 @@
       "event_triggers": []
     },
     {
+      "table": "nodes_props_passport_passwords",
+      "object_relationships": [
+        {
+          "using": {
+            "foreign_key_constraint_on": "typeId"
+          },
+          "name": "type",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": "ofId"
+          },
+          "name": "of",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "user",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": [
+              "id",
+              "typeId",
+              "ofId",
+              "username",
+              "password",
+              "inserted",
+              "deleted"
+            ],
+            "filter": {
+              "of": {
+                "links_index_of": {
+                  "node": {
+                    "_or": [
+                      {
+                        "links_by_target": {
+                          "_and": [
+                            {
+                              "type": {
+                                "name": {
+                                  "_eq": "access"
+                                }
+                              }
+                            },
+                            {
+                              "node": {
+                                "accesses": {
+                                  "_and": [
+                                    {
+                                      "access_type": {
+                                        "name": {
+                                          "_eq": "select"
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "tableName": {
+                                        "_eq": "nodes_props_passport_passwords"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            {
+                              "sourceId": {
+                                "_eq": "X-Hasura-User-Id"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "id": {
+                          "_eq": "X-Hasura-User-Id"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
       "table": "nodes",
       "object_relationships": [],
       "array_relationships": [
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "nodeId",
+              "table": "links"
+            }
+          },
+          "name": "links_by_node",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "nodeId",
+              "table": "links_index"
+            }
+          },
+          "name": "links_index",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "ofNodeId",
+              "table": "links_index"
+            }
+          },
+          "name": "links_index_of",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "ofId",
+              "table": "nodes_props_access"
+            }
+          },
+          "name": "accesses",
+          "comment": null
+        },
         {
           "using": {
             "foreign_key_constraint_on": {
@@ -256,36 +415,6 @@
           },
           "name": "links_by_target",
           "comment": null
-        },
-        {
-          "using": {
-            "foreign_key_constraint_on": {
-              "column": "nodeId",
-              "table": "links"
-            }
-          },
-          "name": "links_by_node",
-          "comment": null
-        },
-        {
-          "using": {
-            "foreign_key_constraint_on": {
-              "column": "nodeId",
-              "table": "links_index"
-            }
-          },
-          "name": "links_index",
-          "comment": null
-        },
-        {
-          "using": {
-            "foreign_key_constraint_on": {
-              "column": "ofNodeId",
-              "table": "links_index"
-            }
-          },
-          "name": "links_index_of",
-          "comment": null
         }
       ],
       "insert_permissions": [],
@@ -294,19 +423,67 @@
           "role": "user",
           "comment": null,
           "permission": {
-            "allow_aggregations": false,
-            "columns": ["id", "deleted", "inserted"],
-            "filter": {}
-          }
-        },
-        {
-          "role": "anonymous",
-          "comment": null,
-          "permission": {
-            "allow_aggregations": false,
-            "columns": ["id", "inserted", "deleted"],
-            "limit": 0,
-            "filter": {}
+            "allow_aggregations": true,
+            "columns": [
+              "id",
+              "deleted",
+              "inserted"
+            ],
+            "filter": {
+              "_or": [
+                {
+                  "links_index_of": {
+                    "node": {
+                      "_and": [
+                        {
+                          "links_by_target": {
+                            "_and": [
+                              {
+                                "type": {
+                                  "name": {
+                                    "_eq": "access"
+                                  }
+                                }
+                              },
+                              {
+                                "node": {
+                                  "accesses": {
+                                    "_and": [
+                                      {
+                                        "access_type": {
+                                          "name": {
+                                            "_eq": "select"
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "tableName": {
+                                          "_eq": "nodes"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              },
+                              {
+                                "sourceId": {
+                                  "_eq": "X-Hasura-User-Id"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": {
+                    "_eq": "X-Hasura-User-Id"
+                  }
+                }
+              ]
+            }
           }
         }
       ],
@@ -318,22 +495,30 @@
       "table": "links",
       "object_relationships": [
         {
-          "using": { "foreign_key_constraint_on": "typeId" },
+          "using": {
+            "foreign_key_constraint_on": "typeId"
+          },
           "name": "type",
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "targetId" },
+          "using": {
+            "foreign_key_constraint_on": "targetId"
+          },
           "name": "target",
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "sourceId" },
+          "using": {
+            "foreign_key_constraint_on": "sourceId"
+          },
           "name": "source",
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "nodeId" },
+          "using": {
+            "foreign_key_constraint_on": "nodeId"
+          },
           "name": "node",
           "comment": null
         }
@@ -353,24 +538,6 @@
       "insert_permissions": [],
       "select_permissions": [
         {
-          "role": "anonymous",
-          "comment": null,
-          "permission": {
-            "allow_aggregations": false,
-            "columns": [
-              "id",
-              "sourceId",
-              "targetId",
-              "nodeId",
-              "typeId",
-              "inserted",
-              "deleted"
-            ],
-            "limit": 0,
-            "filter": {}
-          }
-        },
-        {
           "role": "user",
           "comment": null,
           "permission": {
@@ -384,67 +551,78 @@
               "deleted",
               "inserted"
             ],
-            "filter": {}
-          }
-        }
-      ],
-      "update_permissions": [],
-      "delete_permissions": [],
-      "event_triggers": []
-    },
-    {
-      "table": "links_index",
-      "object_relationships": [
-        {
-          "using": { "foreign_key_constraint_on": "linkId" },
-          "name": "link",
-          "comment": null
-        },
-        {
-          "using": { "foreign_key_constraint_on": "nodeId" },
-          "name": "node",
-          "comment": null
-        },
-        {
-          "using": { "foreign_key_constraint_on": "ofNodeId" },
-          "name": "ofNode",
-          "comment": null
-        }
-      ],
-      "array_relationships": [],
-      "insert_permissions": [],
-      "select_permissions": [
-        {
-          "role": "anonymous",
-          "comment": null,
-          "permission": {
-            "allow_aggregations": false,
-            "columns": [
-              "id",
-              "nodeId",
-              "linkId",
-              "depth",
-              "inserted",
-              "deleted"
-            ],
-            "limit": 0,
-            "filter": {}
-          }
-        },
-        {
-          "role": "user",
-          "comment": null,
-          "permission": {
-            "allow_aggregations": false,
-            "columns": [
-              "depth",
-              "id",
-              "linkId",
-              "nodeId",
-              "deleted",
-              "inserted"
-            ],
-            "filter": {}
+            "filter": {
+              "_or": [
+                {
+                  "source": {
+                    "links_index_of": {
+                      "node": {
+                        "_and": [
+                          {
+                            "links_by_target": {
+                              "_and": [
+                                {
+                                  "type": {
+                                    "name": {
+                                      "_eq": "access"
+                                    }
+                                  }
+                                },
+                                {
+                                  "node": {
+                                    "accesses": {
+                                      "_and": [
+                                        {
+                                          "access_type": {
+                                            "name": {
+                                              "_eq": "select"
+                                            }
+                                          }
+                                        },
+                                        {
+                                          "tableName": {
+                                            "_eq": "links"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                },
+                                {
+                                  "sourceId": {
+                                    "_eq": "X-Hasura-User-Id"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "node": {
+                    "accesses": {
+                      "_and": [
+                        {
+                          "access_type": {
+                            "name": {
+                              "_eq": "select"
+                            }
+                          }
+                        },
+                        {
+                          "tableName": {
+                            "_eq": "links"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
           }
         }
       ],
@@ -485,27 +663,220 @@
           },
           "name": "types",
           "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "typeId",
+              "table": "nodes_props_access"
+            }
+          },
+          "name": "accesses",
+          "comment": null
         }
       ],
       "insert_permissions": [],
       "select_permissions": [
         {
-          "role": "anonymous",
+          "role": "user",
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "name", "inserted", "deleted"],
-            "limit": 0,
+            "columns": [
+              "id",
+              "name",
+              "deleted",
+              "inserted"
+            ],
             "filter": {}
           }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "links_index",
+      "object_relationships": [
+        {
+          "using": {
+            "foreign_key_constraint_on": "linkId"
+          },
+          "name": "link",
+          "comment": null
         },
+        {
+          "using": {
+            "foreign_key_constraint_on": "nodeId"
+          },
+          "name": "node",
+          "comment": null
+        },
+        {
+          "using": {
+            "foreign_key_constraint_on": "ofNodeId"
+          },
+          "name": "ofNode",
+          "comment": null
+        }
+      ],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [
         {
           "role": "user",
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "name", "deleted", "inserted"],
-            "filter": {}
+            "columns": [
+              "depth",
+              "id",
+              "linkId",
+              "nodeId",
+              "ofNodeId",
+              "listId",
+              "deleted",
+              "inserted"
+            ],
+            "filter": {
+              "ofNode": {
+                "links_index_of": {
+                  "node": {
+                    "_and": [
+                      {
+                        "links_by_target": {
+                          "_and": [
+                            {
+                              "type": {
+                                "name": {
+                                  "_eq": "access"
+                                }
+                              }
+                            },
+                            {
+                              "node": {
+                                "accesses": {
+                                  "_and": [
+                                    {
+                                      "access_type": {
+                                        "name": {
+                                          "_eq": "select"
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "tableName": {
+                                        "_eq": "links_index"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            {
+                              "sourceId": {
+                                "_eq": "X-Hasura-User-Id"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "access_types",
+      "object_relationships": [],
+      "array_relationships": [
+        {
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "accessTypeId",
+              "table": "nodes_props_access"
+            }
+          },
+          "name": "accesses",
+          "comment": null
+        }
+      ],
+      "insert_permissions": [],
+      "select_permissions": [
+        {
+          "role": "user",
+          "comment": null,
+          "permission": {
+            "allow_aggregations": false,
+            "columns": [
+              "id",
+              "name",
+              "inserted",
+              "deleted"
+            ],
+            "filter": {
+              "accesses": {
+                "of": {
+                  "links_index_of": {
+                    "node": {
+                      "_or": [
+                        {
+                          "links_by_target": {
+                            "_and": [
+                              {
+                                "type": {
+                                  "name": {
+                                    "_eq": "access"
+                                  }
+                                }
+                              },
+                              {
+                                "node": {
+                                  "accesses": {
+                                    "_and": [
+                                      {
+                                        "access_type": {
+                                          "name": {
+                                            "_eq": "select"
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "tableName": {
+                                          "_eq": "access_types"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              },
+                              {
+                                "sourceId": {
+                                  "_eq": "X-Hasura-User-Id"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "id": {
+                            "_eq": "X-Hasura-User-Id"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       ],
@@ -517,12 +888,16 @@
       "table": "nodes_props_sessions",
       "object_relationships": [
         {
-          "using": { "foreign_key_constraint_on": "typeId" },
+          "using": {
+            "foreign_key_constraint_on": "typeId"
+          },
           "name": "type",
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "ofId" },
+          "using": {
+            "foreign_key_constraint_on": "ofId"
+          },
           "name": "of",
           "comment": null
         }
@@ -531,22 +906,71 @@
       "insert_permissions": [],
       "select_permissions": [
         {
-          "role": "anonymous",
-          "comment": null,
-          "permission": {
-            "allow_aggregations": false,
-            "columns": ["id", "typeId", "ofId", "token", "inserted", "deleted"],
-            "limit": 0,
-            "filter": {}
-          }
-        },
-        {
           "role": "user",
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "ofId", "typeId", "token", "deleted", "inserted"],
-            "filter": {}
+            "columns": [
+              "id",
+              "typeId",
+              "ofId",
+              "token",
+              "inserted",
+              "deleted"
+            ],
+            "filter": {
+              "of": {
+                "links_index_of": {
+                  "node": {
+                    "_or": [
+                      {
+                        "links_by_target": {
+                          "_and": [
+                            {
+                              "type": {
+                                "name": {
+                                  "_eq": "access"
+                                }
+                              }
+                            },
+                            {
+                              "node": {
+                                "accesses": {
+                                  "_and": [
+                                    {
+                                      "access_type": {
+                                        "name": {
+                                          "_eq": "select"
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "tableName": {
+                                        "_eq": "nodes_props_sessions"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            {
+                              "sourceId": {
+                                "_eq": "X-Hasura-User-Id"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "id": {
+                          "_eq": "X-Hasura-User-Id"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
           }
         }
       ],

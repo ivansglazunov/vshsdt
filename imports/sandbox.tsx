@@ -1,8 +1,12 @@
 import { gql } from './use-gql';
 
-export const GET_NODES = gql`
+export const GET_NODES = gql`{
   nodes {
     id
+    types {
+      id
+      ofId
+    }
     passport_passwords {
       id
       ofId
@@ -14,9 +18,14 @@ export const GET_NODES = gql`
       ofId
       token
     }
-    types {
+    accesses {
       id
       ofId
+      accessTypeId
+      access_type {
+        name
+      }
+      tableName
     }
     links_index_of {
       id
@@ -24,6 +33,7 @@ export const GET_NODES = gql`
       nodeId
       listId
       ofNodeId
+      depth
     }
     links_index {
       id
@@ -31,16 +41,19 @@ export const GET_NODES = gql`
       nodeId
       listId
       ofNodeId
+      depth
     }
     links_by_source {
       id
       sourceId
       targetId
+      nodeId
     }
     links_by_target {
       id
       sourceId
       targetId
+      nodeId
     }
   }
-`;
+}`;

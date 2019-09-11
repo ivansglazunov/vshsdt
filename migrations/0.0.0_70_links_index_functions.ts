@@ -95,7 +95,7 @@ export const F_LINK_INSERT_UP = `
         nextListId,
         (
           SELECT
-          sli1."depth" + 1
+          sli1."depth" + tli1."depth" + 1
           FROM
           "links_index" as sli1
           WHERE

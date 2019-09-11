@@ -116,7 +116,7 @@ export const GET_ALL = gql`
 export class API {
   apolloClient?: ApolloClient<any>;
   constructor(apolloClient?) {
-    this.apolloClient = apolloClient || initApollo({});
+    this.apolloClient = apolloClient || initApollo({}, { secret: process.env.HASURA_ADMIN_SECRET });
   }
 
   prepareLinksTypeId = async (): Promise<number> => {
