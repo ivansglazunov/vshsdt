@@ -59,6 +59,16 @@ export const theme = createMuiTheme({
     },
   },
   overrides: {
+    MuiButton: {
+      root: {
+        minWidth: 0,
+      },
+    },
+    MuiTab: {
+      root: {
+        minWidth: 0,
+      },
+    },
     MuiList: {
       root: {
         fontFamily,

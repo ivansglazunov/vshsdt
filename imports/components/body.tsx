@@ -6,6 +6,7 @@ const useStyle = makeStyles(theme => ({
     position: 'absolute',
     top: 0, left: 0,
     width: '100%', minHeight: '100%',
+    overflow: 'hidden',
   },
 }));
 

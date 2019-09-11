@@ -1,8 +1,8 @@
 import '../imports/i18n';
 
-import { useTheme, Grid, Typography, useMediaQuery, Paper } from '@material-ui/core';
+import { useTheme, Grid, Typography, useMediaQuery, Paper, Button } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
-import React from 'react';
+import React, { useState } from 'react';
 import Fade from 'react-reveal/Fade';
 import Slide from 'react-reveal/Slide';
 import { Parallax, Background } from 'react-parallax';
@@ -17,6 +17,8 @@ export default wrapPage(() => {
   const theme = useTheme();
   const xsDown = useMediaQuery(theme.breakpoints.down('xs'));
 
+  const [asPanel, setAsPanel] = useState(false);
+
   return <>
     <ThemeProvider theme={defaultTheme}>
       <Body>
@@ -29,7 +31,9 @@ export default wrapPage(() => {
             left: 0,
             top: 0,
           }}>
-
+            <Button style={{ width: 38, height: 38, color: 'white', fontSize: '1em' }}>
+              #
+            </Button>
           </Paper>
         </Slide>
         <Grid container justify="center" alignItems="center">
@@ -68,36 +72,40 @@ export default wrapPage(() => {
               </Grid>
             </Grid>
             <Grid container justify="center" alignItems="center">
-              <Grid item xs={xsDown ? 12 : undefined} style={{ position: 'relative', ...(xsDown ? { left: -6 } : { top: -6 }) }}>
-                <Fade ssrReveal delay={500}>
-                  <div style={{ padding: 42, width: 150, textAlign: 'center', position: 'relative', overflow: 'hidden', margin: '0 auto' }}>
-                    <Slide right={!xsDown} bottom={xsDown} ssrReveal delay={1000}>
-                      <div style={{
-                        background: '#ffaf36',
-                        position: 'absolute',
-                        zIndex: 1,
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                      }}></div>
-                    </Slide>
+              <Grid item xs={xsDown ? 12 : undefined} style={asPanel ? {} : { position: 'relative', ...(xsDown ? { left: -6 } : { top: -6 }) }}>
+                <div style={{ padding: 42, width: 150, textAlign: 'center', position: 'relative', overflow: 'hidden', margin: '0 auto' }}>
+                  <Slide right={!xsDown} bottom={xsDown} ssrReveal delay={1000}>
                     <div style={{
-                      position: 'relative',
-                      zIndex: 2,
+                      background: '#ffaf36',
+                      position: 'absolute',
+                      zIndex: 1,
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                    }}></div>
+                  </Slide>
+                  <div style={{
+                    position: 'relative',
+                    zIndex: 2,
+                  }}>
+                    <div style={{
+                      transition: 'all 1s ease',
+                      overflow: 'hidden',
+                      ...(asPanel ? { height: 0 } : { height: 100 }),
                     }}>
-                      <img src="/static/vshsdt-plain.svg" style={{ width: '70%' }}/>
-                      <Typography variant="h5" component="h5" align="center">
-                        Стилистики
-                      </Typography>
-                      <Typography variant="body1" component="div" align="right">
-                        факультет
-                      </Typography>
+                      <img src="/static/vshsdt-plain_animated.svg" style={{ width: 100 }}/>
                     </div>
+                    <Typography variant="h5" component="h5" align="center">
+                      Стилистики
+                    </Typography>
+                    <Typography variant="body1" component="div" align="right">
+                      факультет
+                    </Typography>
                   </div>
-                </Fade>
+                </div>
               </Grid>
-              <Grid item xs={xsDown ? 12 : undefined} style={{ zIndex: 5, position: 'relative', ...(xsDown ? { left: 5 } : {}) }}>
+              <Grid item xs={xsDown ? 12 : undefined} style={asPanel ? {} : { zIndex: 5, position: 'relative', ...(xsDown ? { left: 5 } : {}) }}>
                 <div style={{ padding: 42, width: 150, textAlign: 'center', position: 'relative', margin: '0 auto' }}>
                   <Slide top={!xsDown} right={xsDown} ssrReveal delay={0}>
                     <div style={{
@@ -115,7 +123,13 @@ export default wrapPage(() => {
                     position: 'relative',
                     zIndex: 2,
                   }}>
-                    <img src="/static/vshsdt-plain_animated.svg" style={{ width: '70%' }}/>
+                    <div style={{
+                      transition: 'all 1s ease',
+                      overflow: 'hidden',
+                      ...(asPanel ? { height: 0 } : { height: 100 }),
+                    }}>
+                      <img src="/static/vshsdt-design-plain_animated.svg" style={{ width: 100 }}/>
+                    </div>
                     <Typography variant="h5" component="h5" align="center">
                       Дизайна
                     </Typography>
@@ -125,38 +139,44 @@ export default wrapPage(() => {
                   </div>
                 </div>
               </Grid>
-              <Grid item xs={xsDown ? 12 : undefined} style={{ position: 'relative', ...(xsDown ? { left: -12 } : { top: -15 }) }}>
-                <Fade ssrReveal delay={500}>
-                  <div style={{ padding: 42, width: 150, textAlign: 'center', position: 'relative', overflow: 'hidden', margin: '0 auto' }}>
-                    <Slide left={!xsDown} top={xsDown} ssrReveal delay={1000}>
-                      <div style={{
-                        background: '#0798ff',
-                        position: 'absolute',
-                        zIndex: 1,
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                      }}></div>
-                    </Slide>
+              <Grid item xs={xsDown ? 12 : undefined} style={asPanel ? {} : { position: 'relative', ...(xsDown ? { left: -12 } : { top: -15 }) }}>
+                <div style={{ padding: 42, width: 150, textAlign: 'center', position: 'relative', overflow: 'hidden', margin: '0 auto' }}>
+                  <Slide left={!xsDown} top={xsDown} ssrReveal delay={1000}>
                     <div style={{
-                      position: 'relative',
-                      zIndex: 2,
+                      background: '#0798ff',
+                      position: 'absolute',
+                      zIndex: 1,
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                    }}></div>
+                  </Slide>
+                  <div style={{
+                    position: 'relative',
+                    zIndex: 2,
+                  }}>
+                    <div style={{
+                      transition: 'all 1s ease',
+                      overflow: 'hidden',
+                      ...(asPanel ? { height: 0 } : { height: 100 }),
                     }}>
-                      <img src="/static/vshsdt-plain.svg" style={{ width: '70%' }}/>
-                      <Typography variant="h5" component="h5" align="center">
-                      Технологий
-                      </Typography>
-                      <Typography variant="body1" component="div" align="right">
-                        факультет
-                      </Typography>
+                      <img src="/static/vshsdt-tech-plain_animated.svg" style={{ width: 100 }}/>
                     </div>
+                    <Typography variant="h5" component="h5" align="center">
+                    Технологий
+                    </Typography>
+                    <Typography variant="body1" component="div" align="right">
+                      факультет
+                    </Typography>
                   </div>
-                </Fade>
+                </div>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
+        <Spacing size={30}/>
+        <button onClick={() => setAsPanel(!asPanel)}>{asPanel ? '+' : '-'} asPanel</button>
         <Spacing size={300}/>
       </Body>
     </ThemeProvider>
