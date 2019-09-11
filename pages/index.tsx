@@ -17,7 +17,7 @@ export default wrapPage(() => {
   const theme = useTheme();
   const xsDown = useMediaQuery(theme.breakpoints.down('xs'));
 
-  const [asPanel, setAsPanel] = useState(false);
+  const [asPanel, setAsPanel] = useState(0);
 
   return <>
     <ThemeProvider theme={defaultTheme}>
@@ -36,11 +36,14 @@ export default wrapPage(() => {
             </Button>
           </Paper>
         </Slide>
-        <Grid container justify="center" alignItems="center">
+        <Grid container justify="center" alignItems="center" style={asPanel ? { position: 'fixed', top: 0, left: 0 } : {}}>
           <Grid item xs={12} sm={11} md={10} lg={8}>
             <Grid container justify="center" alignItems="center">
-              <Grid item>
-                <div style={{ padding: 36 }}>
+              <Grid item xs={asPanel ? undefined : 12}>
+                <div
+                  style={{ padding: 36 }}
+                  onClick={() => setAsPanel(0)}
+                >
                   <Typography variant="h4" component="h1" align="center">
                     #ВШ
                       <span style={{ position: 'relative', display: 'inline-block' }}>
@@ -70,10 +73,11 @@ export default wrapPage(() => {
                   </Typography>
                 </div>
               </Grid>
-            </Grid>
-            <Grid container justify="center" alignItems="center">
               <Grid item xs={xsDown ? 12 : undefined} style={asPanel ? {} : { position: 'relative', ...(xsDown ? { left: -6 } : { top: -6 }) }}>
-                <div style={{ padding: 42, width: 150, textAlign: 'center', position: 'relative', overflow: 'hidden', margin: '0 auto' }}>
+                <div 
+                  onClick={() => setAsPanel(1)}
+                  style={{ transition: 'all 1s ease', padding: asPanel ? (asPanel === 1 ? 12 : 6) : 42, width: 150, textAlign: 'center', position: 'relative', overflow: 'hidden', margin: '0 auto' }}
+                >
                   <Slide right={!xsDown} bottom={xsDown} ssrReveal delay={1000}>
                     <div style={{
                       background: '#ffaf36',
@@ -89,13 +93,7 @@ export default wrapPage(() => {
                     position: 'relative',
                     zIndex: 2,
                   }}>
-                    <div style={{
-                      transition: 'all 1s ease',
-                      overflow: 'hidden',
-                      ...(asPanel ? { height: 0 } : { height: 100 }),
-                    }}>
-                      <img src="/static/vshsdt-plain_animated.svg" style={{ width: 100 }}/>
-                    </div>
+                    <img src="/static/vshsdt-plain_animated.svg" style={{ width: 100, height: asPanel ? 0 : 100 }}/>
                     <Typography variant="h5" component="h5" align="center">
                       Стилистики
                     </Typography>
@@ -105,8 +103,11 @@ export default wrapPage(() => {
                   </div>
                 </div>
               </Grid>
-              <Grid item xs={xsDown ? 12 : undefined} style={asPanel ? {} : { zIndex: 5, position: 'relative', ...(xsDown ? { left: 5 } : {}) }}>
-                <div style={{ padding: 42, width: 150, textAlign: 'center', position: 'relative', margin: '0 auto' }}>
+              <Grid item xs={xsDown ? 12 : undefined} style={asPanel ? { zIndex: 5, position: 'relative' } : { zIndex: 5, position: 'relative', ...(xsDown ? { left: 5 } : {}) }}>
+                <div 
+                  onClick={() => setAsPanel(2)}
+                  style={{ transition: 'all 1s ease', padding: asPanel ? (asPanel === 2 ? 12 : 6) : 42, width: 150, textAlign: 'center', position: 'relative', margin: '0 auto' }}
+                >
                   <Slide top={!xsDown} right={xsDown} ssrReveal delay={0}>
                     <div style={{
                       background: '#cb66f5',
@@ -116,20 +117,15 @@ export default wrapPage(() => {
                       left: 0,
                       width: '100%',
                       height: '100%',
-                      boxShadow: '0 5px 15px 0 #00000052',
+                      transition: 'all 1s ease',
+                      boxShadow: asPanel ? '0 0 0 0 transparent' : '0 5px 15px 0 #00000052',
                     }}></div>
                   </Slide>
                   <div style={{
                     position: 'relative',
                     zIndex: 2,
                   }}>
-                    <div style={{
-                      transition: 'all 1s ease',
-                      overflow: 'hidden',
-                      ...(asPanel ? { height: 0 } : { height: 100 }),
-                    }}>
-                      <img src="/static/vshsdt-design-plain_animated.svg" style={{ width: 100 }}/>
-                    </div>
+                    <img src="/static/vshsdt-design-plain_animated.svg" style={{ width: 100, height: asPanel ? 0 : 100 }}/>
                     <Typography variant="h5" component="h5" align="center">
                       Дизайна
                     </Typography>
@@ -140,7 +136,10 @@ export default wrapPage(() => {
                 </div>
               </Grid>
               <Grid item xs={xsDown ? 12 : undefined} style={asPanel ? {} : { position: 'relative', ...(xsDown ? { left: -12 } : { top: -15 }) }}>
-                <div style={{ padding: 42, width: 150, textAlign: 'center', position: 'relative', overflow: 'hidden', margin: '0 auto' }}>
+                <div 
+                  onClick={() => setAsPanel(3)}
+                  style={{ transition: 'all 1s ease', padding: asPanel ? (asPanel === 3 ? 12 : 6) : 42, width: 150, textAlign: 'center', position: 'relative', overflow: 'hidden', margin: '0 auto' }}
+                >
                   <Slide left={!xsDown} top={xsDown} ssrReveal delay={1000}>
                     <div style={{
                       background: '#0798ff',
@@ -156,13 +155,7 @@ export default wrapPage(() => {
                     position: 'relative',
                     zIndex: 2,
                   }}>
-                    <div style={{
-                      transition: 'all 1s ease',
-                      overflow: 'hidden',
-                      ...(asPanel ? { height: 0 } : { height: 100 }),
-                    }}>
-                      <img src="/static/vshsdt-tech-plain_animated.svg" style={{ width: 100 }}/>
-                    </div>
+                    <img src="/static/vshsdt-tech-plain_animated.svg" style={{ width: 100, height: asPanel ? 0 : 100 }}/>
                     <Typography variant="h5" component="h5" align="center">
                     Технологий
                     </Typography>
@@ -176,7 +169,7 @@ export default wrapPage(() => {
           </Grid>
         </Grid>
         <Spacing size={30}/>
-        <button onClick={() => setAsPanel(!asPanel)}>{asPanel ? '+' : '-'} asPanel</button>
+        <button onClick={() => setAsPanel(asPanel <= 2 ? asPanel + 1 : 0)}>{asPanel} asPanel</button>
         <Spacing size={300}/>
       </Body>
     </ThemeProvider>
