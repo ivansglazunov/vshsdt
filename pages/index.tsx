@@ -90,8 +90,8 @@ export default wrapPage(() => {
                 width: asPanel ? 240 : 0,
               }}>
                 <div
-                  style={{ padding: 36, width: 220 }}
                   onClick={() => setAsPanel(0)}
+                  style={{ cursor: 'pointer', padding: 36, width: 220 }}
                 >
                   {vsh}
                 </div>
@@ -99,7 +99,7 @@ export default wrapPage(() => {
               <Grid item xs={xsDown ? 12 : undefined} style={asPanel ? {} : { position: 'relative', ...(xsDown ? { left: -6 } : { top: -6 }) }}>
                 <div 
                   onClick={() => setAsPanel(1)}
-                  style={{ transition: 'all 1s ease', padding: asPanel ? (asPanel === 1 ? 12 : 6) : 42, width: 150, textAlign: 'center', position: 'relative', overflow: 'hidden', margin: '0 auto' }}
+                  style={{ cursor: 'pointer', transition: 'all 1s ease', padding: asPanel ? (asPanel === 1 ? 12 : 6) : 42, width: 150, textAlign: 'center', position: 'relative', overflow: 'hidden', margin: '0 auto' }}
                 >
                   <Slide right={!xsDown} bottom={xsDown} ssrReveal delay={1000}>
                     <div style={{
@@ -134,7 +134,7 @@ export default wrapPage(() => {
               <Grid item xs={xsDown ? 12 : undefined} style={asPanel ? { zIndex: 5, position: 'relative' } : { zIndex: 5, position: 'relative', ...(xsDown ? { left: 5 } : {}) }}>
                 <div 
                   onClick={() => setAsPanel(2)}
-                  style={{ transition: 'all 1s ease', padding: asPanel ? (asPanel === 2 ? 12 : 6) : 42, width: 150, textAlign: 'center', position: 'relative', margin: '0 auto' }}
+                  style={{ cursor: 'pointer', transition: 'all 1s ease', padding: asPanel ? (asPanel === 2 ? 12 : 6) : 42, width: 150, textAlign: 'center', position: 'relative', margin: '0 auto' }}
                 >
                   <Slide top={!xsDown} right={xsDown} ssrReveal delay={0}>
                     <div style={{
@@ -171,7 +171,7 @@ export default wrapPage(() => {
               <Grid item xs={xsDown ? 12 : undefined} style={asPanel ? {} : { position: 'relative', ...(xsDown ? { left: -12 } : { top: -15 }) }}>
                 <div 
                   onClick={() => setAsPanel(3)}
-                  style={{ transition: 'all 1s ease', padding: asPanel ? (asPanel === 3 ? 12 : 6) : 42, width: 150, textAlign: 'center', position: 'relative', overflow: 'hidden', margin: '0 auto' }}
+                  style={{ cursor: 'pointer', transition: 'all 1s ease', padding: asPanel ? (asPanel === 3 ? 12 : 6) : 42, width: 150, textAlign: 'center', position: 'relative', overflow: 'hidden', margin: '0 auto' }}
                 >
                   <Slide left={!xsDown} top={xsDown} ssrReveal delay={1000}>
                     <div style={{
