@@ -12,6 +12,8 @@ import { darkTheme, theme as defaultTheme } from '../imports/theme';
 import { wrapPage } from '../imports/wrap-page';
 import { Spacing } from '../imports/components/spacing';
 import { InsideSlide } from '../imports/components/effects';
+import { Draw } from '../imports/components/draw';
+import Vivus from 'vivus';
 
 export default wrapPage(() => {
   const theme = useTheme();
@@ -93,7 +95,12 @@ export default wrapPage(() => {
                     position: 'relative',
                     zIndex: 2,
                   }}>
-                    <img src="/static/vshsdt-plain_animated.svg" style={{ width: 100, height: asPanel ? 0 : 100 }}/>
+                    {!asPanel && <Draw
+                      animTimingFunction={Vivus.EASE_IN_OUT}
+                      type="oneByOne"
+                      duration={100}
+                      file={'/static/logo-style.svg'}
+                    />}
                     <Typography variant="h5" component="h5" align="center">
                       Стилистики
                     </Typography>
@@ -125,7 +132,12 @@ export default wrapPage(() => {
                     position: 'relative',
                     zIndex: 2,
                   }}>
-                    <img src="/static/vshsdt-design-plain_animated.svg" style={{ width: 100, height: asPanel ? 0 : 100 }}/>
+                    {!asPanel && <Draw
+                      animTimingFunction={Vivus.EASE_IN_OUT}
+                      type="oneByOne"
+                      duration={3000}
+                      file={'/static/logo-design.svg'}
+                    />}
                     <Typography variant="h5" component="h5" align="center">
                       Дизайна
                     </Typography>
@@ -155,7 +167,12 @@ export default wrapPage(() => {
                     position: 'relative',
                     zIndex: 2,
                   }}>
-                    <img src="/static/vshsdt-tech-plain_animated.svg" style={{ width: 100, height: asPanel ? 0 : 100 }}/>
+                    {!asPanel && <Draw
+                      animTimingFunction={Vivus.EASE_IN_OUT}
+                      type="oneByOne"
+                      duration={300}
+                      file={'/static/logo-tech.svg'}
+                    />}
                     <Typography variant="h5" component="h5" align="center">
                     Технологий
                     </Typography>

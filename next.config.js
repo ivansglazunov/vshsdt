@@ -11,7 +11,10 @@ module.exports = withPlugins([
       url: false
     }
   }],
-  [optimizedImages],
+  [optimizedImages, {
+    optimizeImages: false,
+    optimizeImagesInDev: false,
+  }],
 ], {
   webpack: (config) => {
     config.plugins.push(new webpack.IgnorePlugin(/\.flow$/));
