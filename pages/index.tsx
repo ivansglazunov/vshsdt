@@ -21,6 +21,36 @@ export default wrapPage(() => {
 
   const [asPanel, setAsPanel] = useState(0);
 
+  const vsh = (
+    <Typography variant="h4" component="h1" align="center">
+      #ВШ
+      <span style={{ position: 'relative', display: 'inline-block' }}>
+        С
+        <div style={{ position: 'absolute', bottom: -4, width: '100%', height: 5 }}>
+          <InsideSlide revealProps={{ top: true, delay: 1200 }}>
+            <div style={{ width: '100%', height: '100%', background: '#ffaf36' }}></div>
+          </InsideSlide>
+        </div>
+      </span>
+      <span style={{ position: 'relative', display: 'inline-block' }}>
+        Д
+        <div style={{ position: 'absolute', bottom: -4, width: '100%', height: 5 }}>
+          <InsideSlide revealProps={{ top: true, delay: 1000 }}>
+            <div style={{ width: '100%', height: '100%', background: '#cb66f5' }}></div>
+          </InsideSlide>
+        </div>
+      </span>
+      <span style={{ position: 'relative', display: 'inline-block' }}>
+        Т
+        <div style={{ position: 'absolute', bottom: -4, width: '100%', height: 5 }}>
+          <InsideSlide revealProps={{ top: true, delay: 1300 }}>
+            <div style={{ width: '100%', height: '100%', background: '#0798ff' }}></div>
+          </InsideSlide>
+        </div>
+      </span>
+    </Typography>
+  );
+
   return <>
     <ThemeProvider theme={defaultTheme}>
       <Body>
@@ -41,38 +71,29 @@ export default wrapPage(() => {
         <Grid container justify="center" alignItems="center" style={asPanel ? { position: 'fixed', top: 0, left: 0 } : {}}>
           <Grid item xs={12} sm={11} md={10} lg={8}>
             <Grid container justify="center" alignItems="center">
-              <Grid item xs={asPanel ? undefined : 12}>
+              <Grid item xs={12} style={{ overflow: 'hidden', transition: 'all 1s ease', height: asPanel ? 0 : 111 }}>
                 <div
-                  style={{ padding: 36 }}
+                  style={{
+                    padding: 36,
+                    transition: 'all 1s ease',
+                    position: 'relative',
+                    top: asPanel ? 50 : 0,
+                  }}
                   onClick={() => setAsPanel(0)}
                 >
-                  <Typography variant="h4" component="h1" align="center">
-                    #ВШ
-                      <span style={{ position: 'relative', display: 'inline-block' }}>
-                        С
-                        <div style={{ position: 'absolute', bottom: -4, width: '100%', height: 5 }}>
-                          <InsideSlide revealProps={{ top: true, delay: 1200 }}>
-                            <div style={{ width: '100%', height: '100%', background: '#ffaf36' }}></div>
-                          </InsideSlide>
-                        </div>
-                      </span>
-                      <span style={{ position: 'relative', display: 'inline-block' }}>
-                        Д
-                        <div style={{ position: 'absolute', bottom: -4, width: '100%', height: 5 }}>
-                          <InsideSlide revealProps={{ top: true, delay: 1000 }}>
-                            <div style={{ width: '100%', height: '100%', background: '#cb66f5' }}></div>
-                          </InsideSlide>
-                        </div>
-                      </span>
-                      <span style={{ position: 'relative', display: 'inline-block' }}>
-                        Т
-                        <div style={{ position: 'absolute', bottom: -4, width: '100%', height: 5 }}>
-                          <InsideSlide revealProps={{ top: true, delay: 1300 }}>
-                            <div style={{ width: '100%', height: '100%', background: '#0798ff' }}></div>
-                          </InsideSlide>
-                        </div>
-                      </span>
-                  </Typography>
+                  {vsh}
+                </div>
+              </Grid>
+              <Grid item style={{
+                overflow: 'hidden',
+                transition: 'all 1s ease',
+                width: asPanel ? 240 : 0,
+              }}>
+                <div
+                  style={{ padding: 36, width: 220 }}
+                  onClick={() => setAsPanel(0)}
+                >
+                  {vsh}
                 </div>
               </Grid>
               <Grid item xs={xsDown ? 12 : undefined} style={asPanel ? {} : { position: 'relative', ...(xsDown ? { left: -6 } : { top: -6 }) }}>
