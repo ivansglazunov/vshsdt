@@ -156,7 +156,7 @@ export default wrapPage(() => {
                     {!asPanel && <Draw
                       animTimingFunction={Vivus.EASE_IN_OUT}
                       type="oneByOne"
-                      duration={300}
+                      duration={2000}
                       file={'/static/logo-design.svg'}
                     />}
                     <Typography variant="h5" component="h5" align="center">
