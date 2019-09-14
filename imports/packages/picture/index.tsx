@@ -15,7 +15,7 @@ export const Picture = ({
   const theme = useTheme();
 
   return <picture>
-    {_.reverse(images).map((image, i) => {
+    {images.map((image, i) => {
       return <source key={i} srcSet={image.path} media={`(min-width: ${image.width}px)`} type={image.type || 'image/jpeg'}/>
     })}
     <img src={src} {...props}/>
