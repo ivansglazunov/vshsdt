@@ -3,6 +3,7 @@ import '../imports/i18n';
 import { ThemeProvider } from '@material-ui/styles';
 import Router from 'next/router';
 import React, { useState, useEffect } from 'react';
+import Slide from 'react-reveal/Slide';
 
 import { Body } from '../imports/components/body';
 import HeaderFacults from '../imports/components/vshsdt/header-facults';
@@ -11,12 +12,12 @@ import { wrapPage } from '../imports/wrap-page';
 
 export default () => {
   return <>
-    {/* <ThemeProvider theme={defaultTheme}> */}
-      {/* <Body> */}
+    <ThemeProvider theme={defaultTheme}>
+      <Body>
         <HeaderFacults
           screen={''}
         />
-      {/* </Body> */}
-    {/* </ThemeProvider> */}
+      </Body>
+    </ThemeProvider>
   </>;
 };
