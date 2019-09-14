@@ -4,7 +4,7 @@ import { wrapPage } from '../imports/wrap-page';
 import { useTheme, Typography } from '@material-ui/core';
 import { Picture } from '../imports/packages/picture';
 
-const ri = require('../images/sandbox.jpg?sizes[]=600,sizes[]=960,sizes[]=1280,sizes[]=1800');
+const ri = require('../images/sandbox.jpg?sizes[]=100,sizes[]=300,sizes[]=600,sizes[]=960,sizes[]=1280,sizes[]=1800');
 
 export const Content = () => {
   const theme = useTheme();
@@ -21,7 +21,7 @@ export const Content = () => {
       Somewhere, not in render, put this.
     </Typography>
     <pre><code>
-      const ri = require('../images/sandbox.jpg?sizes[]=600,sizes[]=960,sizes[]=1280,sizes[]=1800');
+      const ri = require('../images/sandbox.jpg?sizes[]=100,sizes[]=300,sizes[]=600,sizes[]=960,sizes[]=1280,sizes[]=1800');
     </code></pre>
     <Typography variant="body1">
       Each sended sizes number, will be used as media (min-width) for {"<picture> <source>"} tag.
