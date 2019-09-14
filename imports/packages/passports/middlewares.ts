@@ -5,10 +5,11 @@ import gql from 'graphql-tag';
 import _ from 'lodash';
 import uniqid from 'uniqid';
 import Debug from 'debug';
-import { isEqualHashAndPassword, createHashFromPassword, errors } from './api.server';
+
+import { isEqualHashAndPassword, createHashFromPassword, signup, findByUsername, verifyNodeAndPassword, errors } from './api.server';
 import { CREATE_USER_NODE_WITH_PASSWORD, FIND_USER_PASSWORD } from './gqls';
 
-const debug = Debug('passports:server');
+const debug = Debug('passports');
 
 export const signinMiddleware = apolloClient => (req, res, next) => {
   passport.authenticate('local', async (error, user, info) => {
@@ -33,16 +34,18 @@ export const signupMiddleware = (
   _signinMiddleware,
 ) => async (req, res, next) => {
   debug('signupMiddleware', { body: req.body });
-  const password = await createHashFromPassword({ password: req.body.password });
-  await apolloClient.mutate({
-    mutation: CREATE_USER_NODE_WITH_PASSWORD,
-    variables: {
-      password,
-      username: req.body.username,
-      token: uniqid(),
-    },
+  await signup({
+    apolloClient,
+    password: req.body.password,
+    username: req.body.username,
   });
   _signinMiddleware(req, res, next);
+};
+
+export const signoutMiddleware = async (req, res, next) => {
+  debug('signoutMiddleware', {});
+  req.logout();
+  return res.status(200).json({});
 };
 
 export const passportUse = (apolloClient: ApolloClient<any>) => {
@@ -54,40 +57,18 @@ export const passportUse = (apolloClient: ApolloClient<any>) => {
       },
       async (username, password, done) => {
         debug('strategy start', { username, password });
-        const result = await apolloClient.query({
-          query: FIND_USER_PASSWORD,
-          variables: {
-            username,
-          },
-          fetchPolicy: 'no-cache',
+        const result = await findByUsername({
+          apolloClient,
+          username,
         });
-        // TODO check errors
-        if (result.errors && result.errors.length) {
-          debug('strategy errors', { errors: result.errors });
-          return done('!gql');
-        }
-        const node = _.get(result, 'data.nodes.0');
-        if (!node) return done('!node');
-        // TODO crypt passwords
-        const isEqualPasswords = await isEqualHashAndPassword({
-          hash: _.get(node, 'passport_passwords.0.password'),
+        await verifyNodeAndPassword(
+          result,
           password,
-        });
-        if (isEqualPasswords) {
-          debug('strategy done', { node });
-          return done(null, node);
-        }
-        debug('strategy !password', { node });
-        return done('!password');
+          done,
+        );
       },
     ),
   );
-};
-
-export const signoutMiddleware = async (req, res, next) => {
-  debug('signoutMiddleware', {});
-  req.logout();
-  return res.status(200).json({});
 };
 
 export default async (app, initApollo) => {

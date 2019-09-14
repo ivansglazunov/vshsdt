@@ -1,4 +1,5 @@
 import 'mocha';
+require('dotenv').config();
 import { initApollo } from '../imports/apollo';
 import gql from 'graphql-tag';
 import _ from 'lodash';
@@ -42,7 +43,6 @@ describe('links_insert', function() {
     await api.clearNodes();
   };
 
-  let typeId = 1;
   before(async () => {
     await clear();
   });
@@ -57,15 +57,15 @@ describe('links_insert', function() {
     it('A-B-C-D-E fake', async () => {
       await api.insertNodes(10);
 
-      await api.insertLinks(1, 2, typeId);
-      await api.insertLinks(3, 4, typeId);
-      await api.insertLinks(4, 1, typeId);
-      // await api.insertLinks(3, 4, typeId);
-      // await api.insertLinks(4, 5, typeId);
+      await api.insertLinks(1, 2, 1);
+      await api.insertLinks(2, 3, 1);
 
-      // await api.insertLinks(6, 7, typeId);
+      // await api.insertLinks(3, 4, 1);
+      // await api.insertLinks(4, 5, 1);
 
-      // await api.insertLinks(7, 3, typeId);
+      // await api.insertLinks(6, 7, 1);
+
+      // await api.insertLinks(7, 3, 1);
 
       const all = await api.getAll();
       console.log(all);
@@ -83,7 +83,7 @@ describe('links_insert', function() {
     });
     it('A-B', async () => {
       const nIds = await api.insertNodes(2);
-      const lId0 = await api.insertLinks(nIds[0], nIds[1], typeId);
+      const lId0 = await api.insertLinks(nIds[0], nIds[1], 1);
       const all = await api.getAll();
       assert.lengthOf(all.nodes, 2);
       assert.lengthOf(all.links, 1);

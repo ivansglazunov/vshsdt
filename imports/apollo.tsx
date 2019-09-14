@@ -18,9 +18,7 @@ export interface IOptions {
   headers?: any;
 };
 
-export function initApollo(initialState = {}, options: IOptions = {}) {
-  debug('initApollo', options);
-
+export function initApollo(initialState = {}, options: IOptions) {
   const headers = {
     ...(options.token ? {
       'Authorization': `Bearer ${options.token}`,

@@ -8,6 +8,11 @@ export async function up(knex: Knex) {
       .text('name')
       .notNullable()
       .unique();
+    
+    table
+      .boolean('indexing')
+      .notNullable()
+      .defaultTo('false');
 
     table
       .timestamp('inserted', { useTz: true })

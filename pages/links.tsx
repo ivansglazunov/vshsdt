@@ -44,8 +44,6 @@ export default wrapPage(() => {
   const [selectedHistory, setSelectedHistory] = useState(0);
   const [main, setMain] = useState({});
   const { nodes, links } = useParsed(history[selectedHistory], main);
-
-  console.log({ nodes, links });
   
   const graphQLFetcher = (token) => (params) => {
     if (!params.query.includes('__schema') && !params.query.includes('mutation')) {

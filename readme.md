@@ -17,10 +17,14 @@
 - [ ] passport + hasura tokens auth [@ivansglazunov]
 - [x] links + links_index + triggers
   - [x] insert/delete links triggers works with links_index
+  - [ ] tests for triggers [@menzorg]
   - [x] multiparent trees
-  - [ ] recursive trees (need to control duplcates in index)
-- [ ] props based on links_index
-- [ ] access props based on links_index
+  - [ ] recursive trees (need to control duplcates in index) [@ivansglazunov]
+  - [ ] triggers listen indexing links_types field
+  - [ ] (access link + access props) to user, auto created [@ivansglazunov]
+  - [ ] interval clear unused user-nodes without passwords
+- [ ] props based on links_index [@ivansglazunov]
+- [ ] access props based on links_index [@ivansglazunov]
 
 ### how to
 
