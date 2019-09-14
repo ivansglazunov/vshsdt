@@ -68,7 +68,7 @@ const Form = () => {
       <Button
         variant="outlined"
         fullWidth
-        disabled={error !== '!node' || loading}
+        disabled={Boolean(error !== '!node' || token || loading)}
         onClick={() => signup(username, password)}
       >{t('signup')}</Button>
     </Grid>

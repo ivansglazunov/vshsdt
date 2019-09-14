@@ -54,6 +54,16 @@ export const M_CLEAR_NODES = gql`
   }
 `;
 
+export const M_INSERT_ACCESS_PROPS = (objects) => gql`
+  mutation {
+    insert_nodes_props_access(objects: ${JSON.stringify(objects)}) {
+      returning {
+        id
+      }
+    }
+  }
+`;
+
 export const M_INSERT_NODES = (count) => gql`
   mutation {
     insert_nodes(objects: ${JSON.stringify(_.times(count, () => ({})))}) {
@@ -115,11 +125,12 @@ export const GET_ALL = gql`
 
 export class API {
   apolloClient?: ApolloClient<any>;
-  constructor(apolloClient?) {
-    this.apolloClient = apolloClient || initApollo({}, { secret: process.env.HASURA_ADMIN_SECRET });
+  constructor(apolloClient = initApollo({}, { secret: process.env.HASURA_ADMIN_SECRET })) {
+    this.apolloClient = apolloClient;
   }
 
   prepareLinksTypeId = async (): Promise<number> => {
+    console.log('prepareLinksTypeId', { M_PREPARE });
     const result = await this.apolloClient.mutate({
       mutation: M_PREPARE,
     });
@@ -127,24 +138,28 @@ export class API {
   }
   
   clearLinksTypeId = async (): Promise<void> => {
+    console.log('clearLinksTypeId', { M_PREPARE_CLEAR });
     await this.apolloClient.mutate({
       mutation: M_PREPARE_CLEAR,
     });
   }
 
   clearLinksIndex = async (): Promise<void> => {
+    console.log('clearLinksIndex', { M_CLEAR_LINKS_INDEX });
     await this.apolloClient.mutate({
       mutation: M_CLEAR_LINKS_INDEX,
     });
   }
   
   clearLinks = async (): Promise<void> => {
+    console.log('clearLinks', { M_CLEAR_LINKS });
     await this.apolloClient.mutate({
       mutation: M_CLEAR_LINKS,
     });
   }
 
   clearNodes = async (): Promise<void> => {
+    console.log('clearNodes', { M_CLEAR_NODES });
     await this.apolloClient.mutate({
       mutation: M_CLEAR_NODES,
     });
