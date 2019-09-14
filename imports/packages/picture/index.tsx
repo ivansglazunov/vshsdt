@@ -8,7 +8,7 @@ export const Picture = ({
   src,
   ...props
 }: {
-  images: { path: string; width: number; height: number }[];
+  images: { path: string; width: number; height?: number; type?: string }[];
   src: string;
   [key: string]: any;
 }) => {
@@ -16,7 +16,7 @@ export const Picture = ({
 
   return <picture>
     {_.reverse(images).map((image, i) => {
-      return <source key={i} srcSet={image.path} type="image/jpeg" media={`(min-width: ${image.width}px)`}/>
+      return <source key={i} srcSet={image.path} media={`(min-width: ${image.width}px)`} type={image.type || 'image/jpeg'}/>
     })}
     <img src={src} {...props}/>
   </picture>;
