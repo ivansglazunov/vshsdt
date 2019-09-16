@@ -7,8 +7,9 @@ import Slide from 'react-reveal/Slide';
 
 import { Body } from '../imports/components/body';
 import HeaderFacults from '../imports/components/vshsdt/header-facults';
-import { theme as defaultTheme } from '../imports/theme';
+import { theme as defaultTheme, styleTheme } from '../imports/theme';
 import { wrapPage } from '../imports/wrap-page';
+import Test from '../imports/components/vshsdt/test';
 
 export default () => {
   return <>
@@ -17,6 +18,9 @@ export default () => {
         <HeaderFacults
           screen={''}
         />
+        <ThemeProvider theme={styleTheme}>
+          <Test style={{ width: 100, height: 100 }}/>
+        </ThemeProvider>
       </Body>
     </ThemeProvider>
   </>;

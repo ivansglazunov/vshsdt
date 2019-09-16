@@ -7,7 +7,7 @@ import { Parallax, Background } from 'react-parallax';
 import Link from 'next/link';
 
 import { Body } from '../body';
-import { darkTheme, theme as defaultTheme } from '../../theme';
+import { theme as defaultTheme } from '../../theme';
 import { wrapPage } from '../../wrap-page';
 import { Spacing } from '../spacing';
 import { InsideSlide } from '../effects';
@@ -54,20 +54,6 @@ export const HeaderFacults = ({
 
   return <>
     <ThemeProvider theme={defaultTheme}>
-      <Slide left>
-        <Paper square style={{
-          background: 'black',
-          width: 38,
-          height: '100%',
-          position: 'fixed',
-          left: 0,
-          top: 0,
-        }}>
-          <Button style={{ width: 38, height: 38, color: 'white', fontSize: '1em' }}>
-            #
-          </Button>
-        </Paper>
-      </Slide>
       <Grid container justify="center" alignItems="center" style={screen ? { position: 'fixed', top: 0, left: 0 } : {}}>
         <Grid item xs={12} sm={11} md={10} lg={8}>
           <Grid container justify="center" alignItems="center">

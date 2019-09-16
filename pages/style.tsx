@@ -8,7 +8,7 @@ import Slide from 'react-reveal/Slide';
 import { Parallax, Background } from 'react-parallax';
 
 import { Body } from '../imports/components/body';
-import { darkTheme, theme as defaultTheme } from '../imports/theme';
+import { theme as defaultTheme } from '../imports/theme';
 import { wrapPage } from '../imports/wrap-page';
 import { Spacing } from '../imports/components/spacing';
 import { InsideSlide } from '../imports/components/effects';

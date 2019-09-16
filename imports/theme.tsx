@@ -77,50 +77,13 @@ export const theme = createMuiTheme({
   },
 });
 
-export const lightTheme = theme => createMuiTheme(_.merge({}, theme, { palette: { type: 'light' } }));
-
-export const darkTheme = theme => createMuiTheme(_.merge(
+export const styleTheme = theme => createMuiTheme(_.merge(
   {},
   theme,
   {
     palette: {
-      type: 'dark',
-      background: {
-        paper: darkBackgroundColor,
-      },
-    },
-    overrides: {
-      MuiTypography: {
-        root: {
-          color: '#fff',
-        },
-      },
-      MuiList: {
-        root: {
-          fontFamily,
-          color: '#fff',
-        },
-      },
-    },
-  },
-));
-
-export const goldTheme = theme => createMuiTheme(_.merge(
-  {},
-  theme,
-  {
-    palette: {
-      type: 'dark',
-      common: {
-        white: goldColor,
-      },
-    },
-    overrides: {
-      MuiTypography: {
-        root: {
-          fontFamily,
-          color: goldColor,
-        },
+      primary: {
+        main: 'red',
       },
     },
   },

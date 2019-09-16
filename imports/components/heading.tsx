@@ -2,7 +2,7 @@ import { Grid, Hidden, Theme, Typography, useMediaQuery, Paper } from '@material
 import { makeStyles, ThemeProvider, useTheme } from '@material-ui/styles';
 import React from 'react';
 
-import { goldTheme, theme, darkBackgroundColor } from '../theme';
+import { theme, darkBackgroundColor } from '../theme';
 import { Container } from './container';
 import { Spacing } from './spacing';
 import classnames from 'classnames';
