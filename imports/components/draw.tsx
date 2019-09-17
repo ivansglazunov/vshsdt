@@ -4,19 +4,15 @@ import { makeStyles, useTheme } from '@material-ui/styles';
 import { Theme, useMediaQuery, Typography } from '@material-ui/core';
 import Vivus from 'vivus';
 
-let _i = 0;
-
 const defaultCallback = () => {};
 
-export const Draw = ({ style = {}, callback = defaultCallback, ...props }) => {
-  const [i] = useState(_i++);
-
+export const Draw = ({ id, style = {}, callback = defaultCallback, ...props }) => {
   useEffect(() => {
-    new Vivus(`vivus-${i}`, props, callback);
+    new Vivus(id, props, callback);
   }, []);
 
   return <div
-    id={`vivus-${i}`}
+    id={id}
     style={style}
   />;
 };

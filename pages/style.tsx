@@ -14,14 +14,16 @@ import { Spacing } from '../imports/components/spacing';
 import { InsideSlide } from '../imports/components/effects';
 import { Draw } from '../imports/components/draw';
 import HeaderFacults from '../imports/components/vshsdt/header-facults';
+import {ScreenOne} from '../imports/components/vshsdt/screen-one';
 
 export default () => {
   return <>
     <ThemeProvider theme={defaultTheme}>
       <Body>
-        <HeaderFacults
+        {/* <HeaderFacults
           screen={'style'}
-        />
+        /> */}
+        <ScreenOne />
       </Body>
     </ThemeProvider>
   </>;

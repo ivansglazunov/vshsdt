@@ -105,6 +105,7 @@ export const HeaderFacults = ({
                     zIndex: 2,
                   }}>
                     {!screen && <Draw
+                      id="_draw_1"
                       animTimingFunction={Vivus.EASE_IN_OUT}
                       type="oneByOne"
                       duration={100}
@@ -143,6 +144,7 @@ export const HeaderFacults = ({
                     zIndex: 2,
                   }}>
                     {!screen && <Draw
+                      id="_draw_2"
                       animTimingFunction={Vivus.EASE_IN_OUT}
                       type="oneByOne"
                       duration={2000}
@@ -179,6 +181,7 @@ export const HeaderFacults = ({
                     zIndex: 2,
                   }}>
                     {!screen && <Draw
+                      id="_draw_3"
                       animTimingFunction={Vivus.EASE_IN_OUT}
                       type="oneByOne"
                       duration={300}

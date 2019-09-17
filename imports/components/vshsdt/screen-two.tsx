@@ -1,4 +1,4 @@
-import { useMediaQuery, useTheme, makeStyles, Theme } from '@material-ui/core';
+import {useTheme, makeStyles, Theme } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -7,16 +7,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const Test = ({
+export const ScreenTwo = ({
   ...props
 }) => {
   const classes = useStyles({});
   const theme = useTheme();
-  const xsDown = useMediaQuery(theme.breakpoints.down('xs'));
+//   const xsDown = useMediaQuery(theme.breakpoints.down('xs'));
 
   return <>
     <div className={classes.root} {...props}></div>
   </>;
 };
-
-export default Test;
