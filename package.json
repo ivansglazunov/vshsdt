@@ -61,7 +61,7 @@
     "jimp": "^0.8.2",
     "js-cookie": "^2.2.1",
     "knex": "^0.19.4",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "lqip-loader": "^2.2.0",
     "material-color-hash": "^0.1.6",
     "mocha": "^6.2.0",
