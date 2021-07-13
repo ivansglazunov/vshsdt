@@ -85,7 +85,7 @@ export const HeaderFacults = ({
               </Link>
             </Grid>
             <Grid item xs={xsDown ? 12 : undefined} style={screen ? {} : { position: 'relative', ...(xsDown ? { left: -6 } : { top: -6 }) }}>
-              <Link href="/style">
+              <Link href="/">
                 <div 
                   style={{ cursor: 'pointer', transition: 'all 1s ease', padding: screen ? (screen === 'style' ? 12 : 6) : 42, width: 150, textAlign: 'center', position: 'relative', overflow: 'hidden', margin: '0 auto' }}
                 >
@@ -122,7 +122,7 @@ export const HeaderFacults = ({
               </Link>
             </Grid>
             <Grid item xs={xsDown ? 12 : undefined} style={screen ? { zIndex: 5, position: 'relative' } : { zIndex: 5, position: 'relative', ...(xsDown ? { left: 5 } : {}) }}>
-              <Link href="/design">
+              <Link href="/">
                 <div 
                   style={{ cursor: 'pointer', transition: 'all 1s ease', padding: screen ? (screen === 'design' ? 12 : 6) : 42, width: 150, textAlign: 'center', position: 'relative', margin: '0 auto' }}
                 >
@@ -161,7 +161,7 @@ export const HeaderFacults = ({
               </Link>
             </Grid>
             <Grid item xs={xsDown ? 12 : undefined} style={screen ? {} : { position: 'relative', ...(xsDown ? { left: -12 } : { top: -15 }) }}>
-              <Link href="/tech">
+              <Link href="/">
                 <div 
                   style={{ cursor: 'pointer', transition: 'all 1s ease', padding: screen ? (screen === 'tech' ? 12 : 6) : 42, width: 150, textAlign: 'center', position: 'relative', overflow: 'hidden', margin: '0 auto' }}
                 >

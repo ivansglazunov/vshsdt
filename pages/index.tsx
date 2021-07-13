@@ -18,10 +18,6 @@ export default () => {
         <HeaderFacults
           screen={''}
         />
-        <Test style={{ width: 100, height: 100 }}/>
-        <ThemeProvider theme={styleTheme}>
-          <Test style={{ width: 100, height: 100 }}/>
-        </ThemeProvider>
       </Body>
     </ThemeProvider>
   </>;
