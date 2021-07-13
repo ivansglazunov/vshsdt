@@ -5,6 +5,8 @@ const withPlugins = require('next-compose-plugins');
 const optimizedImages = require('next-optimized-images');
 const withCSS = require('@zeit/next-css');
 
+const isProd = process.env.NODE_ENV === 'production';
+
 module.exports = withPlugins([
   [withCSS, {
     cssLoaderOptions: {
@@ -12,6 +14,8 @@ module.exports = withPlugins([
     }
   }],
 ], {
+  basePath: isProd ? '/vshsdt' : '',
+  assetPrefix: isProd ? 'https://cdn.statically.io/gh/ivansglazunov/vshsdt/master/docs/' : '',
   hmr: true,
   webpack: (config) => {
     // if (dev && !isServer) {
