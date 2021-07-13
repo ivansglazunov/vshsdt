@@ -179,7 +179,7 @@ var HeaderFacults = function HeaderFacults(_ref) {
       top: -6
     })
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_5___default.a, {
-    href: "/"
+    href: "/style"
   }, __jsx("div", {
     style: {
       cursor: 'pointer',
@@ -216,7 +216,7 @@ var HeaderFacults = function HeaderFacults(_ref) {
     animTimingFunction: vivus__WEBPACK_IMPORTED_MODULE_9___default.a.EASE_IN_OUT,
     type: "oneByOne",
     duration: 100,
-    file: '/static/logo-style.svg'
+    file: 'static/logo-style.svg'
   }), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
     variant: "h5",
     component: "h5",
@@ -238,7 +238,7 @@ var HeaderFacults = function HeaderFacults(_ref) {
       left: 5
     } : {})
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_5___default.a, {
-    href: "/"
+    href: "/design"
   }, __jsx("div", {
     style: {
       cursor: 'pointer',
@@ -276,7 +276,7 @@ var HeaderFacults = function HeaderFacults(_ref) {
     animTimingFunction: vivus__WEBPACK_IMPORTED_MODULE_9___default.a.EASE_IN_OUT,
     type: "oneByOne",
     duration: 2000,
-    file: '/static/logo-design.svg'
+    file: 'static/logo-design.svg'
   }), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
     variant: "h5",
     component: "h5",
@@ -296,7 +296,7 @@ var HeaderFacults = function HeaderFacults(_ref) {
       top: -15
     })
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_5___default.a, {
-    href: "/"
+    href: "/tech"
   }, __jsx("div", {
     style: {
       cursor: 'pointer',
@@ -333,7 +333,7 @@ var HeaderFacults = function HeaderFacults(_ref) {
     animTimingFunction: vivus__WEBPACK_IMPORTED_MODULE_9___default.a.EASE_IN_OUT,
     type: "oneByOne",
     duration: 300,
-    file: '/static/logo-tech.svg'
+    file: 'static/logo-tech.svg'
   }), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
     variant: "h5",
     component: "h5",
@@ -349,4 +349,4 @@ var HeaderFacults = function HeaderFacults(_ref) {
 /***/ })
 
 })
-//# sourceMappingURL=index.js.77859a02fa97c4fa447c.hot-update.js.map
+//# sourceMappingURL=index.js.038a025cb0daaca5b4de.hot-update.js.map

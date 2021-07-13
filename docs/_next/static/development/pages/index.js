@@ -301,7 +301,7 @@ var HeaderFacults = function HeaderFacults(_ref) {
       top: -6
     })
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_5___default.a, {
-    href: "/"
+    href: "/style"
   }, __jsx("div", {
     style: {
       cursor: 'pointer',
@@ -338,7 +338,7 @@ var HeaderFacults = function HeaderFacults(_ref) {
     animTimingFunction: vivus__WEBPACK_IMPORTED_MODULE_9___default.a.EASE_IN_OUT,
     type: "oneByOne",
     duration: 100,
-    file: '/static/logo-style.svg'
+    file: 'static/logo-style.svg'
   }), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
     variant: "h5",
     component: "h5",
@@ -360,7 +360,7 @@ var HeaderFacults = function HeaderFacults(_ref) {
       left: 5
     } : {})
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_5___default.a, {
-    href: "/"
+    href: "/design"
   }, __jsx("div", {
     style: {
       cursor: 'pointer',
@@ -398,7 +398,7 @@ var HeaderFacults = function HeaderFacults(_ref) {
     animTimingFunction: vivus__WEBPACK_IMPORTED_MODULE_9___default.a.EASE_IN_OUT,
     type: "oneByOne",
     duration: 2000,
-    file: '/static/logo-design.svg'
+    file: 'static/logo-design.svg'
   }), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
     variant: "h5",
     component: "h5",
@@ -418,7 +418,7 @@ var HeaderFacults = function HeaderFacults(_ref) {
       top: -15
     })
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_5___default.a, {
-    href: "/"
+    href: "/tech"
   }, __jsx("div", {
     style: {
       cursor: 'pointer',
@@ -455,7 +455,7 @@ var HeaderFacults = function HeaderFacults(_ref) {
     animTimingFunction: vivus__WEBPACK_IMPORTED_MODULE_9___default.a.EASE_IN_OUT,
     type: "oneByOne",
     duration: 300,
-    file: '/static/logo-tech.svg'
+    file: 'static/logo-tech.svg'
   }), __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
     variant: "h5",
     component: "h5",
@@ -96166,7 +96166,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 /***/ }),
 
-/***/ 0:
+/***/ 1:
 /*!*********************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2Fworkspace%2Fofbox%2Fvshsdt.ru%2Fpages%2Findex.tsx ***!
   \*********************************************************************************************************************/
@@ -96189,5 +96189,5 @@ module.exports = dll_129a35c7ec57967eb265;
 
 /***/ })
 
-},[[0,"static/runtime/webpack.js"]]]);
+},[[1,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=index.js.map

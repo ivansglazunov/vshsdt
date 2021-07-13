@@ -85,7 +85,7 @@ export const HeaderFacults = ({
               </Link>
             </Grid>
             <Grid item xs={xsDown ? 12 : undefined} style={screen ? {} : { position: 'relative', ...(xsDown ? { left: -6 } : { top: -6 }) }}>
-              <Link href="/">
+              <Link href="/style">
                 <div 
                   style={{ cursor: 'pointer', transition: 'all 1s ease', padding: screen ? (screen === 'style' ? 12 : 6) : 42, width: 150, textAlign: 'center', position: 'relative', overflow: 'hidden', margin: '0 auto' }}
                 >
@@ -109,7 +109,7 @@ export const HeaderFacults = ({
                       animTimingFunction={Vivus.EASE_IN_OUT}
                       type="oneByOne"
                       duration={100}
-                      file={'/static/logo-style.svg'}
+                      file={'static/logo-style.svg'}
                     />}
                     <Typography variant="h5" component="h5" align="center">
                       Стилистики
@@ -122,7 +122,7 @@ export const HeaderFacults = ({
               </Link>
             </Grid>
             <Grid item xs={xsDown ? 12 : undefined} style={screen ? { zIndex: 5, position: 'relative' } : { zIndex: 5, position: 'relative', ...(xsDown ? { left: 5 } : {}) }}>
-              <Link href="/">
+              <Link href="/design">
                 <div 
                   style={{ cursor: 'pointer', transition: 'all 1s ease', padding: screen ? (screen === 'design' ? 12 : 6) : 42, width: 150, textAlign: 'center', position: 'relative', margin: '0 auto' }}
                 >
@@ -148,7 +148,7 @@ export const HeaderFacults = ({
                       animTimingFunction={Vivus.EASE_IN_OUT}
                       type="oneByOne"
                       duration={2000}
-                      file={'/static/logo-design.svg'}
+                      file={'static/logo-design.svg'}
                     />}
                     <Typography variant="h5" component="h5" align="center">
                       Дизайна
@@ -161,7 +161,7 @@ export const HeaderFacults = ({
               </Link>
             </Grid>
             <Grid item xs={xsDown ? 12 : undefined} style={screen ? {} : { position: 'relative', ...(xsDown ? { left: -12 } : { top: -15 }) }}>
-              <Link href="/">
+              <Link href="/tech">
                 <div 
                   style={{ cursor: 'pointer', transition: 'all 1s ease', padding: screen ? (screen === 'tech' ? 12 : 6) : 42, width: 150, textAlign: 'center', position: 'relative', overflow: 'hidden', margin: '0 auto' }}
                 >
@@ -185,7 +185,7 @@ export const HeaderFacults = ({
                       animTimingFunction={Vivus.EASE_IN_OUT}
                       type="oneByOne"
                       duration={300}
-                      file={'/static/logo-tech.svg'}
+                      file={'static/logo-tech.svg'}
                     />}
                     <Typography variant="h5" component="h5" align="center">
                     Технологий
