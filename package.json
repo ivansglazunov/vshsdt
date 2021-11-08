@@ -45,7 +45,7 @@
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "express-validator": "^6.2.0",
-    "graphiql": "^0.14.2",
+    "graphiql": "^1.4.7",
     "graphql": "^14.5.5",
     "graphql-tag": "^2.10.1",
     "i18next": "^17.0.14",
