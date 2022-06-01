@@ -97,7 +97,7 @@
     "react-yandex-metrika": "^2.5.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
-    "sharp": "^0.23.0",
+    "sharp": "^0.30.5",
     "simpl-schema": "^1.5.5",
     "styled-components": "^4.3.2",
     "subscriptions-transport-ws": "^0.9.16",
